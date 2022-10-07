@@ -1,0 +1,210 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/u004488/Documents/Dev/Personal/tick-it/Application/Application.csproj": {}
+  },
+  "projects": {
+    "/Users/u004488/Documents/Dev/Personal/tick-it/Application/Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/u004488/Documents/Dev/Personal/tick-it/Application/Application.csproj",
+        "projectName": "Application",
+        "projectPath": "/Users/u004488/Documents/Dev/Personal/tick-it/Application/Application.csproj",
+        "packagesPath": "/Users/u004488/.nuget/packages/",
+        "outputPath": "/Users/u004488/Documents/Dev/Personal/tick-it/Application/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/u004488/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "/Users/u004488/Documents/Dev/Nuget": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://xpinvestimentos.pkgs.visualstudio.com/_packaging/PackagesXP/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "/Users/u004488/Documents/Dev/Personal/tick-it/Domain/Domain.csproj": {
+                "projectPath": "/Users/u004488/Documents/Dev/Personal/tick-it/Domain/Domain.csproj"
+              },
+              "/Users/u004488/Documents/Dev/Personal/tick-it/MockDatabase/MockDatabase.csproj": {
+                "projectPath": "/Users/u004488/Documents/Dev/Personal/tick-it/MockDatabase/MockDatabase.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Authentication": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.9, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.2.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/u004488/Documents/Dev/Personal/tick-it/Domain/Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/u004488/Documents/Dev/Personal/tick-it/Domain/Domain.csproj",
+        "projectName": "Domain",
+        "projectPath": "/Users/u004488/Documents/Dev/Personal/tick-it/Domain/Domain.csproj",
+        "packagesPath": "/Users/u004488/.nuget/packages/",
+        "outputPath": "/Users/u004488/Documents/Dev/Personal/tick-it/Domain/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/u004488/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "/Users/u004488/Documents/Dev/Nuget": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://xpinvestimentos.pkgs.visualstudio.com/_packaging/PackagesXP/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.Extensions.DependencyInjection.Abstractions": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/u004488/Documents/Dev/Personal/tick-it/MockDatabase/MockDatabase.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/u004488/Documents/Dev/Personal/tick-it/MockDatabase/MockDatabase.csproj",
+        "projectName": "MockDatabase",
+        "projectPath": "/Users/u004488/Documents/Dev/Personal/tick-it/MockDatabase/MockDatabase.csproj",
+        "packagesPath": "/Users/u004488/.nuget/packages/",
+        "outputPath": "/Users/u004488/Documents/Dev/Personal/tick-it/MockDatabase/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/u004488/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "/Users/u004488/Documents/Dev/Nuget": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://xpinvestimentos.pkgs.visualstudio.com/_packaging/PackagesXP/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "/Users/u004488/Documents/Dev/Personal/tick-it/Domain/Domain.csproj": {
+                "projectPath": "/Users/u004488/Documents/Dev/Personal/tick-it/Domain/Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.Extensions.DependencyInjection.Abstractions": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "NIZF0qF1rS3/NcDawWFxz+NuqCnQgi6ZMckEMPF0pMr37tUCgBT4Gd7GqE/vYpZIVeg0JOMI+uUSMvI/ogERKg==",
+  "success": true,
+  "projectFilePath": "/Users/u004488/Documents/Dev/Personal/tick-it/MockDatabase/MockDatabase.csproj",
+  "expectedPackageFiles": [
+    "/Users/u004488/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/6.0.0/microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
