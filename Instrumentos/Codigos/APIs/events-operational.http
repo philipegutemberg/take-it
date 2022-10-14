@@ -1,0 +1,27 @@
+# @name LoginOperational
+POST {{host}}/api/v1/login HTTP/1.1
+Content-Type: application/json
+Content-Length: 59
+
+{
+  "username": "{{usernameOperational}}",
+  "password": "{{passwordOperational}}"
+}
+
+###
+
+# @name Create
+POST {{host}}/api/v1/event HTTP/1.1
+Authorization: Bearer {{LoginOperational.response.body.token}}
+Content-Type: application/json
+Content-Length: 198
+
+{
+  "date": "2023-10-10",
+  "location": "Autódromo Interlagos - SP",
+  "title": "The Town 2023",
+  "description": "The Town 2023",
+  "ticker": "TOWN23",
+  "price": 1050,
+  "ticketsMaxCount": 30000
+}

@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ethereum.Nethereum", "Ether
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTestApp", "ConsoleTestApp\ConsoleTestApp.csproj", "{BA9A6374-D1EF-413F-9CD5-D4B7651BC8A6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QRCode.BarCode", "QRCode.BarCode\QRCode.BarCode.csproj", "{D662970F-91FF-45C0-BF9F-7B82B722FDF4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{BA9A6374-D1EF-413F-9CD5-D4B7651BC8A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA9A6374-D1EF-413F-9CD5-D4B7651BC8A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA9A6374-D1EF-413F-9CD5-D4B7651BC8A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D662970F-91FF-45C0-BF9F-7B82B722FDF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D662970F-91FF-45C0-BF9F-7B82B722FDF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D662970F-91FF-45C0-BF9F-7B82B722FDF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D662970F-91FF-45C0-BF9F-7B82B722FDF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

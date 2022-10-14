@@ -136,3 +136,11 @@
 /Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/Application/bin/Debug/net6.0/BouncyCastle.Crypto.dll
 /Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/Application/bin/Debug/net6.0/Ethereum.Nethereum.dll
 /Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/Application/bin/Debug/net6.0/Ethereum.Nethereum.pdb
+/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/Application/bin/Debug/net6.0/QRCode.BarCode.dll
+/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/Application/bin/Debug/net6.0/QRCode.BarCode.pdb
+/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/Application/bin/Debug/net6.0/QrCodeGenerator.dll
+/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/Application/bin/Debug/net6.0/SkiaSharp.dll
+/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/Application/bin/Debug/net6.0/runtimes/osx/native/libSkiaSharp.dylib
+/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/Application/bin/Debug/net6.0/runtimes/win-arm64/native/libSkiaSharp.dll
+/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/Application/bin/Debug/net6.0/runtimes/win-x64/native/libSkiaSharp.dll
+/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/Application/bin/Debug/net6.0/runtimes/win-x86/native/libSkiaSharp.dll

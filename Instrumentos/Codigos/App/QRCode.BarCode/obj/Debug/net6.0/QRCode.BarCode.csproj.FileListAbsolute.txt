@@ -1,0 +1,15 @@
+/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/QRCode.BarCode/bin/Debug/net6.0/QRCode.BarCode.deps.json
+/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/QRCode.BarCode/bin/Debug/net6.0/QRCode.BarCode.dll
+/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/QRCode.BarCode/bin/Debug/net6.0/ref/QRCode.BarCode.dll
+/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/QRCode.BarCode/bin/Debug/net6.0/QRCode.BarCode.pdb
+/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/QRCode.BarCode/bin/Debug/net6.0/Domain.dll
+/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/QRCode.BarCode/bin/Debug/net6.0/Domain.pdb
+/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/QRCode.BarCode/obj/Debug/net6.0/QRCode.BarCode.csproj.AssemblyReference.cache
+/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/QRCode.BarCode/obj/Debug/net6.0/QRCode.BarCode.GeneratedMSBuildEditorConfig.editorconfig
+/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/QRCode.BarCode/obj/Debug/net6.0/QRCode.BarCode.AssemblyInfoInputs.cache
+/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/QRCode.BarCode/obj/Debug/net6.0/QRCode.BarCode.AssemblyInfo.cs
+/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/QRCode.BarCode/obj/Debug/net6.0/QRCode.BarCode.csproj.CoreCompileInputs.cache
+/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/QRCode.BarCode/obj/Debug/net6.0/QRCode.BarCode.csproj.CopyComplete
+/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/QRCode.BarCode/obj/Debug/net6.0/QRCode.BarCode.dll
+/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/QRCode.BarCode/obj/Debug/net6.0/ref/QRCode.BarCode.dll
+/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/QRCode.BarCode/obj/Debug/net6.0/QRCode.BarCode.pdb

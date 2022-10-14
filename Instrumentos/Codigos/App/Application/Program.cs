@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using MockDatabase.Injection;
+using QRCode.BarCode.Injection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,7 +48,8 @@ builder.Services
         "0edde832e34196546524378154c0643e387a23865b727395638de7afd6516225",
         "0xCa2acA0E413A6cbbC096F03E0896D28867f431b4",
         "2fe5e94432dbfe9cfc4334d54601f9106d69b330684cc0489ab053dfcbfdbbaf",
-        "0xB051AFC251C1d18f7Db5D6E1e2b53dFbC73d7e41");
+        "0xB051AFC251C1d18f7Db5D6E1e2b53dFbC73d7e41")
+    .InjectBarcodeServices();
 
 var app = builder.Build();
 

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "sjIpJfIYvrAkRSq7toKSpxNGNPXBivww60RdJiMIwr7DNT1p5y0kkQAnVXUHYQls1QdMdoKJABdclqHUeqBBUQ==",
+  "dgSpecHash": "zuY7W8KQYKqmYsKFW2EkFsw1nn3EtGjSgLdopb2dzYLqgih5DMZZk8GUn6HZPZAjr+b7qCHUKkITX6IaBd2kaw==",
   "success": true,
   "projectFilePath": "/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/Application/Application.csproj",
   "expectedPackageFiles": [
@@ -39,6 +39,7 @@
     "/Users/u004488/.nuget/packages/microsoft.openapi/1.2.3/microsoft.openapi.1.2.3.nupkg.sha512",
     "/Users/u004488/.nuget/packages/microsoft.win32.registry/4.5.0/microsoft.win32.registry.4.5.0.nupkg.sha512",
     "/Users/u004488/.nuget/packages/nbitcoin.secp256k1/1.0.3/nbitcoin.secp256k1.1.0.3.nupkg.sha512",
+    "/Users/u004488/.nuget/packages/net.codecrete.qrcodegenerator/2.0.3/net.codecrete.qrcodegenerator.2.0.3.nupkg.sha512",
     "/Users/u004488/.nuget/packages/nethereum.abi/4.9.0/nethereum.abi.4.9.0.nupkg.sha512",
     "/Users/u004488/.nuget/packages/nethereum.accounts/4.9.0/nethereum.accounts.4.9.0.nupkg.sha512",
     "/Users/u004488/.nuget/packages/nethereum.blockchainprocessing/4.9.0/nethereum.blockchainprocessing.4.9.0.nupkg.sha512",
@@ -56,6 +57,9 @@
     "/Users/u004488/.nuget/packages/nethereum.web3/4.9.0/nethereum.web3.4.9.0.nupkg.sha512",
     "/Users/u004488/.nuget/packages/newtonsoft.json/11.0.2/newtonsoft.json.11.0.2.nupkg.sha512",
     "/Users/u004488/.nuget/packages/portable.bouncycastle/1.8.2/portable.bouncycastle.1.8.2.nupkg.sha512",
+    "/Users/u004488/.nuget/packages/skiasharp/2.88.3/skiasharp.2.88.3.nupkg.sha512",
+    "/Users/u004488/.nuget/packages/skiasharp.nativeassets.macos/2.88.3/skiasharp.nativeassets.macos.2.88.3.nupkg.sha512",
+    "/Users/u004488/.nuget/packages/skiasharp.nativeassets.win32/2.88.3/skiasharp.nativeassets.win32.2.88.3.nupkg.sha512",
     "/Users/u004488/.nuget/packages/swashbuckle.aspnetcore/6.2.3/swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
     "/Users/u004488/.nuget/packages/swashbuckle.aspnetcore.swagger/6.2.3/swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
     "/Users/u004488/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.2.3/swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",

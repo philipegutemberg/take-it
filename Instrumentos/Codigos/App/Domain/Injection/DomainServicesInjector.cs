@@ -10,6 +10,7 @@ namespace Domain.Injection
             .AddTransient<IEventService, EventService>()
             .AddTransient<ITicketBuyService, TicketBuyService>()
             .AddTransient<IUserService, UserService>()
-            .AddTransient<ITokenTransferService, TokenTransferService>();
+            .AddTransient<ITokenTransferService, TokenTransferService>()
+            .AddTransient<ITicketValidationService, TicketValidationService>();
     }
 }

@@ -1,0 +1,22 @@
+# @name LoginCustomer
+POST {{host}}/api/v1/login HTTP/1.1
+Content-Type: application/json
+Content-Length: 55
+
+{
+  "username": "{{usernameCustomer}}",
+  "password": "{{passwordCustomer}}"
+}
+
+###
+
+# @name GetTicket
+GET {{host}}/api/v1/ticketvalidation/ticket HTTP/1.1
+Authorization: Bearer {{LoginCustomer.response.body.token}}
+Content-Type: application/json
+Content-Length: 126
+
+{
+  "TicketId": "7d0b1fcf-ee01-4b2a-9bb0-a09365af21e2",
+  "DestinationAddress": "0xbBd0B8A8A716f9Be74A611a98D7A3E9fE92AF039"
+}
