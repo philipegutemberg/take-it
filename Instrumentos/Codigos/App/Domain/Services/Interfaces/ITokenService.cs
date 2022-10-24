@@ -1,13 +1,15 @@
 using System.Threading.Tasks;
+using Domain.Models;
+using Domain.Models.Users;
 
 namespace Domain.Services.Interfaces
 {
     public interface ITokenService
     {
-        Task Mint(string contractAddress);
+        Task EmitToken(EventTicketType ticketType, Ticket ticket, Event @event, Customer customer);
 
-        Task TransferToTicketOwner(string contractAddress, string ticketOwnerAddress, long tokenId);
-        
-        Task<long> GetBalance(string contractAddress, string ownerAddress);
+        Task TransferToCustomer(Ticket ticket, Event @event, Customer customer);
+
+        Task<long> GetCustomerBalance(Event @event, Customer customer);
     }
 }

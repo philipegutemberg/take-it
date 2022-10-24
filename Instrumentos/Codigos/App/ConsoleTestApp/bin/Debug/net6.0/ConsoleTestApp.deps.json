@@ -44,6 +44,19 @@
           }
         }
       },
+      "Microsoft.NETCore.Platforms/1.1.0": {},
+      "NBitcoin/7.0.15": {
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "6.0.1",
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "runtime": {
+          "lib/net6.0/NBitcoin.dll": {
+            "assemblyVersion": "7.0.15.0",
+            "fileVersion": "7.0.15.0"
+          }
+        }
+      },
       "NBitcoin.Secp256k1/1.0.3": {
         "runtime": {
           "lib/netcoreapp2.1/NBitcoin.Secp256k1.dll": {
@@ -56,7 +69,7 @@
         "dependencies": {
           "Nethereum.Hex": "4.9.0",
           "Nethereum.Util": "4.9.0",
-          "Newtonsoft.Json": "11.0.2"
+          "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "lib/net5.0/Nethereum.ABI.dll": {
@@ -72,7 +85,7 @@
           "Nethereum.Signer": "4.9.0",
           "Nethereum.Signer.EIP712": "4.9.0",
           "Nethereum.Util": "4.9.0",
-          "Newtonsoft.Json": "11.0.2"
+          "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "lib/net5.0/Nethereum.Accounts.dll": {
@@ -88,7 +101,7 @@
           "Nethereum.JsonRpc.RpcClient": "4.9.0",
           "Nethereum.RPC": "4.9.0",
           "Nethereum.Util": "4.9.0",
-          "Newtonsoft.Json": "11.0.2"
+          "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "lib/net5.0/Nethereum.BlockchainProcessing.dll": {
@@ -102,7 +115,7 @@
           "Nethereum.ABI": "4.9.0",
           "Nethereum.Hex": "4.9.0",
           "Nethereum.RPC": "4.9.0",
-          "Newtonsoft.Json": "11.0.2"
+          "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "lib/net5.0/Nethereum.Contracts.dll": {
@@ -111,9 +124,23 @@
           }
         }
       },
+      "Nethereum.HdWallet/4.9.0": {
+        "dependencies": {
+          "NBitcoin": "7.0.15",
+          "NETStandard.Library": "2.0.3",
+          "Nethereum.Web3": "4.9.0",
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Nethereum.HdWallet.dll": {
+            "assemblyVersion": "4.9.0.0",
+            "fileVersion": "4.9.0.0"
+          }
+        }
+      },
       "Nethereum.Hex/4.9.0": {
         "dependencies": {
-          "Newtonsoft.Json": "11.0.2"
+          "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "lib/net5.0/Nethereum.Hex.dll": {
@@ -125,7 +152,7 @@
       "Nethereum.JsonRpc.Client/4.9.0": {
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": "6.0.1",
-          "Newtonsoft.Json": "11.0.2"
+          "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "lib/net5.0/Nethereum.JsonRpc.Client.dll": {
@@ -137,7 +164,7 @@
       "Nethereum.JsonRpc.RpcClient/4.9.0": {
         "dependencies": {
           "Nethereum.JsonRpc.Client": "4.9.0",
-          "Newtonsoft.Json": "11.0.2"
+          "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "lib/net5.0/Nethereum.JsonRpc.RpcClient.dll": {
@@ -149,7 +176,7 @@
       "Nethereum.KeyStore/4.9.0": {
         "dependencies": {
           "Nethereum.Hex": "4.9.0",
-          "Newtonsoft.Json": "11.0.2",
+          "Newtonsoft.Json": "13.0.1",
           "Portable.BouncyCastle": "1.8.2"
         },
         "runtime": {
@@ -163,7 +190,7 @@
         "dependencies": {
           "Nethereum.RLP": "4.9.0",
           "Nethereum.Util": "4.9.0",
-          "Newtonsoft.Json": "11.0.2"
+          "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "lib/net5.0/Nethereum.Model.dll": {
@@ -175,7 +202,7 @@
       "Nethereum.RLP/4.9.0": {
         "dependencies": {
           "Nethereum.Hex": "4.9.0",
-          "Newtonsoft.Json": "11.0.2"
+          "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "lib/net5.0/Nethereum.RLP.dll": {
@@ -190,7 +217,7 @@
           "Nethereum.JsonRpc.Client": "4.9.0",
           "Nethereum.Model": "4.9.0",
           "Nethereum.Util": "4.9.0",
-          "Newtonsoft.Json": "11.0.2"
+          "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "lib/net5.0/Nethereum.RPC.dll": {
@@ -206,7 +233,7 @@
           "Nethereum.Model": "4.9.0",
           "Nethereum.RLP": "4.9.0",
           "Nethereum.Util": "4.9.0",
-          "Newtonsoft.Json": "11.0.2",
+          "Newtonsoft.Json": "13.0.1",
           "Portable.BouncyCastle": "1.8.2"
         },
         "runtime": {
@@ -222,7 +249,7 @@
           "Nethereum.Hex": "4.9.0",
           "Nethereum.Signer": "4.9.0",
           "Nethereum.Util": "4.9.0",
-          "Newtonsoft.Json": "11.0.2"
+          "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "lib/net5.0/Nethereum.Signer.EIP712.dll": {
@@ -235,7 +262,7 @@
         "dependencies": {
           "Nethereum.Hex": "4.9.0",
           "Nethereum.RLP": "4.9.0",
-          "Newtonsoft.Json": "11.0.2"
+          "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "lib/net5.0/Nethereum.Util.dll": {
@@ -256,7 +283,7 @@
           "Nethereum.RPC": "4.9.0",
           "Nethereum.Signer": "4.9.0",
           "Nethereum.Util": "4.9.0",
-          "Newtonsoft.Json": "11.0.2"
+          "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "lib/net5.0/Nethereum.Web3.dll": {
@@ -265,11 +292,16 @@
           }
         }
       },
-      "Newtonsoft.Json/11.0.2": {
+      "NETStandard.Library/2.0.3": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "1.1.0"
+        }
+      },
+      "Newtonsoft.Json/13.0.1": {
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {
-            "assemblyVersion": "11.0.0.0",
-            "fileVersion": "11.0.2.21924"
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.1.25517"
           }
         }
       },
@@ -294,6 +326,8 @@
         "dependencies": {
           "Domain": "1.0.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0",
+          "NBitcoin": "7.0.15",
+          "Nethereum.HdWallet": "4.9.0",
           "Nethereum.Web3": "4.9.0"
         },
         "runtime": {
@@ -329,6 +363,20 @@
       "path": "microsoft.extensions.logging.abstractions/6.0.1",
       "hashPath": "microsoft.extensions.logging.abstractions.6.0.1.nupkg.sha512"
     },
+    "Microsoft.NETCore.Platforms/1.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kz0PEW2lhqygehI/d6XsPCQzD7ff7gUJaVGPVETX611eadGsA3A877GdSlU0LRVMCTH/+P3o2iDTak+S08V2+A==",
+      "path": "microsoft.netcore.platforms/1.1.0",
+      "hashPath": "microsoft.netcore.platforms.1.1.0.nupkg.sha512"
+    },
+    "NBitcoin/7.0.15": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-t7ECl09dT2iQuoYwxZRr5mk9g+K/deQ4QAmG80RssJ4drGzC0z8EiJo0zGdGnXtDaj6jhmCe5Vc1vlLnrFPAiA==",
+      "path": "nbitcoin/7.0.15",
+      "hashPath": "nbitcoin.7.0.15.nupkg.sha512"
+    },
     "NBitcoin.Secp256k1/1.0.3": {
       "type": "package",
       "serviceable": true,
@@ -363,6 +411,13 @@
       "sha512": "sha512-ofjFSSwShpUa98MuMnJoLnksNNNr633jEmp6pmkYQ2ZkwQqbxo0ps9YO8O8Xn8FbSBkZzUW+NpAIwbCqlMPThw==",
       "path": "nethereum.contracts/4.9.0",
       "hashPath": "nethereum.contracts.4.9.0.nupkg.sha512"
+    },
+    "Nethereum.HdWallet/4.9.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-gDKfO+4Kc/QS08XWtuNFHyGkBjOpROXaJbNyyUgLExYKNd1sQ1v22Eqh6ti1NDSNWx3+2bq5QVM5eWNE/g0cIA==",
+      "path": "nethereum.hdwallet/4.9.0",
+      "hashPath": "nethereum.hdwallet.4.9.0.nupkg.sha512"
     },
     "Nethereum.Hex/4.9.0": {
       "type": "package",
@@ -441,12 +496,19 @@
       "path": "nethereum.web3/4.9.0",
       "hashPath": "nethereum.web3.4.9.0.nupkg.sha512"
     },
-    "Newtonsoft.Json/11.0.2": {
+    "NETStandard.Library/2.0.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-IvJe1pj7JHEsP8B8J8DwlMEx8UInrs/x+9oVY+oCD13jpLu4JbJU2WCIsMRn5C4yW9+DgkaO8uiVE5VHKjpmdQ==",
-      "path": "newtonsoft.json/11.0.2",
-      "hashPath": "newtonsoft.json.11.0.2.nupkg.sha512"
+      "sha512": "sha512-st47PosZSHrjECdjeIzZQbzivYBJFv6P2nv4cj2ypdI204DO+vZ7l5raGMiX4eXMJ53RfOIg+/s4DHVZ54Nu2A==",
+      "path": "netstandard.library/2.0.3",
+      "hashPath": "netstandard.library.2.0.3.nupkg.sha512"
+    },
+    "Newtonsoft.Json/13.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
+      "path": "newtonsoft.json/13.0.1",
+      "hashPath": "newtonsoft.json.13.0.1.nupkg.sha512"
     },
     "Portable.BouncyCastle/1.8.2": {
       "type": "package",

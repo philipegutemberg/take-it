@@ -5,25 +5,35 @@ namespace Domain.Models.Users
 {
     public record Customer : User
     {
-        public Customer(string fullName, string email, string phone, string username, string password) 
+        public Customer(string username, string password, string fullName, string email, string phone, string walletAddress)
             : base(username, password)
         {
-            this.FullName = fullName;
-            this.Email = email;
-            this.Phone = phone;
-            TicketsIds = new List<string>();
+            FullName = fullName;
+            Email = email;
+            Phone = phone;
+            WalletAddress = walletAddress;
+            TicketsCodes = new List<string>();
         }
 
-        public Customer() { }
-        
-        public string FullName { get; init; }
-        public string Email { get; init; }
-        public string Phone { get; init; }
-        public List<string> TicketsIds { get; init; }
-
-        public void AssignTicket(string ticketId)
+        public Customer(int id, string code, string username, string password, string fullName, string email, string phone, string walletAddress, List<string> ticketsIds)
+            : base(id, code, username, password)
         {
-            TicketsIds.Add(ticketId);
+            FullName = fullName;
+            Email = email;
+            Phone = phone;
+            WalletAddress = walletAddress;
+            TicketsCodes = ticketsIds;
+        }
+
+        public string FullName { get; }
+        public string Email { get; }
+        public string Phone { get; }
+        public string WalletAddress { get; }
+        public List<string> TicketsCodes { get; }
+
+        public void AssignTicket(string ticketCode)
+        {
+            TicketsCodes.Add(ticketCode);
         }
 
         public override EnumUserRole Role => EnumUserRole.Customer;

@@ -1,31 +1,30 @@
 using System.Threading.Tasks;
 using Domain.Exceptions;
-using Domain.Models;
 using Domain.Models.Users;
 using Domain.Repositories;
+using Domain.Services.Interfaces;
 
 namespace Application.Services
 {
     public class LoginService
     {
-        private readonly UserService _userService;
-        private readonly IUserRepository _userRepository;
+        private readonly IUserService _userService;
+        private readonly HashService _hashService;
 
-        public LoginService(UserService userService, IUserRepository userRepository)
+        public LoginService(IUserService userService, HashService hashService)
         {
             _userService = userService;
-            _userRepository = userRepository;
+            _hashService = hashService;
         }
-        
-        public async Task<User> Login(string username, string password)
+
+        public async Task<User?> TryLogin(string username, string password)
         {
-            User user = await _userRepository.GetUser(username);
-            if (user == null)
-                throw new UserNotFoundException(username);
+            password = _hashService.GetHash(password);
+            User user = await _userService.Get(username);
 
-            await _userService.SignIn(user);
-
-            return user;
+            if (password == user.Password)
+                return user;
+            return null;
         }
     }
 }

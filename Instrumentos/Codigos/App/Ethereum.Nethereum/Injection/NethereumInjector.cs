@@ -1,7 +1,5 @@
 using Domain.Services.Interfaces;
 using Ethereum.Nethereum.Services;
-using Ethereum.Nethereum.Services.Interfaces;
-using Ethereum.Nethereum.TicketTokenSmartContract.Deployment;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Ethereum.Nethereum.Injection
@@ -9,17 +7,20 @@ namespace Ethereum.Nethereum.Injection
     public static class NethereumInjector
     {
         public static IServiceCollection InjectNethereumServices(
-            this IServiceCollection services, 
+            this IServiceCollection services,
             string url,
-            string mainAccountPrivateKey,
-            string mainAccountPublicKey,
-            string tokenHolderAccountPrivateKey,
-            string tokenHolderAccountPublicKey) => services
-            .AddSingleton<IMainAccountFaucet>(p => new Web3Service(url, mainAccountPrivateKey, mainAccountPublicKey))
-            .AddSingleton<ITokenHolderAccountFaucet>(p => new Web3Service(url, tokenHolderAccountPrivateKey, tokenHolderAccountPublicKey))
-            .AddTransient<TicketTokenDeploymentService>()
-            .AddTransient<DeploymentService>()
-            .AddTransient<ITokenCreationService, TicketTokenCreationService>()
-            .AddTransient<ITokenService, TicketTokenService>();
+            string walletWords,
+            string walletPassword) =>
+            services
+                .AddTransient<SmartContracts.ERC721Mintable.Deployment.DeploymentService>()
+                .AddTransient<DeploymentService>()
+                .AddTransient<MnemonicService>()
+                .AddSingleton(p => new WalletService(walletWords, walletPassword))
+                .AddSingleton(p => new Web3Service(url))
+                .AddTransient<AccountService>()
+                .AddTransient<OwnerAccountsService>()
+                .AddTransient<ITokenCreationService, ERC271MintableCreationService>()
+                .AddTransient<ITokenService, TicketTokenService>()
+                .AddTransient<ITokenMetadataService, MetadataFileService>();
     }
 }

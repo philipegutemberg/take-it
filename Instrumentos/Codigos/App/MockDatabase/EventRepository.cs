@@ -11,7 +11,7 @@ namespace MockDatabase
     {
         public Task<Event> Register(Event newEvent)
         {
-            Insert(newEvent.Id, newEvent);
+            Insert(newEvent.Code, newEvent);
 
             return Task.FromResult(newEvent);
         }

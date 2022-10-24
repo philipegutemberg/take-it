@@ -1,11 +1,12 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using Domain.Models;
+using Domain.Models.Users;
 
 namespace Domain.Services.Interfaces
 {
     public interface IUserService
     {
-        Task<IEnumerable<Ticket>> ListMyTickets(string username);
+        Task<User> Create(User user);
+
+        Task<User> Get(string username);
     }
 }

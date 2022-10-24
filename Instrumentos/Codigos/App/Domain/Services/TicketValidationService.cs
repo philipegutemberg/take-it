@@ -11,7 +11,7 @@ namespace Domain.Services
         {
             _qrCodeService = qrCodeService;
         }
-        
+
         public async Task<byte[]> GetTicketImage(string ticketId)
         {
             return await _qrCodeService.Generate("Esse TCC vai sair!!!!");

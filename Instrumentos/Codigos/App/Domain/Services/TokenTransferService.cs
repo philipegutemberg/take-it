@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Domain.Exceptions;
 using Domain.Models;
+using Domain.Models.Users;
 using Domain.Repositories;
 using Domain.Services.Interfaces;
 
@@ -18,16 +19,17 @@ namespace Domain.Services
             _eventRepository = eventRepository;
             _tokenService = tokenService;
         }
-        
+
         public async Task Transfer(string username, string ticketId, string ticketOwnerAddress)
         {
             Ticket? ticket = await _ticketRepository.GetById(ticketId);
             if (ticket == null) throw new TicketNotFoundException(ticketId);
 
-            Event? @event = await _eventRepository.GetById(ticket.EventId);
-            if (@event == null) throw new EventNotFoundException(ticket.EventId);
+            Event? @event = await _eventRepository.GetById(ticket.EventCode);
+            if (@event == null) throw new EventNotFoundException(ticket.EventCode);
 
-            await _tokenService.TransferToTicketOwner(@event.TokenContractId!, ticketOwnerAddress, ticket.TokenId);
+            /* ToDo: revisar fluxo corrigindo customer */
+            await _tokenService.TransferToCustomer(ticket, @event, new Customer());
         }
     }
 }

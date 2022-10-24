@@ -11,13 +11,13 @@ Content-Length: 55
 ###
 
 # @name List
-GET {{host}}/api/v1/event HTTP/1.1
+GET {{host}}/api/v1/events HTTP/1.1
 Authorization: Bearer {{LoginCustomer.response.body.token}}
 
 ###
 
 # @name Buy
-POST {{host}}/api/v1/event/buy HTTP/1.1
+POST {{host}}/api/v1/events/buy HTTP/1.1
 Authorization: Bearer {{LoginCustomer.response.body.token}}
 Content-Type: application/json
 Content-Length: 55
@@ -29,7 +29,7 @@ Content-Length: 55
 ###
 
 # @name Transfer
-POST {{host}}/api/v1/event/transfer HTTP/1.1
+POST {{host}}/api/v1/events/transfer HTTP/1.1
 Authorization: Bearer {{LoginCustomer.response.body.token}}
 Content-Type: application/json
 Content-Length: 126

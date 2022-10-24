@@ -80,3 +80,5 @@
 /Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/ConsoleTestApp/bin/Debug/net6.0/Domain.pdb
 /Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/ConsoleTestApp/obj/Debug/net6.0/ConsoleTestApp.csproj.CopyComplete
 /Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/ConsoleTestApp/obj/Debug/net6.0/ConsoleTestApp.genruntimeconfig.cache
+/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/ConsoleTestApp/bin/Debug/net6.0/NBitcoin.dll
+/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/ConsoleTestApp/bin/Debug/net6.0/Nethereum.HdWallet.dll

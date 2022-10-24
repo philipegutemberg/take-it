@@ -27,6 +27,9 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
+              "/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/AWS-S3/AWS-S3.csproj": {
+                "projectPath": "/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/AWS-S3/AWS-S3.csproj"
+              },
               "/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/Domain/Domain.csproj": {
                 "projectPath": "/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/Domain/Domain.csproj"
               },
@@ -43,6 +46,7 @@
           }
         },
         "warningProperties": {
+          "allWarningsAsErrors": true,
           "warnAsError": [
             "NU1605"
           ]
@@ -59,6 +63,16 @@
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[6.0.9, )"
+            },
+            "SonarAnalyzer.CSharp": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.47.0.55603, )"
+            },
+            "StyleCop.Analyzers": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.2.0-beta.435, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -79,6 +93,87 @@
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
             },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/AWS-S3/AWS-S3.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/AWS-S3/AWS-S3.csproj",
+        "projectName": "AWS-S3",
+        "projectPath": "/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/AWS-S3/AWS-S3.csproj",
+        "packagesPath": "/Users/u004488/.nuget/packages/",
+        "outputPath": "/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/AWS-S3/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/u004488/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "/Users/u004488/Documents/Dev/Nuget": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/Domain/Domain.csproj": {
+                "projectPath": "/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/Domain/Domain.csproj"
+              },
+              "/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/Ethereum.Nethereum/Ethereum.Nethereum.csproj": {
+                "projectPath": "/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/Ethereum.Nethereum/Ethereum.Nethereum.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "allWarningsAsErrors": true,
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "AWSSDK.Extensions.NETCore.Setup": {
+              "target": "Package",
+              "version": "[3.7.2, )"
+            },
+            "AWSSDK.S3": {
+              "target": "Package",
+              "version": "[3.7.101, )"
+            },
+            "SonarAnalyzer.CSharp": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.47.0.55603, )"
+            },
+            "StyleCop.Analyzers": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.2.0-beta.435, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
@@ -113,6 +208,7 @@
           }
         },
         "warningProperties": {
+          "allWarningsAsErrors": true,
           "warnAsError": [
             "NU1605"
           ]
@@ -125,6 +221,16 @@
             "Microsoft.Extensions.DependencyInjection.Abstractions": {
               "target": "Package",
               "version": "[6.0.0, )"
+            },
+            "SonarAnalyzer.CSharp": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.47.0.55603, )"
+            },
+            "StyleCop.Analyzers": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.2.0-beta.435, )"
             }
           },
           "imports": [
@@ -176,6 +282,7 @@
           }
         },
         "warningProperties": {
+          "allWarningsAsErrors": true,
           "warnAsError": [
             "NU1605"
           ]
@@ -189,9 +296,27 @@
               "target": "Package",
               "version": "[6.0.0, )"
             },
+            "NBitcoin": {
+              "target": "Package",
+              "version": "[7.0.15, )"
+            },
+            "Nethereum.HdWallet": {
+              "target": "Package",
+              "version": "[4.9.0, )"
+            },
             "Nethereum.Web3": {
               "target": "Package",
               "version": "[4.9.0, )"
+            },
+            "SonarAnalyzer.CSharp": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.47.0.55603, )"
+            },
+            "StyleCop.Analyzers": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.2.0-beta.435, )"
             }
           },
           "imports": [
@@ -243,6 +368,7 @@
           }
         },
         "warningProperties": {
+          "allWarningsAsErrors": true,
           "warnAsError": [
             "NU1605"
           ]
@@ -255,6 +381,16 @@
             "Microsoft.Extensions.DependencyInjection.Abstractions": {
               "target": "Package",
               "version": "[6.0.0, )"
+            },
+            "SonarAnalyzer.CSharp": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.47.0.55603, )"
+            },
+            "StyleCop.Analyzers": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.2.0-beta.435, )"
             }
           },
           "imports": [
@@ -306,6 +442,7 @@
           }
         },
         "warningProperties": {
+          "allWarningsAsErrors": true,
           "warnAsError": [
             "NU1605"
           ]
@@ -322,6 +459,16 @@
             "SkiaSharp": {
               "target": "Package",
               "version": "[2.88.3, )"
+            },
+            "SonarAnalyzer.CSharp": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.47.0.55603, )"
+            },
+            "StyleCop.Analyzers": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.2.0-beta.435, )"
             }
           },
           "imports": [

@@ -1,27 +1,53 @@
 ﻿using System;
+using Domain.Enums;
+using Domain.Models;
+using Domain.Models.Users;
 using Domain.Services.Interfaces;
 using Ethereum.Nethereum.Injection;
 using Microsoft.Extensions.DependencyInjection;
 
 var provider = new ServiceCollection()
         .InjectNethereumServices(
-            "https://summer-lingering-silence.ethereum-goerli.discover.quiknode.pro/ee2b11130f5ef374d83453df4e8adf8b2f70b840/", 
-            "0edde832e34196546524378154c0643e387a23865b727395638de7afd6516225",
-            "0xCa2acA0E413A6cbbC096F03E0896D28867f431b4",
-            "2fe5e94432dbfe9cfc4334d54601f9106d69b330684cc0489ab053dfcbfdbbaf",
-            "0xB051AFC251C1d18f7Db5D6E1e2b53dFbC73d7e41")
+            $"https://summer-lingering-silence.ethereum-goerli.discover.quiknode.pro/ee2b11130f5ef374d83453df4e8adf8b2f70b840/",
+            "ripple scissors kick mammal hire column oak again sun offer wealth tomorrow wagon turn fatal",
+            "C@78726fFhd$Bj8")
     .BuildServiceProvider();
 
+Event @event = new Event(DateTime.Now, "dffg", "ATR", "gdfgkd", "ATR2", 50, 10000);
+
+Ticket ticket = new Ticket(@event.Code, 0);
+ticket.TicketId = 245;
+
+EventTicketType eventTicketType = new EventTicketType
+{
+    Access = "Pass (All days)",
+    Code = Guid.NewGuid().ToString(),
+    Qualification = EnumTicketQualification.Student,
+    SingleDay = false,
+    StartDate = new DateTime(2023, 3, 14),
+    EndDate = new DateTime(2023, 3, 17),
+    MetadataFileUrl = "dfsdfsdfdsfsfsdf",
+    PriceBrl = 530
+};
+
+Customer customer = new Customer("dfsdf", "dfsf", "dsfsdf", "philipe", "dfsdffdf");
+customer.Id = 22;
+customer.WalletAddress = "0xCa2acA0E413A6cbbC096F03E0896D28867f431b4";
+
 var tokenCreationService = provider.GetRequiredService<ITokenCreationService>();
-string tokenAddress = await tokenCreationService.Create("ATR", "ATR0");
+@event.TokenContractAddress = await tokenCreationService.Create(@event);
 
 var tokenService = provider.GetRequiredService<ITokenService>();
-long balance = await tokenService.GetBalance(tokenAddress, "0xCa2acA0E413A6cbbC096F03E0896D28867f431b4");
+long balance = await tokenService.GetCustomerBalance(@event, customer);
 
-Console.WriteLine($"Balance: {balance} tokens");
+Console.WriteLine($"Balance minted: {balance} tokens");
 
-await tokenService.Mint(tokenAddress);
+await tokenService.EmitToken(eventTicketType, ticket, @event, customer);
+balance = await tokenService.GetCustomerBalance(@event, customer);
 
-balance = await tokenService.GetBalance(tokenAddress, "0xCa2acA0E413A6cbbC096F03E0896D28867f431b4");
+Console.WriteLine($"Balance minted: {balance} tokens");
 
-Console.WriteLine($"Balance: {balance} tokens");
+await tokenService.TransferToCustomer(ticket, @event, customer);
+balance = await tokenService.GetCustomerBalance(@event, customer);
+
+Console.WriteLine($"Balance minted: {balance} tokens");

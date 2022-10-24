@@ -1,5 +1,3 @@
-using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 using Domain.Services.Interfaces;
 using Net.Codecrete.QrCodeGenerator;

@@ -3,8 +3,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Application.Settings;
-using Domain;
-using Domain.Models;
 using Domain.Models.Users;
 using Microsoft.IdentityModel.Tokens;
 

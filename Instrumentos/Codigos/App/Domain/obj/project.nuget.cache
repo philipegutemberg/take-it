@@ -1,10 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "DMRtTy84t5H2rSiNYF+HejG/2b1PmUgOTZmIu0t6seqVhQbdmWuP4/39iXeSQqcW8+FzvPbAxWj7DLwOKrS0cQ==",
+  "dgSpecHash": "jWVz6q5XQjuCub0c96rXZXqLsGcQiArdk96WHg2qdYlzaOhplOaKe0qRxR0MRv68uPN8UnVHrLQA0RYYTKzjcw==",
   "success": true,
   "projectFilePath": "/Users/u004488/Documents/Dev/Personal/tcc-ii-pucminas-smartticketing/Instrumentos/Codigos/App/Domain/Domain.csproj",
   "expectedPackageFiles": [
-    "/Users/u004488/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/6.0.0/microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512"
+    "/Users/u004488/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/6.0.0/microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "/Users/u004488/.nuget/packages/sonaranalyzer.csharp/8.47.0.55603/sonaranalyzer.csharp.8.47.0.55603.nupkg.sha512",
+    "/Users/u004488/.nuget/packages/stylecop.analyzers/1.2.0-beta.435/stylecop.analyzers.1.2.0-beta.435.nupkg.sha512",
+    "/Users/u004488/.nuget/packages/stylecop.analyzers.unstable/1.2.0.435/stylecop.analyzers.unstable.1.2.0.435.nupkg.sha512"
   ],
   "logs": []
 }

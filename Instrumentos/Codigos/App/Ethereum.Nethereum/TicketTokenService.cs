@@ -1,62 +1,72 @@
 using System.Numerics;
 using System.Threading.Tasks;
+using Domain.Exceptions;
+using Domain.Models;
+using Domain.Models.Users;
 using Domain.Services.Interfaces;
 using Ethereum.Nethereum.Services;
-using Ethereum.Nethereum.Services.Interfaces;
-using Ethereum.Nethereum.TicketTokenSmartContract.Functions;
+using Ethereum.Nethereum.SmartContracts.ERC721Mintable.Functions;
 
 namespace Ethereum.Nethereum
 {
     internal class TicketTokenService : ITokenService
     {
-        private readonly IMainAccountFaucet _mainAccountFaucet;
-        private readonly ITokenHolderAccountFaucet _tokenHolderAccountFaucet;
+        private readonly AccountService _accountService;
+        private readonly OwnerAccountsService _ownerAccountsService;
+        private readonly Web3Service _web3Service;
 
-        public TicketTokenService(IMainAccountFaucet mainAccountFaucet, ITokenHolderAccountFaucet tokenHolderAccountFaucet)
+        public TicketTokenService(AccountService accountService, OwnerAccountsService ownerAccountsService, Web3Service web3Service)
         {
-            _mainAccountFaucet = mainAccountFaucet;
-            _tokenHolderAccountFaucet = tokenHolderAccountFaucet;
+            _accountService = accountService;
+            _ownerAccountsService = ownerAccountsService;
+            _web3Service = web3Service;
         }
 
-        public async Task Mint(string contractAddress)
+        public async Task EmitToken(EventTicketType ticketType, Ticket ticket, Event @event, Customer customer)
         {
-            // ToDo: Gerar arquivo metadata dinamicamente e armazenar em local público (filebase?)
             var mintFunctionMessage = new MintFunction()
             {
-                ToAddress = _tokenHolderAccountFaucet.GetPublicAddress(),
-                MetadataUri = "ipfs://QmbKxHChGcXbbF8cAbsWaVbiU9Fa3vkDgQRqqyN2eWWs6P"
+                ToAddress = _accountService.Get(customer.Id).Address,
+                MetadataUri = ticketType.MetadataFileUrl,
+                TokenId = ticket.TokenId
             };
 
-            var mintHandler = _mainAccountFaucet.GetWeb3ETH().GetContractTransactionHandler<MintFunction>();
-            var transactionReceipt = await mintHandler.SendRequestAndWaitForReceiptAsync(contractAddress, mintFunctionMessage);
+            var web3 = _web3Service.GetWeb3(_ownerAccountsService.GetContractOwner());
+            var mintHandler = web3.Eth.GetContractTransactionHandler<MintFunction>();
+            await mintHandler.SendRequestAndWaitForReceiptAsync(@event.TokenContractAddress, mintFunctionMessage);
         }
 
-        public async Task TransferToTicketOwner(string contractAddress, string ticketOwnerAddress, long tokenId)
+        public async Task TransferToCustomer(Ticket ticket, Event @event, Customer customer)
         {
-            var transferFunction = new TransferFunction()
+            if (string.IsNullOrWhiteSpace(customer.WalletAddress))
+                throw new InvalidAddressException(customer.WalletAddress);
+
+            var transferFunction = new OwnerTransferFunction()
             {
-                From = _tokenHolderAccountFaucet.GetPublicAddress(),
-                To = ticketOwnerAddress,
-                TokenId = tokenId
+                From = _accountService.Get(customer.Id).Address,
+                To = customer.WalletAddress,
+                TokenId = ticket.TokenId
             };
-            
-            var transferHandler = _tokenHolderAccountFaucet.GetWeb3ETH().GetContractTransactionHandler<TransferFunction>();
-            
-            var gasEstimate = await transferHandler.EstimateGasAsync(contractAddress, transferFunction);
-            transferFunction.Gas = gasEstimate.Value * 2;
-            
-            var transactionReceipt = await transferHandler.SendRequestAndWaitForReceiptAsync(contractAddress, transferFunction);
+
+            var web3 = _web3Service.GetWeb3(_ownerAccountsService.GetContractOwner());
+            var transferHandler = web3.Eth.GetContractTransactionHandler<OwnerTransferFunction>();
+
+            var gasEstimate = await transferHandler.EstimateGasAsync(@event.TokenContractAddress, transferFunction);
+            transferFunction.Gas = (BigInteger)((long)gasEstimate.Value * 1.5);
+
+            await transferHandler.SendRequestAndWaitForReceiptAsync(@event.TokenContractAddress, transferFunction);
         }
 
-        public async Task<long> GetBalance(string contractAddress, string ownerAddress)
+        public async Task<long> GetCustomerBalance(Event @event, Customer customer)
         {
             var balanceOfFunctionMessage = new BalanceOfFunction()
             {
-                Owner = ownerAddress
+                Owner = _accountService.Get(customer.Id).Address
             };
 
-            var balanceHandler = _mainAccountFaucet.GetWeb3ETH().GetContractQueryHandler<BalanceOfFunction>();
-            return await balanceHandler.QueryAsync<long>(contractAddress, balanceOfFunctionMessage);
+            var web3 = _web3Service.GetWeb3(_ownerAccountsService.GetContractOwner());
+            var balanceHandler = web3.Eth.GetContractQueryHandler<BalanceOfFunction>();
+            return await balanceHandler.QueryAsync<long>(@event.TokenContractAddress, balanceOfFunctionMessage);
         }
     }
 }

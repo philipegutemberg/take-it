@@ -5,18 +5,25 @@ namespace Domain.Models.Users
 {
     public abstract record User
     {
-        public User(string username, string password)
+        protected User(string username, string password)
         {
-            Id = Guid.NewGuid().ToString();
+            Id = -1;
+            Code = Guid.NewGuid().ToString();
             Username = username;
             Password = password;
         }
 
-        public User() { }
+        protected User(int id, string code, string username, string password)
+            : this(username, password)
+        {
+            Id = id;
+            Code = code;
+        }
 
-        public string Id { get; init; }
-        public string Username { get; init; }
-        public string Password { get; init; }
+        public int Id { get; }
+        public string Code { get; }
+        public string Username { get; }
+        public string Password { get; }
         public abstract EnumUserRole Role { get; }
     }
 }

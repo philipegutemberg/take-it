@@ -14,11 +14,13 @@ contract TicketToken is ERC721, ERC721Enumerable, Ownable, ERC721URIStorage {
 
     constructor(string memory tokenName, string memory tokenSymbol) ERC721(tokenName, tokenSymbol) { }
 
-    function safeMint(address to, string memory uri) public onlyOwner {
-        uint256 tokenId = _tokenIdCounter.current();
-        _tokenIdCounter.increment();
+    function safeMint(address to, uint256 tokenId, string memory uri) public onlyOwner {
         _safeMint(to, tokenId);
         _setTokenURI(tokenId, uri);
+    }
+
+    function ownerSafeTransfer(address from, address to, uint256 tokenId) public onlyOwner {
+        _safeTransfer(from, to, tokenId, "");
     }
 
     // The following functions are overrides required by Solidity.

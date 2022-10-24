@@ -9,8 +9,9 @@ namespace Domain.Injection
         public static IServiceCollection InjectDomainServices(this IServiceCollection services) => services
             .AddTransient<IEventService, EventService>()
             .AddTransient<ITicketBuyService, TicketBuyService>()
-            .AddTransient<IUserService, UserService>()
+            .AddTransient<ITicketService, TicketService>()
             .AddTransient<ITokenTransferService, TokenTransferService>()
-            .AddTransient<ITicketValidationService, TicketValidationService>();
+            .AddTransient<ITicketValidationService, TicketValidationService>()
+            .AddTransient<IUserService, UserService>();
     }
 }

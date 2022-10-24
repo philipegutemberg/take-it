@@ -11,8 +11,8 @@ namespace MockDatabase
     {
         public Task Save(Ticket ticket)
         {
-            Insert(ticket.Id, ticket);
-            
+            Insert(ticket.Code, ticket);
+
             return Task.CompletedTask;
         }
 
@@ -20,7 +20,7 @@ namespace MockDatabase
 
         public Task<IEnumerable<Ticket>> GetByIds(IEnumerable<string> ticketsIds)
         {
-            return Task.FromResult(ticketsIds.Select(tid => _storage[tid]));
+            return Task.FromResult(ticketsIds.Select(tid => Storage[tid]));
         }
     }
 }

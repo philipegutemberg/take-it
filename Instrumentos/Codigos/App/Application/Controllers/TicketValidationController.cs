@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Application.Controllers.Base;
 using Application.Controllers.Models;
 using Domain.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -9,7 +10,7 @@ namespace Application.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class TicketValidationController : Controller
+    public class TicketValidationController : BaseController
     {
         private readonly ITicketValidationService _ticketValidationService;
 
@@ -28,7 +29,7 @@ namespace Application.Controllers
 
                 return File(fileByteArray, "image/png");
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return Problem();
             }

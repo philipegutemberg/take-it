@@ -1,11 +1,9 @@
 using System;
 using System.Threading.Tasks;
+using Application.Controllers.Base;
 using Application.Controllers.Models;
 using Application.Services;
-using Domain;
-using Domain.Enums;
 using Domain.Exceptions;
-using Domain.Models;
 using Domain.Models.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +12,7 @@ namespace Application.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class LoginController : Controller
+    public class LoginController : BaseController
     {
         private readonly TokenService _tokenService;
         private readonly LoginService _loginService;
@@ -24,31 +22,34 @@ namespace Application.Controllers
             _tokenService = tokenService;
             _loginService = loginService;
         }
-        
+
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Authenticate([FromBody]LoginModel model)
         {
             try
             {
-                User user = await _loginService.Login(model.Username, model.Password);
-
-                // Gera o Token
-                var token = _tokenService.GenerateToken(user);
-
-                // Retorna os dados
-                return Ok(new
+                User? loggedUser = await _loginService.TryLogin(model.Username!, model.Password!);
+                if (loggedUser != null)
                 {
-                    user.Username,
-                    user.Role,
-                    token = token
-                });
+                    // Gera o Token
+                    var token = _tokenService.GenerateToken(loggedUser);
+
+                    // Retorna os dados
+                    return Ok(new
+                    {
+                        loggedUser.Username,
+                        token = token
+                    });
+                }
+
+                return Unauthorized();
             }
-            catch (UserNotFoundException e)
+            catch (UserNotFoundException)
             {
                 return NotFound(new { message = "Invalid user" });
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return Problem();
             }

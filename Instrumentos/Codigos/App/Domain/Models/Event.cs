@@ -1,38 +1,78 @@
 using System;
+using System.Collections.Generic;
 using Domain.Models.Users;
 
 namespace Domain.Models
 {
     public record Event
     {
-        public Event(DateTime date, string location, string title, string description, string ticker, decimal price, long ticketsCount)
+        public Event(
+            DateTime startDate,
+            DateTime endDate,
+            string location,
+            string title,
+            string description,
+            string ticker,
+            string imageUrl)
         {
-            Id = Guid.NewGuid().ToString();
-            Date = date;
+            Code = Guid.NewGuid().ToString();
+            StartDate = startDate;
+            EndDate = endDate;
             Location = location;
             Title = title;
             Description = description;
             Ticker = ticker;
-            PriceBRL = price;
-            TicketStock = new EventTicketStock(Id, ticketsCount);
+            TokenContractAddress = string.Empty;
+            ImageUrl = imageUrl;
+            TicketTypesCodes = new List<string>();
         }
 
-        public Event() { }
-
-        public string Id { get; init; }
-        public DateTime Date { get; init; }
-        public string Location { get; init; }
-        public string Title { get; init; }
-        public string Description { get; init; }
-        public string Ticker { get; init; }
-        public decimal PriceBRL { get; init; }
-        public string? TokenContractId { get; set; }
-        public EventTicketStock TicketStock { get; init; }
-        public bool Available => !TicketStock.OutOfStock && Date >= DateTime.Today;
-
-        public bool TryPurchase(Customer customer, out Ticket? ticket)
+        public Event(
+            string code,
+            DateTime startDate,
+            DateTime endDate,
+            string location,
+            string title,
+            string description,
+            string ticker,
+            string tokenContractAddress,
+            string imageUrl,
+            List<string> ticketTypesCodes)
         {
-            return TicketStock.TryIssueTicket(customer, out ticket);
+            Code = code;
+            StartDate = startDate;
+            EndDate = endDate;
+            Location = location;
+            Title = title;
+            Description = description;
+            Ticker = ticker;
+            TokenContractAddress = tokenContractAddress;
+            ImageUrl = imageUrl;
+            TicketTypesCodes = ticketTypesCodes;
+        }
+
+        public string Code { get; }
+        public DateTime StartDate { get; }
+        public DateTime EndDate { get; }
+        public string Location { get; }
+        public string Title { get; }
+        public string Description { get; }
+        public string Ticker { get; }
+        public string TokenContractAddress { get; private set; }
+        public string ImageUrl { get; }
+        public List<string> TicketTypesCodes { get; }
+
+        public void AssignTicketType(string ticketTypeCode)
+        {
+            TicketTypesCodes.Add(ticketTypeCode);
+        }
+
+        public void AssignTokenContractAddress(string address)
+        {
+            if (!string.IsNullOrEmpty(TokenContractAddress))
+                throw new Exception("Token contract address already assigned.");
+
+            TokenContractAddress = address;
         }
     }
 }

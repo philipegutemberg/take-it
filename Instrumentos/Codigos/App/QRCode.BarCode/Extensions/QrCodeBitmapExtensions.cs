@@ -25,13 +25,14 @@ namespace Net.Codecrete.QrCodeGenerator
             {
                 throw new ArgumentOutOfRangeException(nameof(scale), "Value out of range");
             }
+
             if (border < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(border), "Value out of range");
             }
 
             int size = qrCode.Size;
-            int dim = (size + border * 2) * scale;
+            int dim = (size + (border * 2)) * scale;
 
             if (dim > short.MaxValue)
             {
@@ -84,6 +85,7 @@ namespace Net.Codecrete.QrCodeGenerator
         /// If not specified, the foreground color is black (0x000000) und the background color always white (0xFFFFFF).
         /// </para>
         /// </summary>
+        /// <param name="qrCode">Qr Code.</param>
         /// <param name="scale">The width and height, in pixels, of each module.</param>
         /// <param name="border">The number of border modules to add to each of the four sides.</param>
         /// <returns>The created bitmap representing this QR code.</returns>
@@ -119,6 +121,7 @@ namespace Net.Codecrete.QrCodeGenerator
         /// If not specified, the foreground color is black (0x000000) und the background color always white (0xFFFFFF).
         /// </para>
         /// </summary>
+        /// <param name="qrCode">Qr Code.</param>
         /// <param name="scale">The width and height, in pixels, of each module.</param>
         /// <param name="border">The number of border modules to add to each of the four sides.</param>
         /// <returns>The created bitmap representing this QR code.</returns>
@@ -155,6 +158,8 @@ namespace Net.Codecrete.QrCodeGenerator
         /// If not specified, the foreground color is black (0x000000) und the background color always white (0xFFFFFF).
         /// </para>
         /// </summary>
+        /// <param name="qrCode">Qr Code.</param>
+        /// <param name="filename">Filename.</param>
         /// <param name="scale">The width and height, in pixels, of each module.</param>
         /// <param name="border">The number of border modules to add to each of the four sides.</param>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="scale"/> is 0 or negative, <paramref name="border"/> is negative

@@ -21,7 +21,7 @@ namespace Domain.Services
             _ticketRepository = ticketRepository;
             _tokenService = tokenService;
         }
-        
+
         public async Task Buy(string username, string eventId)
         {
             User? user = await _userRepository.GetUser(username);
@@ -35,10 +35,12 @@ namespace Domain.Services
             if (@event.TryPurchase(customer, out Ticket? ticket))
             {
                 await _ticketRepository.Save(ticket!);
-                await _tokenService.Mint(@event.TokenContractId!);
+                await _tokenService.EmitToken(ticket, @event, customer);
             }
             else
+            {
                 throw new UnsuccessfulPurchaseException();
+            }
         }
     }
 }

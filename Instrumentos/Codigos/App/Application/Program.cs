@@ -1,6 +1,8 @@
 using System.Text;
-using Application.DependencyInjection;
+using Amazon;
+using Application.Injection;
 using Application.Settings;
+using AWS_S3.Injection;
 using Domain.Injection;
 using Ethereum.Nethereum.Injection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -14,7 +16,6 @@ using QRCode.BarCode.Injection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -44,12 +45,11 @@ builder.Services
     .InjectApplicationServices()
     .InjectMockDatabaseServices()
     .InjectNethereumServices(
-        "https://summer-lingering-silence.ethereum-goerli.discover.quiknode.pro/ee2b11130f5ef374d83453df4e8adf8b2f70b840/", 
-        "0edde832e34196546524378154c0643e387a23865b727395638de7afd6516225",
-        "0xCa2acA0E413A6cbbC096F03E0896D28867f431b4",
-        "2fe5e94432dbfe9cfc4334d54601f9106d69b330684cc0489ab053dfcbfdbbaf",
-        "0xB051AFC251C1d18f7Db5D6E1e2b53dFbC73d7e41")
-    .InjectBarcodeServices();
+        $"https://summer-lingering-silence.ethereum-goerli.discover.quiknode.pro/ee2b11130f5ef374d83453df4e8adf8b2f70b840/",
+        "ripple scissors kick mammal hire column oak again sun offer wealth tomorrow wagon turn natal",
+        "C@78726fFhd$Bj8") /* ToDo: pegar isso de algum lugar seguro */
+    .InjectBarcodeServices()
+    .InjectS3Services("AKIAW7G7XFRODL3YN5UO", "n0bSUIdqLQeMm+xIMiKXl0X8mwPM2q4U8DlL8nOD", RegionEndpoint.USEast1);
 
 var app = builder.Build();
 

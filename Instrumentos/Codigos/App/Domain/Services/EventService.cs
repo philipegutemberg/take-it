@@ -16,14 +16,16 @@ namespace Domain.Services
             _eventRepository = eventRepository;
             _tokenCreationService = tokenCreationService;
         }
-        
+
         public async Task Register(Event newEvent)
         {
-            string tokenContractId = await _tokenCreationService.Create(newEvent.Title, newEvent.Ticker);
-            newEvent.TokenContractId = tokenContractId;
-            
+            string tokenContractId = await _tokenCreationService.Create(newEvent);
+            newEvent.AssignTokenContractAddress(tokenContractId);
+
             await _eventRepository.Register(newEvent);
         }
+        
+        /* ToDo: CREATE TICKET TYPE HERE !!!!!!!!!!!! */
 
         public async Task<IEnumerable<Event>> ListAllAvailable()
         {

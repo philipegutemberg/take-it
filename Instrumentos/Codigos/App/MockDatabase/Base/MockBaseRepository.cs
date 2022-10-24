@@ -5,29 +5,43 @@ namespace MockDatabase.Base
 {
     internal abstract class MockBaseRepository<TEntity>
     {
-        protected IDictionary<string, TEntity> _storage;
+#pragma warning disable SA1401
+        protected readonly IDictionary<string, TEntity> Storage;
+#pragma warning restore SA1401
 
-        public MockBaseRepository()
+        protected MockBaseRepository()
         {
-            _storage = new Dictionary<string, TEntity>();
+            Storage = new Dictionary<string, TEntity>();
         }
 
         protected void Insert(string key, TEntity entity)
         {
-            _storage.Add(key, entity);
+            Storage.Add(key, entity);
+        }
+
+        protected void InsertOrUpdate(string key, TEntity entity)
+        {
+            if (Storage.ContainsKey(key))
+            {
+                Storage[key] = entity;
+            }
+            else
+            {
+                Insert(key, entity);
+            }
         }
 
         protected TEntity? GetByKey(string key)
         {
-            if (_storage.ContainsKey(key))
-                return _storage[key];
+            if (Storage.ContainsKey(key))
+                return Storage[key];
 
             return default;
         }
 
         protected IEnumerable<TEntity> GetAllEntities()
         {
-            return _storage.Select(s => s.Value);
+            return Storage.Select(s => s.Value);
         }
     }
 }
