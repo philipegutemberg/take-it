@@ -4,6 +4,6 @@ namespace Domain.Services.Interfaces
 {
     public interface ITicketBuyService
     {
-        Task Buy(string username, string eventId);
+        Task Buy(string username, string eventTicketTypeCode);
     }
 }

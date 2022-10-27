@@ -3,10 +3,11 @@ using Domain.Models.Users;
 
 namespace Domain.Services.Interfaces
 {
-    public interface IUserService
+    public interface IUserService<TUser>
+        where TUser : User
     {
-        Task<User> Create(User user);
+        Task<TUser> Create(TUser user);
 
-        Task<User> Get(string username);
+        Task<TUser> Get(string username);
     }
 }

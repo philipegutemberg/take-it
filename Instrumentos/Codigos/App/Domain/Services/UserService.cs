@@ -5,23 +5,24 @@ using Domain.Services.Interfaces;
 
 namespace Domain.Services
 {
-    internal class UserService : IUserService
+    internal class UserService<TUser> : IUserService<TUser>
+        where TUser : User
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUserRepository<TUser> _userRepository;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository<TUser> userRepository)
         {
             _userRepository = userRepository;
         }
 
-        public async Task<User> Create(User user)
+        public async Task<TUser> Create(TUser user)
         {
             return await _userRepository.Save(user);
         }
 
-        public async Task<User> Get(string username)
+        public async Task<TUser> Get(string username)
         {
-            return await _userRepository.GetUser(username);
+            return await _userRepository.GetByUsername(username);
         }
     }
 }

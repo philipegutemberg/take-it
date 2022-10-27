@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using Domain.Exceptions;
 using Domain.Models;
 using Domain.Models.Users;
 using Domain.Repositories;
@@ -12,24 +11,27 @@ namespace Domain.Services
         private readonly ITicketRepository _ticketRepository;
         private readonly IEventRepository _eventRepository;
         private readonly ITokenService _tokenService;
+        private readonly IUserRepository<Customer> _customerRepository;
 
-        public TokenTransferService(ITicketRepository ticketRepository, IEventRepository eventRepository, ITokenService tokenService)
+        public TokenTransferService(
+            ITicketRepository ticketRepository,
+            IEventRepository eventRepository,
+            ITokenService tokenService,
+            IUserRepository<Customer> customerRepository)
         {
             _ticketRepository = ticketRepository;
             _eventRepository = eventRepository;
             _tokenService = tokenService;
+            _customerRepository = customerRepository;
         }
 
-        public async Task Transfer(string username, string ticketId, string ticketOwnerAddress)
+        public async Task Transfer(string username, string ticketCode)
         {
-            Ticket? ticket = await _ticketRepository.GetById(ticketId);
-            if (ticket == null) throw new TicketNotFoundException(ticketId);
+            Ticket ticket = await _ticketRepository.GetByCode(ticketCode);
+            Event @event = await _eventRepository.GetByCode(ticket.EventCode);
+            Customer customer = await _customerRepository.GetByUsername(username);
 
-            Event? @event = await _eventRepository.GetById(ticket.EventCode);
-            if (@event == null) throw new EventNotFoundException(ticket.EventCode);
-
-            /* ToDo: revisar fluxo corrigindo customer */
-            await _tokenService.TransferToCustomer(ticket, @event, new Customer());
+            await _tokenService.TransferToCustomer(ticket, @event, customer);
         }
     }
 }

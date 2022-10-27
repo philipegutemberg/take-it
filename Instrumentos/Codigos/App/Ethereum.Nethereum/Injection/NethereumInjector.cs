@@ -15,6 +15,7 @@ namespace Ethereum.Nethereum.Injection
                 .AddTransient<SmartContracts.ERC721Mintable.Deployment.DeploymentService>()
                 .AddTransient<DeploymentService>()
                 .AddTransient<MnemonicService>()
+                .AddTransient<BalanceService>()
                 .AddSingleton(p => new WalletService(walletWords, walletPassword))
                 .AddSingleton(p => new Web3Service(url))
                 .AddTransient<AccountService>()

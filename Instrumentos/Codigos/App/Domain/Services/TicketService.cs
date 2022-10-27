@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Domain.Exceptions;
 using Domain.Models;
 using Domain.Models.Users;
 using Domain.Repositories;
@@ -10,20 +9,20 @@ namespace Domain.Services
 {
     internal class TicketService : ITicketService
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUserRepository<Customer> _customerRepository;
         private readonly ITicketRepository _ticketRepository;
 
-        public TicketService(IUserRepository userRepository, ITicketRepository ticketRepository)
+        public TicketService(IUserRepository<Customer> customerRepository, ITicketRepository ticketRepository)
         {
-            _userRepository = userRepository;
+            _customerRepository = customerRepository;
             _ticketRepository = ticketRepository;
         }
 
         public async Task<IEnumerable<Ticket>> ListMyTickets(string username)
         {
-            Customer customer = await _userRepository.GetCustomer(username);
+            Customer customer = await _customerRepository.GetByUsername(username);
 
-            return await _ticketRepository.GetByIds(customer.TicketsCodes);
+            return await _ticketRepository.GetByCodes(customer.TicketsCodes);
         }
     }
 }

@@ -1,17 +1,15 @@
 using System.Threading.Tasks;
-using Domain.Exceptions;
 using Domain.Models.Users;
-using Domain.Repositories;
 using Domain.Services.Interfaces;
 
 namespace Application.Services
 {
     public class LoginService
     {
-        private readonly IUserService _userService;
+        private readonly IUserService<User> _userService;
         private readonly HashService _hashService;
 
-        public LoginService(IUserService userService, HashService hashService)
+        public LoginService(IUserService<User> userService, HashService hashService)
         {
             _userService = userService;
             _hashService = hashService;

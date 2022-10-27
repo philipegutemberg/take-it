@@ -15,14 +15,11 @@ namespace Ethereum.Nethereum
             _fileStorage = fileStorage;
         }
 
-        public string Build(Event @event, EventTicketType eventType)
+        public async Task<string> BuildAndGenerateLink(Event @event, EventTicketType eventType)
         {
             var metadataFile = new MetadataFile(@event, eventType);
-            return metadataFile.ToJson();
-        }
+            var content = metadataFile.ToJson();
 
-        public async Task<string> Save(string content, Event @event, EventTicketType eventType)
-        {
             string key = $"{@event.Code}|{eventType.Code}";
 
             return await _fileStorage.SaveAndGetLink(key, content);

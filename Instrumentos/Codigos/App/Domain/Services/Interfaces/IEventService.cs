@@ -6,8 +6,8 @@ namespace Domain.Services.Interfaces
 {
     public interface IEventService
     {
-        Task Register(Event newEvent);
+        Task Register(Event newEvent, List<EventTicketType> ticketTypes);
 
-        Task<IEnumerable<Event>> ListAllAvailable();
+        Task<IDictionary<Event, EventTicketType[]>> ListAllAvailable();
     }
 }

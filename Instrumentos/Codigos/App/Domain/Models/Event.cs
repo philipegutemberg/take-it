@@ -25,6 +25,7 @@ namespace Domain.Models
             TokenContractAddress = string.Empty;
             ImageUrl = imageUrl;
             TicketTypesCodes = new List<string>();
+            AlreadyIssuedTickets = 0;
         }
 
         public Event(
@@ -37,7 +38,8 @@ namespace Domain.Models
             string ticker,
             string tokenContractAddress,
             string imageUrl,
-            List<string> ticketTypesCodes)
+            List<string> ticketTypesCodes,
+            long alreadyIssuedTickets)
         {
             Code = code;
             StartDate = startDate;
@@ -49,6 +51,7 @@ namespace Domain.Models
             TokenContractAddress = tokenContractAddress;
             ImageUrl = imageUrl;
             TicketTypesCodes = ticketTypesCodes;
+            AlreadyIssuedTickets = alreadyIssuedTickets;
         }
 
         public string Code { get; }
@@ -61,6 +64,12 @@ namespace Domain.Models
         public string TokenContractAddress { get; private set; }
         public string ImageUrl { get; }
         public List<string> TicketTypesCodes { get; }
+        public long AlreadyIssuedTickets { get; private set; }
+
+        public bool TryIssueTicket(Customer customer, EventTicketType ticketType, out Ticket? ticket)
+        {
+            return ticketType.TryIssueTicket(customer, ++AlreadyIssuedTickets, out ticket);
+        }
 
         public void AssignTicketType(string ticketTypeCode)
         {

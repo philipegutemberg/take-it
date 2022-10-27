@@ -13,5 +13,7 @@ namespace Ethereum.Nethereum.Services
         }
 
         public Web3 GetWeb3(Account account) => new Web3(account, _url);
+
+        public Web3 GetWeb3() => new Web3(_url);
     }
 }

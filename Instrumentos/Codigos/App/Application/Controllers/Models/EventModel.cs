@@ -1,15 +1,26 @@
 using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Application.Controllers.Models
 {
     public record EventModel
     {
-        public DateTime Date { get; set; }
+        [Required]
+        public DateTime StartDate { get; set; }
+        [Required]
+        public DateTime EndDate { get; set; }
+        [Required]
         public string? Location { get; set; }
-        public string? Title { get; init; }
-        public string? Description { get; init; }
-        public string? Ticker { get; init; }
-        public decimal Price { get; init; }
-        public long TicketsMaxCount { get; init; }
+        [Required]
+        public string? Title { get; set; }
+        [Required]
+        public string? Description { get; set; }
+        [Required]
+        public string? Ticker { get; set; }
+        [Required]
+        public string? ImageUrl { get; set; }
+        [Required]
+        public List<TicketTypesModel>? TicketTypes { get; set; }
     }
 }

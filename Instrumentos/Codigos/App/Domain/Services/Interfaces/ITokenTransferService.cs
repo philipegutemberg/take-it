@@ -4,6 +4,6 @@ namespace Domain.Services.Interfaces
 {
     public interface ITokenTransferService
     {
-        Task Transfer(string username, string ticketId, string ticketOwnerAddress);
+        Task Transfer(string username, string ticketCode);
     }
 }

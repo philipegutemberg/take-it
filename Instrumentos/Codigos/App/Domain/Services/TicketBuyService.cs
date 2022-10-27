@@ -9,33 +9,36 @@ namespace Domain.Services
 {
     internal class TicketBuyService : ITicketBuyService
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUserRepository<Customer> _customerRepository;
         private readonly IEventRepository _eventRepository;
         private readonly ITicketRepository _ticketRepository;
         private readonly ITokenService _tokenService;
+        private readonly IEventTicketTypeRepository _eventTicketTypeRepository;
 
-        public TicketBuyService(IUserRepository userRepository, IEventRepository eventRepository, ITicketRepository ticketRepository, ITokenService tokenService)
+        public TicketBuyService(
+            IUserRepository<Customer> customerRepository,
+            IEventRepository eventRepository,
+            ITicketRepository ticketRepository,
+            ITokenService tokenService,
+            IEventTicketTypeRepository eventTicketTypeRepository)
         {
-            _userRepository = userRepository;
+            _customerRepository = customerRepository;
             _eventRepository = eventRepository;
             _ticketRepository = ticketRepository;
             _tokenService = tokenService;
+            _eventTicketTypeRepository = eventTicketTypeRepository;
         }
 
-        public async Task Buy(string username, string eventId)
+        public async Task Buy(string username, string eventTicketTypeCode)
         {
-            User? user = await _userRepository.GetUser(username);
-            if (user == null) throw new UserNotFoundException(username);
+            Customer customer = await _customerRepository.GetByUsername(username);
+            EventTicketType eventTicketType = await _eventTicketTypeRepository.GetByCode(eventTicketTypeCode);
+            Event @event = await _eventRepository.GetByCode(eventTicketType.EventCode);
 
-            Customer customer = (Customer)user;
-
-            Event? @event = await _eventRepository.GetById(eventId);
-            if (@event == null) throw new EventNotFoundException(eventId);
-
-            if (@event.TryPurchase(customer, out Ticket? ticket))
+            if (@event.TryIssueTicket(customer, eventTicketType, out Ticket? ticket))
             {
                 await _ticketRepository.Save(ticket!);
-                await _tokenService.EmitToken(ticket, @event, customer);
+                await _tokenService.EmitToken(eventTicketType, ticket!, @event, customer);
             }
             else
             {

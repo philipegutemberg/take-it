@@ -1,4 +1,3 @@
-using System.Diagnostics.Tracing;
 using Domain.Models.Users;
 
 namespace Domain.Models
@@ -24,7 +23,6 @@ namespace Domain.Models
 
         public bool TryIssueTicket(Customer customer, long tokenId, out Ticket? ticket)
         {
-            /* ToDo: Gerenciar reserva de ingressos por um tempo até que a compra seja efetivada e o token emitido no blockchain */
             lock (_lockObj)
             {
                 if (!OutOfStock)

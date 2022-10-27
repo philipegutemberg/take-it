@@ -17,7 +17,7 @@ namespace AWS_S3
 
         public async Task<string> SaveAndGetLink(string key, string content)
         {
-            string bucketName = "take-it"; /* ToDo: receber bucket name de algum lugar */
+            string bucketName = "take-it";
             string address = $"metadata-files/{key}.json";
 
             await _amazonS3.PutObjectAsync(new PutObjectRequest

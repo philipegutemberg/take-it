@@ -14,7 +14,7 @@ namespace Ethereum.Nethereum.Metadata
             EventDescription = @event.Description;
             ReferenceUrl = string.Empty;
             ImageUrl = @event.ImageUrl;
-            Attributes = new List<IBaseAttribute>();
+            Attributes = new List<object>();
 
             Attributes.Add(new MetadataFile.BasicAttribute("Location", @event.Location));
 
@@ -25,11 +25,11 @@ namespace Ethereum.Nethereum.Metadata
             else
             {
                 Attributes.Add(new MetadataFile.DateAttribute("Start Date", eventType.StartDate));
-                Attributes.Add(new MetadataFile.DateAttribute("End Date", eventType.EndDate!.Value));
+                Attributes.Add(new MetadataFile.DateAttribute("End Date", eventType.EndDate));
             }
 
             Attributes.Add(new MetadataFile.BasicAttribute("Qualification", eventType.Qualification.ToString()));
-            Attributes.Add(new MetadataFile.BasicAttribute("Access", eventType.Access));
+            Attributes.Add(new MetadataFile.BasicAttribute("Access", eventType.TicketName));
         }
 
         [JsonPropertyName("name")]
@@ -45,7 +45,7 @@ namespace Ethereum.Nethereum.Metadata
         public string ImageUrl { get; set; }
 
         [JsonPropertyName("attributes")]
-        public List<IBaseAttribute> Attributes { get; set; }
+        public List<object> Attributes { get; set; }
 
         public string ToJson() => JsonSerializer.Serialize(this);
 

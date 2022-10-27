@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Domain.Exceptions;
 using Domain.Models;
 using Domain.Repositories;
 using MockDatabase.Base;
@@ -9,21 +9,24 @@ namespace MockDatabase
 {
     internal class EventRepository : MockBaseRepository<Event>, IEventRepository
     {
-        public Task<Event> Register(Event newEvent)
+        public Task<Event> Save(Event newEvent)
         {
             Insert(newEvent.Code, newEvent);
 
             return Task.FromResult(newEvent);
         }
 
-        public Task<Event?> GetById(string id)
+        public Task<Event> GetByCode(string code)
         {
-            return Task.FromResult(GetByKey(id));
+            var @event = GetByKey(code);
+            if (@event == null) throw new EventNotFoundException(code);
+
+            return Task.FromResult(@event);
         }
 
-        public Task<IEnumerable<Event>> GetAllAvailable()
+        public Task<IEnumerable<Event>> GetAllEnabled()
         {
-            return Task.FromResult(GetAllEntities().Where(e => e.Available));
+            return Task.FromResult(GetAllEntities());
         }
     }
 }

@@ -1,8 +1,10 @@
 using System;
+using System.Net;
 using System.Threading.Tasks;
 using Application.Controllers.Base;
 using Application.Controllers.Models;
 using Application.Services;
+using Domain.Enums;
 using Domain.Models.Users;
 using Domain.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -14,16 +16,24 @@ namespace Application.Controllers
     [ApiController]
     public class UsersController : BaseController
     {
-        private readonly IUserService _userService;
+        private readonly IUserService<Customer> _customerUserService;
+        private readonly IUserService<BackOffice> _backOfficeUserService;
+        private readonly IUserService<Gatekeeper> _gatekeeperUserService;
         private readonly HashService _hashService;
 
-        public UsersController(IUserService userService, HashService hashService)
+        public UsersController(
+            IUserService<Customer> customerUserService,
+            IUserService<BackOffice> backOfficeUserService,
+            IUserService<Gatekeeper> gatekeeperUserService,
+            HashService hashService)
         {
-            _userService = userService;
+            _customerUserService = customerUserService;
+            _backOfficeUserService = backOfficeUserService;
+            _gatekeeperUserService = gatekeeperUserService;
             _hashService = hashService;
         }
 
-        [HttpGet("register")]
+        [HttpPost("register")]
         [AllowAnonymous]
         public async Task<IActionResult> Register(NewUserModel newUser)
         {
@@ -31,7 +41,7 @@ namespace Application.Controllers
             {
                 string password = _hashService.GetHash(newUser.Password!);
 
-                await _userService.Create(new Customer(
+                await _customerUserService.Create(new Customer(
                     newUser.Username!,
                     password,
                     newUser.FullName!,
@@ -40,7 +50,49 @@ namespace Application.Controllers
                     newUser.WalletAddress!
                 ));
 
-                return Ok();
+                return StatusCode((int)HttpStatusCode.Created);
+            }
+            catch (Exception)
+            {
+                return Problem();
+            }
+        }
+
+        [HttpPost("/special/register")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> RegisterSpecialUser(NewSpecialUserModel newUser)
+        {
+            try
+            {
+                string password = _hashService.GetHash(newUser.Password!);
+
+                switch (newUser.Role)
+                {
+                    case EnumUserRole.Backoffice:
+                    {
+                        await _backOfficeUserService.Create(new BackOffice(
+                            newUser.Username!,
+                            password
+                        ));
+                        break;
+                    }
+
+                    case EnumUserRole.Gatekeeper:
+                    {
+                        await _gatekeeperUserService.Create(new Gatekeeper(
+                            newUser.Username!,
+                            password
+                        ));
+                        break;
+                    }
+
+                    case EnumUserRole.Admin:
+                    case EnumUserRole.Customer:
+                    default:
+                        throw new ArgumentOutOfRangeException(newUser.Role.ToString());
+                }
+
+                return StatusCode((int)HttpStatusCode.Created);
             }
             catch (Exception)
             {

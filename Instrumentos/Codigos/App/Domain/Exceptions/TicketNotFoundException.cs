@@ -4,8 +4,8 @@ namespace Domain.Exceptions
 {
     public class TicketNotFoundException : Exception
     {
-        public TicketNotFoundException(string ticketId)
-            : base($"Ticket {ticketId} not found.")
+        public TicketNotFoundException(string code)
+            : base($"Ticket {code} not found.")
         {
         }
     }

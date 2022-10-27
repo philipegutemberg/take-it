@@ -6,10 +6,10 @@ namespace Domain.Repositories
 {
     public interface IEventRepository
     {
-        Task<Event> Register(Event newEvent);
+        Task<Event> Save(Event newEvent);
 
-        Task<Event?> GetById(string id);
+        Task<Event> GetByCode(string code);
 
-        Task<IEnumerable<Event>> GetAllAvailable();
+        Task<IEnumerable<Event>> GetAllEnabled();
     }
 }

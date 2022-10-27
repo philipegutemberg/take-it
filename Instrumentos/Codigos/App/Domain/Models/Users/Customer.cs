@@ -15,14 +15,14 @@ namespace Domain.Models.Users
             TicketsCodes = new List<string>();
         }
 
-        public Customer(int id, string code, string username, string password, string fullName, string email, string phone, string walletAddress, List<string> ticketsIds)
+        public Customer(int id, string code, string username, string password, string fullName, string email, string phone, string walletAddress, List<string> ticketsCodes)
             : base(id, code, username, password)
         {
             FullName = fullName;
             Email = email;
             Phone = phone;
             WalletAddress = walletAddress;
-            TicketsCodes = ticketsIds;
+            TicketsCodes = ticketsCodes;
         }
 
         public string FullName { get; }

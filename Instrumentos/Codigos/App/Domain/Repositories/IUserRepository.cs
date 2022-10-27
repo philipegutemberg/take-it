@@ -3,12 +3,11 @@ using Domain.Models.Users;
 
 namespace Domain.Repositories
 {
-    public interface IUserRepository
+    public interface IUserRepository<TUser>
+        where TUser : User
     {
-        Task<User> Save(User user);
+        Task<TUser> Save(TUser user);
 
-        Task<User> GetUser(string username);
-
-        Task<Customer> GetCustomer(string username);
+        Task<TUser> GetByUsername(string username);
     }
 }

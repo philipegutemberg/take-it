@@ -8,8 +8,8 @@ namespace Domain.Repositories
     {
         Task Save(Ticket ticket);
 
-        Task<Ticket?> GetById(string ticketId);
+        Task<Ticket> GetByCode(string code);
 
-        Task<IEnumerable<Ticket>> GetByIds(IEnumerable<string> ticketsIds);
+        Task<IEnumerable<Ticket>> GetByCodes(IEnumerable<string> ticketsCodes);
     }
 }

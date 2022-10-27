@@ -10,3 +10,14 @@ Content-Type: application/json
   "phone": "3285574897",
   "walletAddress": "Fullfill"
 }
+
+###
+
+# @name RegisterSpecial
+POST {{host}}/api/v1/users/special/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "{{usernameCustomer}}",
+  "password": "{{passwordCustomer}}"
+}

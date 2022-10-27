@@ -23,7 +23,7 @@ Content-Type: application/json
 Content-Length: 55
 
 {
-  "EventId": "b3340fc3-c828-44e0-bc5a-1f95ce0ca981"
+  "EventTicketTypeCode": "b3340fc3-c828-44e0-bc5a-1f95ce0ca981"
 }
 
 ###
@@ -35,6 +35,5 @@ Content-Type: application/json
 Content-Length: 126
 
 {
-  "TicketId": "7d0b1fcf-ee01-4b2a-9bb0-a09365af21e2",
-  "DestinationAddress": "0xbBd0B8A8A716f9Be74A611a98D7A3E9fE92AF039"
+  "TicketCode": "7d0b1fcf-ee01-4b2a-9bb0-a09365af21e2"
 }

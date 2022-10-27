@@ -1,3 +1,4 @@
+using Domain.Models.Users;
 using Domain.Services;
 using Domain.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +13,7 @@ namespace Domain.Injection
             .AddTransient<ITicketService, TicketService>()
             .AddTransient<ITokenTransferService, TokenTransferService>()
             .AddTransient<ITicketValidationService, TicketValidationService>()
-            .AddTransient<IUserService, UserService>();
+            .AddTransient<IUserService<User>, UserService<User>>()
+            .AddTransient<IUserService<Customer>, UserService<Customer>>();
     }
 }
