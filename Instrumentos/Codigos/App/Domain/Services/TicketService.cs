@@ -22,7 +22,7 @@ namespace Domain.Services
         {
             Customer customer = await _customerRepository.GetByUsername(username);
 
-            return await _ticketRepository.GetByCodes(customer.TicketsCodes);
+            return await _ticketRepository.GetAllOwnedByCustomer(customer.Code);
         }
     }
 }

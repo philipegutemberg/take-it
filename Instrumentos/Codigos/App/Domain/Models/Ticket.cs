@@ -11,19 +11,19 @@ namespace Domain.Models
             EventCode = eventCode;
             EventTicketTypeCode = eventTicketTypeCode;
             PurchaseDate = DateTime.UtcNow;
-            OwnerUserCode = ownerCustomer.Code;
+            OwnerCustomerCode = ownerCustomer.Code;
             TokenId = tokenId;
 
             ownerCustomer.AssignTicket(Code);
         }
 
-        public Ticket(string code, string eventCode, string eventTicketTypeCode, DateTime purchaseDate, string ownerUserCode, long tokenId)
+        public Ticket(string code, string eventCode, string eventTicketTypeCode, DateTime purchaseDate, string ownerCustomerCode, long tokenId)
         {
             Code = code;
             EventCode = eventCode;
             EventTicketTypeCode = eventTicketTypeCode;
             PurchaseDate = purchaseDate;
-            OwnerUserCode = ownerUserCode;
+            OwnerCustomerCode = ownerCustomerCode;
             TokenId = tokenId;
         }
 
@@ -31,7 +31,7 @@ namespace Domain.Models
         public string EventCode { get; }
         public string EventTicketTypeCode { get; }
         public DateTime PurchaseDate { get; }
-        public string OwnerUserCode { get; }
+        public string OwnerCustomerCode { get; }
         public long TokenId { get; }
     }
 }

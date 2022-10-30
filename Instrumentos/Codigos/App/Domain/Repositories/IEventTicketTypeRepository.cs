@@ -10,6 +10,6 @@ namespace Domain.Repositories
 
         Task<EventTicketType> GetByCode(string code);
 
-        Task<IEnumerable<EventTicketType>> GetAllAvailableFromEvent(Event @event);
+        Task<IEnumerable<EventTicketType>> GetAllByEvent(string eventCode);
     }
 }

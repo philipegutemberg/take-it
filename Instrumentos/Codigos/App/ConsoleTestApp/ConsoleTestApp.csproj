@@ -14,9 +14,18 @@
     <ItemGroup>
       <ProjectReference Include="..\Application\Application.csproj" />
       <ProjectReference Include="..\AWS-S3\AWS-S3.csproj" />
+      <ProjectReference Include="..\Database.SQLServer\Database.SQLServer.csproj" />
       <ProjectReference Include="..\Ethereum.Nethereum\Ethereum.Nethereum.csproj" />
       <ProjectReference Include="..\MockDatabase\MockDatabase.csproj" />
       <ProjectReference Include="..\QRCode.BarCode\QRCode.BarCode.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="appsettings.json">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </Content>
     </ItemGroup>
 
 </Project>

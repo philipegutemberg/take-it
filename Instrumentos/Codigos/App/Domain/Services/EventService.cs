@@ -43,13 +43,15 @@ namespace Domain.Services
 
             var events = await _eventRepository.GetAllEnabled();
 
-            async void GetTypesForEvents(Event e)
+            async void GetTypesForEvents(Event @event)
             {
-                var eventTypes = await _eventTicketTypeRepository.GetAllAvailableFromEvent(e);
-                var eventTicketTypes = eventTypes as EventTicketType[] ?? eventTypes.ToArray();
+                var eventTypes = await _eventTicketTypeRepository.GetAllByEvent(@event.Code);
 
+                eventTypes = eventTypes.Where(e => e.Available);
+
+                var eventTicketTypes = eventTypes as EventTicketType[] ?? eventTypes.ToArray();
                 if (eventTicketTypes.Any())
-                    response.Add(e, eventTicketTypes);
+                    response.Add(@event, eventTicketTypes);
             }
 
             events.ToList().ForEach(GetTypesForEvents);

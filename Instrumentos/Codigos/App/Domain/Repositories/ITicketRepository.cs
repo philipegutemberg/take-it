@@ -6,10 +6,10 @@ namespace Domain.Repositories
 {
     public interface ITicketRepository
     {
-        Task Save(Ticket ticket);
+        Task<Ticket> Save(Ticket ticket);
 
         Task<Ticket> GetByCode(string code);
 
-        Task<IEnumerable<Ticket>> GetByCodes(IEnumerable<string> ticketsCodes);
+        Task<IEnumerable<Ticket>> GetAllOwnedByCustomer(string customerCode);
     }
 }

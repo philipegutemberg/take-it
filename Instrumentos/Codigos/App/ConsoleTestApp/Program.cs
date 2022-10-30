@@ -4,20 +4,27 @@ using System.Linq;
 using Amazon;
 using Application.Injection;
 using AWS_S3.Injection;
+using Database.SQLServer.Injection;
 using Domain.Enums;
 using Domain.Injection;
 using Domain.Models;
 using Domain.Models.Users;
 using Domain.Services.Interfaces;
 using Ethereum.Nethereum.Injection;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MockDatabase.Injection;
 using QRCode.BarCode.Injection;
 
+IConfiguration configuration = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json")
+    .Build();
+
 var provider = new ServiceCollection()
+    .AddSingleton(configuration)
     .InjectDomainServices()
     .InjectApplicationServices()
-    .InjectMockDatabaseServices()
+    .InjectSqlServerServices()
     .InjectNethereumServices(
         $"https://summer-lingering-silence.ethereum-goerli.discover.quiknode.pro/ee2b11130f5ef374d83453df4e8adf8b2f70b840/",
         "ripple scissors kick mammal hire column oak again sun offer wealth tomorrow wagon turn fatal",

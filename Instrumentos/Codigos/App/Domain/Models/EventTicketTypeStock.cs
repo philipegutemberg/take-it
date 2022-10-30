@@ -12,14 +12,21 @@ namespace Domain.Models
             EventCode = eventCode;
             TotalAvailableTickets = availableTickets;
             CurrentlyAvailableTickets = TotalAvailableTickets;
-            OutOfStock = false;
+        }
+
+        public EventTicketTypeStock(string eventTicketTypeCode, string eventCode, long totalAvailableTickets, long currentlyAvailableTickets)
+        {
+            EventTicketTypeCode = eventTicketTypeCode;
+            EventCode = eventCode;
+            TotalAvailableTickets = totalAvailableTickets;
+            CurrentlyAvailableTickets = currentlyAvailableTickets;
         }
 
         public string EventTicketTypeCode { get; }
         public string EventCode { get; }
         public long TotalAvailableTickets { get; }
         public long CurrentlyAvailableTickets { get; private set; }
-        public bool OutOfStock { get; private set; }
+        public bool OutOfStock => CurrentlyAvailableTickets == 0;
 
         public bool TryIssueTicket(Customer customer, long tokenId, out Ticket? ticket)
         {
@@ -28,7 +35,6 @@ namespace Domain.Models
                 if (!OutOfStock)
                 {
                     --CurrentlyAvailableTickets;
-                    UpdateOutOfStock();
 
                     ticket = new Ticket(EventCode, EventTicketTypeCode, customer, tokenId);
 
@@ -38,11 +44,6 @@ namespace Domain.Models
                 ticket = null;
                 return false;
             }
-        }
-
-        private void UpdateOutOfStock()
-        {
-            OutOfStock = CurrentlyAvailableTickets == 0;
         }
     }
 }
