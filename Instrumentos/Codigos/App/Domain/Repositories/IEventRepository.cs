@@ -11,5 +11,7 @@ namespace Domain.Repositories
         Task<Event> GetByCode(string code);
 
         Task<IEnumerable<Event>> GetAllEnabled();
+
+        Task UpdateIssuedTickets(string eventCode, long alreadyIssuedTickets);
     }
 }

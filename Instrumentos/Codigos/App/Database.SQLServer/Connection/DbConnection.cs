@@ -24,7 +24,7 @@ namespace Database.SQLServer.Connection
 
             try
             {
-                int rowsAffected = await connection.ExecuteAsync(sql.ToString(), param: parameters, transaction: dbTransaction);
+                int rowsAffected = await connection.ExecuteAsync(sql, param: parameters, transaction: dbTransaction);
                 dbTransaction.Commit();
                 return rowsAffected;
             }

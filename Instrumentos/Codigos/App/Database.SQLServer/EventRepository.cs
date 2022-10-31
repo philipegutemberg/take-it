@@ -101,6 +101,22 @@ namespace Database.SQLServer
                 e.AlreadyIssuedTickets));
         }
 
+        public async Task UpdateIssuedTickets(string eventCode, long alreadyIssuedTickets)
+        {
+            const string sql = @"UPDATE dbo.[Event]
+                                    SET AlreadyIssuedTickets = @alreadyIssuedTickets
+                                  WHERE Code = @code";
+
+            int rowsAffected = await _dbConnection.ExecuteAsyncWithTransaction(sql, new
+            {
+                alreadyIssuedTickets,
+                code = eventCode
+            });
+
+            if (rowsAffected == 0)
+                throw new RepositoryException($"Error trying to update already issued tickets for event {eventCode}");
+        }
+
         private async void GetEventTypeCodesForEvent(dynamic e)
         {
             e.EventTypeCodes = await _eventTicketTypeRepository.GetAllByEvent_Codes(e.Code);

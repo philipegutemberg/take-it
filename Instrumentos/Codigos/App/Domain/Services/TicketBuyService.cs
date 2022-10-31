@@ -39,6 +39,7 @@ namespace Domain.Services
             {
                 await _ticketRepository.Insert(ticket!);
                 await _tokenService.EmitToken(eventTicketType, ticket!, @event, customer);
+                await _eventRepository.UpdateIssuedTickets(@event.Code, @event.AlreadyIssuedTickets);
             }
             else
             {
