@@ -14,6 +14,7 @@ namespace Domain.Injection
             .AddTransient<ITokenTransferService, TokenTransferService>()
             .AddTransient<ITicketValidationService, TicketValidationService>()
             .AddTransient<IUserService<User>, UserService<User>>()
-            .AddTransient<ICustomerService, CustomerService>();
+            .AddTransient<ICustomerService, CustomerService>()
+            .AddTransient<ITokenLogProcessingService, TokenLogProcessingService>();
     }
 }

@@ -79,5 +79,31 @@ namespace Database.SQLServer
             if (rowsAffected == 0)
                 throw new RepositoryException($"Error trying to update internal address for customer {customer.Code}");
         }
+
+        public async Task<Customer?> GetByInternalAddress(string internalAddress)
+        {
+            const string sql = @"SELECT *
+                                   FROM dbo.User_Customer
+                                  WHERE InternalAddress = @internalAddress";
+
+            var customerRow = await _dbConnection.QuerySingle(sql, new
+            {
+                internalAddress
+            });
+
+            if (customerRow == null)
+                return null;
+
+            return new Customer(
+                customerRow.Id,
+                customerRow.Code,
+                customerRow.Username,
+                customerRow.Password,
+                customerRow.FullName,
+                customerRow.Email,
+                customerRow.Phone,
+                customerRow.WalletAddress,
+                customerRow.InternalAddress);
+        }
     }
 }

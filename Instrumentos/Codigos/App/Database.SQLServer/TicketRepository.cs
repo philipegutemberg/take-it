@@ -78,5 +78,28 @@ namespace Database.SQLServer
                 t.OwnerCustomerCode,
                 t.TokenId));
         }
+
+        public async Task<Ticket> GetByTokenId(long tokenId)
+        {
+            const string sql = @"SELECT *
+                                   FROM dbo.Ticket
+                                  WHERE TokenId = @tokenId";
+
+            var ticketRow = await _dbConnection.QuerySingle(sql, new
+            {
+                tokenId
+            });
+
+            if (ticketRow == null)
+                throw new RepositoryException($"Error trying to get ticket by token id {tokenId}.");
+
+            return new Ticket(
+                ticketRow.Code,
+                ticketRow.EventCode,
+                ticketRow.EventTicketTypeCode,
+                ticketRow.PurchaseDate,
+                ticketRow.OwnerCustomerCode,
+                ticketRow.TokenId);
+        }
     }
 }

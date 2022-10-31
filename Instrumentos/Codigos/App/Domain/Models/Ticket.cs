@@ -29,9 +29,14 @@ namespace Domain.Models
         public string EventCode { get; }
         public string EventTicketTypeCode { get; }
         public DateTime PurchaseDate { get; }
-        public string? OwnerCustomerCode { get; }
+        public string? OwnerCustomerCode { get; private set; }
         public long TokenId { get; }
 
         public bool HasCurrentCustomerOwner => OwnerCustomerCode == null;
+
+        public void AssignOwner(string? ownerCustomerCode)
+        {
+            OwnerCustomerCode = ownerCustomerCode;
+        }
     }
 }
