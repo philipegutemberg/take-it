@@ -78,19 +78,5 @@ namespace Database.SQLServer
                 t.OwnerCustomerCode,
                 t.TokenId));
         }
-
-        public async Task<List<string>> GetAllOwnedByCustomer_Codes(string customerCode)
-        {
-            const string ticketSql = @"SELECT Code
-                                   FROM dbo.Ticket
-                                  WHERE OwnerCustomerCode = @customerCode";
-
-            var ticketCodes = await _dbConnection.QueryAsync<string>(ticketSql, new
-            {
-                customerCode
-            });
-
-            return ticketCodes.ToList();
-        }
     }
 }

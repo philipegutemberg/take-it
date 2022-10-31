@@ -1,6 +1,9 @@
 using Domain.Services.Interfaces;
+using Ethereum.Nethereum.BlockProcessor;
 using Ethereum.Nethereum.Services;
+using Ethereum.Nethereum.SmartContracts.ERC721Mintable.BlockProcessor;
 using Microsoft.Extensions.DependencyInjection;
+using Nethereum.BlockchainProcessing.ProgressRepositories;
 
 namespace Ethereum.Nethereum.Injection
 {
@@ -22,6 +25,8 @@ namespace Ethereum.Nethereum.Injection
                 .AddTransient<OwnerAccountsService>()
                 .AddTransient<ITokenCreationService, ERC271MintableCreationService>()
                 .AddTransient<ITokenService, TicketTokenService>()
-                .AddTransient<ITokenMetadataService, MetadataFileService>();
+                .AddTransient<ITokenMetadataService, MetadataFileService>()
+                .AddTransient<IBlockProgressRepository, BlockProgressRepository>()
+                .AddTransient<IERC721BlockProcessor, ERC721BlockProcessor>();
     }
 }

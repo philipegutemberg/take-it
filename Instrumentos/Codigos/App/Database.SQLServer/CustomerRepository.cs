@@ -10,12 +10,10 @@ namespace Database.SQLServer
     internal class CustomerRepository : IUserRepository<Customer>
     {
         private readonly DbConnection _dbConnection;
-        private readonly TicketRepository _ticketRepository;
 
-        public CustomerRepository(DbConnection dbConnection, TicketRepository ticketRepository)
+        public CustomerRepository(DbConnection dbConnection)
         {
             _dbConnection = dbConnection;
-            _ticketRepository = ticketRepository;
         }
 
         public async Task<Customer> Insert(Customer user)
@@ -36,8 +34,7 @@ namespace Database.SQLServer
                 insertedRow.FullName,
                 insertedRow.Email,
                 insertedRow.Phone,
-                insertedRow.WalletAddress,
-                new List<string>());
+                insertedRow.WalletAddress);
         }
 
         public async Task<Customer> GetByUsername(string username)
@@ -54,8 +51,6 @@ namespace Database.SQLServer
             if (customerRow == null)
                 throw new RepositoryException($"Error trying to get customer.");
 
-            var ticketsOwnedByCustomer = await _ticketRepository.GetAllOwnedByCustomer_Codes(customerRow.Code);
-
             return new Customer(
                 customerRow.Id,
                 customerRow.Code,
@@ -64,8 +59,7 @@ namespace Database.SQLServer
                 customerRow.FullName,
                 customerRow.Email,
                 customerRow.Phone,
-                customerRow.WalletAddress,
-                ticketsOwnedByCustomer);
+                customerRow.WalletAddress);
         }
     }
 }

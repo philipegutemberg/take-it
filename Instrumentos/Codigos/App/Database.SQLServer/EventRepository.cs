@@ -11,12 +11,10 @@ namespace Database.SQLServer
     internal class EventRepository : IEventRepository
     {
         private readonly DbConnection _dbConnection;
-        private readonly EventTicketTypeRepository _eventTicketTypeRepository;
 
-        public EventRepository(DbConnection dbConnection, EventTicketTypeRepository eventTicketTypeRepository)
+        public EventRepository(DbConnection dbConnection)
         {
             _dbConnection = dbConnection;
-            _eventTicketTypeRepository = eventTicketTypeRepository;
         }
 
         public async Task<Event> Insert(Event newEvent)
@@ -39,7 +37,6 @@ namespace Database.SQLServer
                 insertedRow.Ticker,
                 insertedRow.TokenContractAddress,
                 insertedRow.ImageUrl,
-                new List<string>(),
                 insertedRow.AlreadyIssuedTickets);
         }
 
@@ -57,8 +54,6 @@ namespace Database.SQLServer
             if (eventRow == null)
                 throw new RepositoryException($"Error trying to get event.");
 
-            var eventTypeCodes = await _eventTicketTypeRepository.GetAllByEvent_Codes(eventRow.Code);
-
             return new Event(
                 eventRow.Code,
                 eventRow.StartDate,
@@ -69,7 +64,6 @@ namespace Database.SQLServer
                 eventRow.Ticker,
                 eventRow.TokenContractAddress,
                 eventRow.ImageUrl,
-                eventTypeCodes,
                 eventRow.AlreadyIssuedTickets);
         }
 
@@ -84,10 +78,7 @@ namespace Database.SQLServer
             if (eventsRows == null)
                 throw new RepositoryException($"Error trying to get all enabled events.");
 
-            var eventsRowsEnumerable = eventsRows as dynamic[] ?? eventsRows.ToArray();
-            eventsRowsEnumerable.ToList().ForEach(GetEventTypeCodesForEvent);
-
-            return eventsRowsEnumerable.Select(e => new Event(
+            return eventsRows.Select(e => new Event(
                 e.Code,
                 e.StartDate,
                 e.EndDate,
@@ -97,7 +88,6 @@ namespace Database.SQLServer
                 e.Ticker,
                 e.TokenContractAddress,
                 e.ImageUrl,
-                e.EventTypeCodes,
                 e.AlreadyIssuedTickets));
         }
 
@@ -115,11 +105,6 @@ namespace Database.SQLServer
 
             if (rowsAffected == 0)
                 throw new RepositoryException($"Error trying to update already issued tickets for event {eventCode}");
-        }
-
-        private async void GetEventTypeCodesForEvent(dynamic e)
-        {
-            e.EventTypeCodes = await _eventTicketTypeRepository.GetAllByEvent_Codes(e.Code);
         }
     }
 }

@@ -13,8 +13,6 @@ namespace Domain.Models
             PurchaseDate = DateTime.UtcNow;
             OwnerCustomerCode = ownerCustomer.Code;
             TokenId = tokenId;
-
-            ownerCustomer.AssignTicket(Code);
         }
 
         public Ticket(string code, string eventCode, string eventTicketTypeCode, DateTime purchaseDate, string ownerCustomerCode, long tokenId)

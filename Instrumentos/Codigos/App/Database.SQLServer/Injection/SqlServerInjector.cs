@@ -15,6 +15,7 @@ namespace Database.SQLServer.Injection
             .AddTransient<IEventTicketTypeRepository, EventTicketTypeRepository>()
             .AddTransient<EventTicketTypeRepository>()
             .AddTransient<ITicketRepository, TicketRepository>()
-            .AddTransient<TicketRepository>();
+            .AddTransient<TicketRepository>()
+            .AddTransient<ITokenEventProcessingRepository, TokenEventProcessingRepository>();
     }
 }

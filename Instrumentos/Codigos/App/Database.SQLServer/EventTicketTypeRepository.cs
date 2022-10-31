@@ -119,22 +119,5 @@ namespace Database.SQLServer
                     e.CurrentlyAvailableTickets
                 )));
         }
-
-        public async Task<List<string>> GetAllByEvent_Codes(string eventCode)
-        {
-            const string sql = @"SELECT Code
-                                   FROM dbo.[EventTicketType]
-                                  WHERE EventCode = @eventCode";
-
-            var eventTicketTypeCodes = await _dbConnection.QueryAsync<string>(sql, new
-            {
-                eventCode
-            });
-
-            if (eventTicketTypeCodes == null)
-                throw new RepositoryException($"Error trying to get event ticket type by event {eventCode}.");
-
-            return eventTicketTypeCodes.ToList();
-        }
     }
 }

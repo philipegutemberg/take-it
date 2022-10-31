@@ -24,8 +24,6 @@ namespace Domain.Models
             PriceBrl = priceBrl;
             MetadataFileUrl = string.Empty;
             TicketStock = new EventTicketTypeStock(Code, EventCode, availableTickets);
-
-            @event.AssignTicketType(Code);
         }
 
         public EventTicketType(

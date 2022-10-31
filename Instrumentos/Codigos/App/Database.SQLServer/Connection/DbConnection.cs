@@ -54,11 +54,16 @@ namespace Database.SQLServer.Connection
             return await connection.QueryAsync<T>(sql, param: parameters);
         }
 
-        public async Task<T> QuerySingle<T>(string sql, object parameters)
+        public async Task<T> QuerySingle<T>(string sql, object? parameters)
         {
             using IDbConnection connection = _dbConnectionFactory.Build();
             connection.Open();
             return await connection.QuerySingleOrDefaultAsync<T>(sql, param: parameters);
+        }
+
+        public async Task<T> QuerySingle<T>(string sql)
+        {
+            return await QuerySingle<T>(sql, null);
         }
 
         public async Task<dynamic> QuerySingle(string sql, object parameters)
