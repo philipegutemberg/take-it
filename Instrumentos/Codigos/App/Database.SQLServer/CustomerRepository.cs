@@ -7,7 +7,7 @@ using Domain.Repositories;
 
 namespace Database.SQLServer
 {
-    internal class CustomerRepository : IUserRepository<Customer>
+    internal class CustomerRepository : ICustomerRepository
     {
         private readonly DbConnection _dbConnection;
 
@@ -34,7 +34,8 @@ namespace Database.SQLServer
                 insertedRow.FullName,
                 insertedRow.Email,
                 insertedRow.Phone,
-                insertedRow.WalletAddress);
+                insertedRow.WalletAddress,
+                insertedRow.InternalAddress);
         }
 
         public async Task<Customer> GetByUsername(string username)
@@ -59,7 +60,24 @@ namespace Database.SQLServer
                 customerRow.FullName,
                 customerRow.Email,
                 customerRow.Phone,
-                customerRow.WalletAddress);
+                customerRow.WalletAddress,
+                customerRow.InternalAddress);
+        }
+
+        public async Task UpdateInternalAddress(Customer customer)
+        {
+            const string sql = @"UPDATE dbo.User_Customer
+                                    SET InternalAddress = @internalAddress
+                                  WHERE Code = @code";
+
+            int rowsAffected = await _dbConnection.ExecuteAsyncWithTransaction(sql, new
+            {
+                internalAddress = customer.InternalAddress,
+                code = customer.Code
+            });
+
+            if (rowsAffected == 0)
+                throw new RepositoryException($"Error trying to update internal address for customer {customer.Code}");
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Database.SQLServer.Injection
         public static IServiceCollection InjectSqlServerServices(this IServiceCollection services) => services
             .AddTransient<DbConnectionFactory>()
             .AddTransient<DbConnection>()
-            .AddTransient<IUserRepository<Customer>, CustomerRepository>()
+            .AddTransient<ICustomerRepository, CustomerRepository>()
             .AddTransient<IEventRepository, EventRepository>()
             .AddTransient<IEventTicketTypeRepository, EventTicketTypeRepository>()
             .AddTransient<EventTicketTypeRepository>()

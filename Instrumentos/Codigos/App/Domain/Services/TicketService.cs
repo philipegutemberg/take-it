@@ -9,10 +9,10 @@ namespace Domain.Services
 {
     internal class TicketService : ITicketService
     {
-        private readonly IUserRepository<Customer> _customerRepository;
+        private readonly ICustomerRepository _customerRepository;
         private readonly ITicketRepository _ticketRepository;
 
-        public TicketService(IUserRepository<Customer> customerRepository, ITicketRepository ticketRepository)
+        public TicketService(ICustomerRepository customerRepository, ITicketRepository ticketRepository)
         {
             _customerRepository = customerRepository;
             _ticketRepository = ticketRepository;

@@ -16,13 +16,13 @@ namespace Application.Controllers
     [ApiController]
     public class UsersController : BaseController
     {
-        private readonly IUserService<Customer> _customerUserService;
+        private readonly ICustomerService _customerUserService;
         private readonly IUserService<BackOffice> _backOfficeUserService;
         private readonly IUserService<Gatekeeper> _gatekeeperUserService;
         private readonly HashService _hashService;
 
         public UsersController(
-            IUserService<Customer> customerUserService,
+            ICustomerService customerUserService,
             IUserService<BackOffice> backOfficeUserService,
             IUserService<Gatekeeper> gatekeeperUserService,
             HashService hashService)

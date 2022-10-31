@@ -15,12 +15,12 @@ namespace Domain.Services
             _userRepository = userRepository;
         }
 
-        public async Task<TUser> Create(TUser user)
+        public virtual async Task<TUser> Create(TUser user)
         {
             return await _userRepository.Insert(user);
         }
 
-        public async Task<TUser> Get(string username)
+        public virtual async Task<TUser> Get(string username)
         {
             return await _userRepository.GetByUsername(username);
         }

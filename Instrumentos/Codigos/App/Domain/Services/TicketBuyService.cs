@@ -9,14 +9,14 @@ namespace Domain.Services
 {
     internal class TicketBuyService : ITicketBuyService
     {
-        private readonly IUserRepository<Customer> _customerRepository;
+        private readonly ICustomerRepository _customerRepository;
         private readonly IEventRepository _eventRepository;
         private readonly ITicketRepository _ticketRepository;
         private readonly ITokenService _tokenService;
         private readonly IEventTicketTypeRepository _eventTicketTypeRepository;
 
         public TicketBuyService(
-            IUserRepository<Customer> customerRepository,
+            ICustomerRepository customerRepository,
             IEventRepository eventRepository,
             ITicketRepository ticketRepository,
             ITokenService tokenService,

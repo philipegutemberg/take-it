@@ -11,13 +11,13 @@ namespace Domain.Services
         private readonly ITicketRepository _ticketRepository;
         private readonly IEventRepository _eventRepository;
         private readonly ITokenService _tokenService;
-        private readonly IUserRepository<Customer> _customerRepository;
+        private readonly ICustomerRepository _customerRepository;
 
         public TokenTransferService(
             ITicketRepository ticketRepository,
             IEventRepository eventRepository,
             ITokenService tokenService,
-            IUserRepository<Customer> customerRepository)
+            ICustomerRepository customerRepository)
         {
             _ticketRepository = ticketRepository;
             _eventRepository = eventRepository;
