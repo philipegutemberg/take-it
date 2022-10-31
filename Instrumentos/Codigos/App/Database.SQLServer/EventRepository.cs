@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Database.SQLServer.Connection;
 using Domain.Exceptions;
 using Domain.Models;
-using Domain.Models.Users;
 using Domain.Repositories;
 
 namespace Database.SQLServer
@@ -20,7 +19,7 @@ namespace Database.SQLServer
             _eventTicketTypeRepository = eventTicketTypeRepository;
         }
 
-        public async Task<Event> Save(Event newEvent)
+        public async Task<Event> Insert(Event newEvent)
         {
             const string sql = @"INSERT INTO dbo.[Event] (Code, StartDate, EndDate, [Location], Title, [Description], Ticker, TokenContractAddress, ImageUrl, AlreadyIssuesTickets)
                                                         OUTPUT INSERTED.*

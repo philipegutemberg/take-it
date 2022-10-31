@@ -37,7 +37,7 @@ namespace Domain.Services
 
             if (@event.TryIssueTicket(customer, eventTicketType, out Ticket? ticket))
             {
-                await _ticketRepository.Save(ticket!);
+                await _ticketRepository.Insert(ticket!);
                 await _tokenService.EmitToken(eventTicketType, ticket!, @event, customer);
             }
             else

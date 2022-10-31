@@ -10,7 +10,7 @@ CREATE TABLE [Event] (
     Ticker                  VARCHAR(20)     NOT NULL,
     TokenContractAddress    VARCHAR(100)    NOT NULL,
     ImageUrl                VARCHAR(MAX)    NOT NULL,
-    AlreadyIssuesTickets    BIGINT          NOT NULL
+    AlreadyIssuedTickets    BIGINT          NOT NULL
 );
 
 CREATE TABLE [EventTicketType] (
@@ -19,7 +19,7 @@ CREATE TABLE [EventTicketType] (
     TicketName                  VARCHAR(200)    NOT NULL,
     StartDate                   DATETIME        NOT NULL,
     EndDate                     DATETIME        NOT NULL,
-    Qualification               VARCHAR(100)    NOT NULL,
+    Qualification               INT             NOT NULL,
     PriceBrl                    DECIMAL(18,2)   NOT NULL,
     MetadataFileUrl             VARCHAR(MAX)    NOT NULL,
     TotalAvailableTickets       BIGINT          NOT NULL,

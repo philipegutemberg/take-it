@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Database.SQLServer.Connection;
+using Domain.Enums;
 using Domain.Exceptions;
 using Domain.Models;
 using Domain.Repositories;
@@ -17,7 +18,7 @@ namespace Database.SQLServer
             _dbConnection = dbConnection;
         }
 
-        public async Task<EventTicketType> Save(EventTicketType eventTicketType)
+        public async Task<EventTicketType> Insert(EventTicketType eventTicketType)
         {
             const string sql = @"INSERT INTO dbo.[EventTicketType] (Code, EventCode, TicketName, StartDate, EndDate, Qualification, PriceBrl, MetadataFileUrl, TotalAvailableTickets, CurrentlyAvailableTickets)
                                                         OUTPUT INSERTED.*
@@ -46,7 +47,7 @@ namespace Database.SQLServer
                 insertedRow.TicketName,
                 insertedRow.StartDate,
                 insertedRow.EndDate,
-                insertedRow.Qualification,
+                (EnumTicketQualification)insertedRow.Qualification,
                 insertedRow.PriceBrl,
                 insertedRow.MetadataFileUrl,
                 new EventTicketTypeStock(
@@ -77,7 +78,7 @@ namespace Database.SQLServer
                 eventTicketTypeRow.TicketName,
                 eventTicketTypeRow.StartDate,
                 eventTicketTypeRow.EndDate,
-                eventTicketTypeRow.Qualification,
+                (EnumTicketQualification)eventTicketTypeRow.Qualification,
                 eventTicketTypeRow.PriceBrl,
                 eventTicketTypeRow.MetadataFileUrl,
                 new EventTicketTypeStock(
@@ -108,7 +109,7 @@ namespace Database.SQLServer
                 e.TicketName,
                 e.StartDate,
                 e.EndDate,
-                e.Qualification,
+                (EnumTicketQualification)e.Qualification,
                 e.PriceBrl,
                 e.MetadataFileUrl,
                 new EventTicketTypeStock(

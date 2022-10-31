@@ -9,11 +9,11 @@ using Domain.Enums;
 using Domain.Injection;
 using Domain.Models;
 using Domain.Models.Users;
+using Domain.Repositories;
 using Domain.Services.Interfaces;
 using Ethereum.Nethereum.Injection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MockDatabase.Injection;
 using QRCode.BarCode.Injection;
 
 IConfiguration configuration = new ConfigurationBuilder()
@@ -33,39 +33,13 @@ var provider = new ServiceCollection()
     .InjectS3Services("AKIAW7G7XFRODL3YN5UO", "n0bSUIdqLQeMm+xIMiKXl0X8mwPM2q4U8DlL8nOD", RegionEndpoint.USEast1)
     .BuildServiceProvider();
 
-Event @event = new(
-    new DateTime(2022, 3, 24),
-    new DateTime(2022, 3, 26),
-    "Autódromo de Interlagos / SP",
-    "Lolapalooza 2023",
-    "Lolapalooza 2023",
-    "LOLA23",
-    $"https://portalpopline.com.br/wp-content/uploads/2022/08/Lollapalooza-2023-800x800.jpg");
-
-EventTicketType eventTicketType = new(
-    @event,
-    "Lola Pass (All days)",
-    new DateTime(2022, 3, 24),
-    new DateTime(2022, 3, 26),
-    EnumTicketQualification.Complimentary,
-    1250,
-    60
-);
-
-Customer customer = new(
-    "lais",
-    "sialmor4es",
-    "Laís Felipe de Moraes",
-    "sialmoraes@outlook.com.br",
-    "+5532",
-    "0xCa2acA0E413A6cbbC096F03E0896D28867f431b4"
-    );
-
 var customerService = provider.GetRequiredService<IUserService<Customer>>();
-customer = await customerService.Create(customer);
+Customer customer = await customerService.Get("lais");
 
 var eventService = provider.GetRequiredService<IEventService>();
-await eventService.Register(@event, new List<EventTicketType> { eventTicketType });
+var available = (await eventService.ListAllAvailable()).First();
+var @event = available.Key;
+var eventTicketType = available.Value.First();
 
 var tokenService = provider.GetRequiredService<ITokenService>();
 long balance = await tokenService.GetCustomerBalance(@event, customer);

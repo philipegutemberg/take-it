@@ -63,8 +63,8 @@ namespace Domain.Models
         public string Ticker { get; }
         public string TokenContractAddress { get; private set; }
         public string ImageUrl { get; }
-        public List<string> TicketTypesCodes { get; }
         public long AlreadyIssuedTickets { get; private set; }
+        public List<string> TicketTypesCodes { get; }
 
         public bool TryIssueTicket(Customer customer, EventTicketType ticketType, out Ticket? ticket)
         {

@@ -6,7 +6,7 @@ namespace Domain.Repositories
 {
     public interface IEventTicketTypeRepository
     {
-        Task<EventTicketType> Save(EventTicketType eventTicketType);
+        Task<EventTicketType> Insert(EventTicketType eventTicketType);
 
         Task<EventTicketType> GetByCode(string code);
 

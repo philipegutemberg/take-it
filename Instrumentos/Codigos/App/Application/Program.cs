@@ -3,6 +3,7 @@ using Amazon;
 using Application.Injection;
 using Application.Settings;
 using AWS_S3.Injection;
+using Database.SQLServer.Injection;
 using Domain.Injection;
 using Ethereum.Nethereum.Injection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -10,7 +11,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using MockDatabase.Injection;
 using QRCode.BarCode.Injection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -43,7 +43,7 @@ builder.Services.AddAuthentication(x =>
 builder.Services
     .InjectDomainServices()
     .InjectApplicationServices()
-    .InjectMockDatabaseServices()
+    .InjectSqlServerServices()
     .InjectNethereumServices(
         $"https://summer-lingering-silence.ethereum-goerli.discover.quiknode.pro/ee2b11130f5ef374d83453df4e8adf8b2f70b840/",
         "ripple scissors kick mammal hire column oak again sun offer wealth tomorrow wagon turn fatal",

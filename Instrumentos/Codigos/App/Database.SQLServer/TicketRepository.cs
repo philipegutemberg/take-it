@@ -17,7 +17,7 @@ namespace Database.SQLServer
             _dbConnection = DbConnection;
         }
 
-        public async Task<Ticket> Save(Ticket ticket)
+        public async Task<Ticket> Insert(Ticket ticket)
         {
             const string sql = @"INSERT INTO dbo.Ticket (Code, EventCode, EventTicketTypeCode, PurchaseDate, OwnerCustomerCode, TokenId)
                                                         OUTPUT INSERTED.*

@@ -31,7 +31,7 @@ namespace Domain.Services
             string tokenContractId = await _tokenCreationService.Create(newEvent);
             newEvent.AssignTokenContractAddress(tokenContractId);
 
-            await _eventRepository.Save(newEvent);
+            await _eventRepository.Insert(newEvent);
 
             var tasks = ticketTypes.Select(tt => SaveEventTicketType(newEvent, tt));
             await Task.WhenAll(tasks);
@@ -43,7 +43,7 @@ namespace Domain.Services
 
             var events = await _eventRepository.GetAllEnabled();
 
-            async void GetTypesForEvents(Event @event)
+            foreach (var @event in events)
             {
                 var eventTypes = await _eventTicketTypeRepository.GetAllByEvent(@event.Code);
 
@@ -54,8 +54,6 @@ namespace Domain.Services
                     response.Add(@event, eventTicketTypes);
             }
 
-            events.ToList().ForEach(GetTypesForEvents);
-
             return response;
         }
 
@@ -65,7 +63,7 @@ namespace Domain.Services
 
             eventTicketType.AssignMetadataFileUrl(metadataFileLink);
 
-            await _eventTicketTypeRepository.Save(eventTicketType);
+            await _eventTicketTypeRepository.Insert(eventTicketType);
         }
     }
 }

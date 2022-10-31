@@ -1,7 +1,6 @@
 using Database.SQLServer.Connection;
 using Domain.Models.Users;
 using Domain.Repositories;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Database.SQLServer.Injection

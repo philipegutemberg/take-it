@@ -6,7 +6,7 @@ namespace Domain.Repositories
     public interface IUserRepository<TUser>
         where TUser : User
     {
-        Task<TUser> Save(TUser user);
+        Task<TUser> Insert(TUser user);
 
         Task<TUser> GetByUsername(string username);
     }

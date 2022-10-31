@@ -60,7 +60,7 @@ namespace Domain.Models
         public decimal PriceBrl { get; }
         public string MetadataFileUrl { get; private set; }
         public EventTicketTypeStock TicketStock { get; }
-        public bool Available => EndDate <= DateTime.Today && !TicketStock.OutOfStock;
+        public bool Available => EndDate >= DateTime.Today && !TicketStock.OutOfStock;
 
         public bool TryIssueTicket(Customer customer, long tokenId, out Ticket? ticket)
         {

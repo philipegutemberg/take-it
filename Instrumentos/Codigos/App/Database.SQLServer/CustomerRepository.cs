@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Database.SQLServer.Connection;
 using Domain.Exceptions;
@@ -19,7 +18,7 @@ namespace Database.SQLServer
             _ticketRepository = ticketRepository;
         }
 
-        public async Task<Customer> Save(Customer user)
+        public async Task<Customer> Insert(Customer user)
         {
             const string sql = @"INSERT INTO dbo.User_Customer (Code, Username, Password, FullName, Email, Phone, WalletAddress)
                                                         OUTPUT INSERTED.*

@@ -6,7 +6,7 @@ namespace Domain.Repositories
 {
     public interface IEventRepository
     {
-        Task<Event> Save(Event newEvent);
+        Task<Event> Insert(Event newEvent);
 
         Task<Event> GetByCode(string code);
 

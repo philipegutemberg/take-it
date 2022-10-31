@@ -17,7 +17,7 @@ namespace Domain.Services
 
         public async Task<TUser> Create(TUser user)
         {
-            return await _userRepository.Save(user);
+            return await _userRepository.Insert(user);
         }
 
         public async Task<TUser> Get(string username)

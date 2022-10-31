@@ -6,7 +6,7 @@ namespace Domain.Repositories
 {
     public interface ITicketRepository
     {
-        Task<Ticket> Save(Ticket ticket);
+        Task<Ticket> Insert(Ticket ticket);
 
         Task<Ticket> GetByCode(string code);
 

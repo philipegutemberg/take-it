@@ -45,7 +45,7 @@ namespace Application.Controllers
 
                 return Unauthorized();
             }
-            catch (UserNotFoundException)
+            catch (RepositoryException)
             {
                 return NotFound(new { message = "Invalid user" });
             }
