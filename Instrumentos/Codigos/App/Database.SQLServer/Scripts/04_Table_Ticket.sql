@@ -5,6 +5,6 @@ CREATE TABLE Ticket (
                         EventCode                   VARCHAR(36)     NOT NULL        FOREIGN KEY REFERENCES [Event](Code),
                         EventTicketTypeCode         VARCHAR(36)     NOT NULL        FOREIGN KEY REFERENCES EventTicketType(Code),
                         PurchaseDate                DATETIME        NOT NULL,
-                        OwnerCustomerCode           VARCHAR(36)     NOT NULL        FOREIGN KEY REFERENCES User_Customer(Code),
+                        OwnerCustomerCode           VARCHAR(36)     NULL            FOREIGN KEY REFERENCES User_Customer(Code),
                         TokenId                     BIGINT          NOT NULL
 );

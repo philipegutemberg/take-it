@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Amazon;
 using Application.Injection;
 using AWS_S3.Injection;
@@ -12,6 +13,7 @@ using Domain.Models.Users;
 using Domain.Repositories;
 using Domain.Services.Interfaces;
 using Ethereum.Nethereum.Injection;
+using Ethereum.Nethereum.SmartContracts.ERC721Mintable.BlockProcessor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using QRCode.BarCode.Injection;
@@ -33,7 +35,7 @@ var provider = new ServiceCollection()
     .InjectS3Services("AKIAW7G7XFRODL3YN5UO", "n0bSUIdqLQeMm+xIMiKXl0X8mwPM2q4U8DlL8nOD", RegionEndpoint.USEast1)
     .BuildServiceProvider();
 
-var customerService = provider.GetRequiredService<IUserService<Customer>>();
+var customerService = provider.GetRequiredService<ICustomerService>();
 Customer customer = await customerService.Get("lais");
 
 var eventService = provider.GetRequiredService<IEventService>();
@@ -57,8 +59,11 @@ var ticketService = provider.GetRequiredService<ITicketService>();
 var tickets = await ticketService.ListMyTickets(customer.Username);
 
 var tokenTransferService = provider.GetRequiredService<ITokenTransferService>();
-await tokenTransferService.Transfer(customer.Username, tickets.First().Code);
+await tokenTransferService.Transfer(customer.Username, tickets.OrderByDescending(t => t.TokenId).First().Code);
 
 balance = await tokenService.GetCustomerBalance(@event, customer);
 
 Console.WriteLine($"Balance minted: {balance} tokens");
+
+var processingService = provider.GetRequiredService<IERC721BlockProcessor>();
+await processingService.StartProcessing(@event, CancellationToken.None);

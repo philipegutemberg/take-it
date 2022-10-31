@@ -35,7 +35,9 @@ namespace Ethereum.Nethereum.SmartContracts.ERC721Mintable.BlockProcessor
                 action: eventLog => _tokenLogProcessingService.ProcessEventLog(eventLog.Event.From, eventLog.Event.To, (long)eventLog.Event.TokenId),
                 blockProgressRepository: _blockProgressRepository);
 
-            await processor.ExecuteAsync(cancellationToken);
+            await processor.ExecuteAsync(
+                cancellationToken,
+                startAtBlockNumberIfNotProcessed: new BigInteger(7860000));
         }
     }
 }

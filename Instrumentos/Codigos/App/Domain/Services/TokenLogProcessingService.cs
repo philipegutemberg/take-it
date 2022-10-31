@@ -24,6 +24,7 @@ namespace Domain.Services
             /* If customerTo not found, it means ticket was transfer to an outside account.
              Then the ticket gets "ownerless" to our systems, and waits for final transfer back. */
             ticket.AssignOwner(customerTo?.Code);
+            await _ticketRepository.UpdateOwner(ticket);
         }
     }
 }

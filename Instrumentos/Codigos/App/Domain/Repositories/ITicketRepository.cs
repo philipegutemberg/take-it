@@ -13,5 +13,7 @@ namespace Domain.Repositories
         Task<IEnumerable<Ticket>> GetAllOwnedByCustomer(string customerCode);
 
         Task<Ticket> GetByTokenId(long tokenId);
+
+        Task UpdateOwner(Ticket ticket);
     }
 }

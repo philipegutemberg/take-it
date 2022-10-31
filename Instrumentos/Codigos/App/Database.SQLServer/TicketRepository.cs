@@ -101,5 +101,21 @@ namespace Database.SQLServer
                 ticketRow.OwnerCustomerCode,
                 ticketRow.TokenId);
         }
+
+        public async Task UpdateOwner(Ticket ticket)
+        {
+            const string sql = @"UPDATE dbo.Ticket
+                                    SET OwnerCustomerCode = @customerOwner
+                                  WHERE Code = @code";
+
+            int rowsAffected = await _dbConnection.ExecuteAsyncWithTransaction(sql, new
+            {
+                customerOwner = ticket.OwnerCustomerCode,
+                code = ticket.Code
+            });
+
+            if (rowsAffected == 0)
+                throw new RepositoryException($"Error trying to update owner for ticket {ticket.Code}.");
+        }
     }
 }
