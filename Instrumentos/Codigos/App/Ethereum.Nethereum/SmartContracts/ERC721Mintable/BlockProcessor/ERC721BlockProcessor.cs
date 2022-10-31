@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Domain.Models;
 using Domain.Services;
+using Domain.Services.Interfaces;
 using Ethereum.Nethereum.BlockProcessor;
 using Ethereum.Nethereum.Services;
 using Nethereum.BlockchainProcessing.ProgressRepositories;

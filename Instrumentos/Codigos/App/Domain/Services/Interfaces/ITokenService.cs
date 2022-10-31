@@ -11,5 +11,9 @@ namespace Domain.Services.Interfaces
         Task TransferToCustomer(Ticket ticket, Event @event, Customer customer);
 
         Task<long> GetCustomerBalance(Event @event, Customer customer);
+
+        Task<string> GetCustomerInternalAddress(Customer customer);
+
+        Task<bool> CheckCustomerTokenOwnership(Event @event, Customer customer, Ticket ticket);
     }
 }

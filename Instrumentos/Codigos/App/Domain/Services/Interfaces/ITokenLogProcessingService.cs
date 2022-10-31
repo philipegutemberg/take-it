@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Domain.Services
+namespace Domain.Services.Interfaces
 {
     public interface ITokenLogProcessingService
     {

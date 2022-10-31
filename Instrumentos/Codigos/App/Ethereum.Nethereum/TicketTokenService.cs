@@ -6,6 +6,7 @@ using Domain.Models.Users;
 using Domain.Services.Interfaces;
 using Ethereum.Nethereum.Services;
 using Ethereum.Nethereum.SmartContracts.ERC721Mintable.Functions;
+using Nethereum.Contracts.Standards.ERC721.ContractDefinition;
 
 namespace Ethereum.Nethereum
 {
@@ -67,6 +68,25 @@ namespace Ethereum.Nethereum
             var web3 = _web3Service.GetWeb3(_ownerAccountsService.GetContractOwner());
             var balanceHandler = web3.Eth.GetContractQueryHandler<BalanceOfFunction>();
             return await balanceHandler.QueryAsync<long>(@event.TokenContractAddress, balanceOfFunctionMessage);
+        }
+
+        public Task<string> GetCustomerInternalAddress(Customer customer)
+        {
+            return Task.FromResult(_accountService.Get(customer.Id).Address);
+        }
+
+        public async Task<bool> CheckCustomerTokenOwnership(Event @event, Customer customer, Ticket ticket)
+        {
+            var ownerOfFunction = new OwnerOfFunction
+            {
+                TokenId = ticket.TokenId
+            };
+
+            var web3 = _web3Service.GetWeb3(_ownerAccountsService.GetContractOwner());
+            var balanceHandler = web3.Eth.GetContractQueryHandler<OwnerOfFunction>();
+            string legitOwnerAddress = await balanceHandler.QueryAsync<string>(@event.TokenContractAddress, ownerOfFunction);
+
+            return legitOwnerAddress == _accountService.Get(customer.Id).Address;
         }
     }
 }
