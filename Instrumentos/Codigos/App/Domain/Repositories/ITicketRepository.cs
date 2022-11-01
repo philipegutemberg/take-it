@@ -15,5 +15,7 @@ namespace Domain.Repositories
         Task<Ticket> GetByTokenId(long tokenId);
 
         Task UpdateOwner(Ticket ticket);
+
+        Task UpdateUsedOnEvent(Ticket ticket);
     }
 }

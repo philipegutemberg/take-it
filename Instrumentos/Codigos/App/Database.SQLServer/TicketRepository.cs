@@ -19,9 +19,9 @@ namespace Database.SQLServer
 
         public async Task<Ticket> Insert(Ticket ticket)
         {
-            const string sql = @"INSERT INTO dbo.Ticket (Code, EventCode, EventTicketTypeCode, PurchaseDate, OwnerCustomerCode, TokenId)
+            const string sql = @"INSERT INTO dbo.Ticket (Code, EventCode, EventTicketTypeCode, PurchaseDate, OwnerCustomerCode, TokenId, UsedOnEvent)
                                                         OUTPUT INSERTED.*
-                                                        VALUES (@Code, @EventCode, @EventTicketTypeCode, @PurchaseDate, @OwnerCustomerCode, @TokenId)";
+                                                        VALUES (@Code, @EventCode, @EventTicketTypeCode, @PurchaseDate, @OwnerCustomerCode, @TokenId, @UsedOnEvent)";
 
             var insertedRow = await _dbConnection.QuerySingle(sql, ticket);
             if (insertedRow == null)
@@ -33,7 +33,8 @@ namespace Database.SQLServer
                 insertedRow.EventTicketTypeCode,
                 insertedRow.PurchaseDate,
                 insertedRow.OwnerCustomerCode,
-                insertedRow.TokenId);
+                insertedRow.TokenId,
+                insertedRow.UsedOnEvent);
         }
 
         public async Task<Ticket> GetByCode(string code)
@@ -56,7 +57,8 @@ namespace Database.SQLServer
                 ticketRow.EventTicketTypeCode,
                 ticketRow.PurchaseDate,
                 ticketRow.OwnerCustomerCode,
-                ticketRow.TokenId);
+                ticketRow.TokenId,
+                ticketRow.UsedOnEvent);
         }
 
         public async Task<IEnumerable<Ticket>> GetAllOwnedByCustomer(string customerCode)
@@ -76,7 +78,8 @@ namespace Database.SQLServer
                 t.EventTicketTypeCode,
                 t.PurchaseDate,
                 t.OwnerCustomerCode,
-                t.TokenId));
+                t.TokenId,
+                t.UsedOnEvent));
         }
 
         public async Task<Ticket> GetByTokenId(long tokenId)
@@ -99,7 +102,8 @@ namespace Database.SQLServer
                 ticketRow.EventTicketTypeCode,
                 ticketRow.PurchaseDate,
                 ticketRow.OwnerCustomerCode,
-                ticketRow.TokenId);
+                ticketRow.TokenId,
+                ticketRow.UsedOnEvent);
         }
 
         public async Task UpdateOwner(Ticket ticket)
@@ -116,6 +120,26 @@ namespace Database.SQLServer
 
             if (rowsAffected == 0)
                 throw new RepositoryException($"Error trying to update owner for ticket {ticket.Code}.");
+        }
+
+        public async Task UpdateUsedOnEvent(Ticket ticket)
+        {
+            const string sql = @"UPDATE dbo.Ticket
+                                    SET UsedOnEvent = @usedOnEvent
+                                  WHERE Code = @code
+                                    AND OwnerCustomerCode = @ownerCustomerCode
+                                    AND UsedOnEvent = @filterUsedOnEvent";
+
+            int rowsAffected = await _dbConnection.ExecuteAsyncWithTransaction(sql, new
+            {
+                usedOnEvent = ticket.UsedOnEvent,
+                code = ticket.Code,
+                ownerCustomerCode = ticket.OwnerCustomerCode,
+                filterUsedOnEvent = !ticket.UsedOnEvent
+            });
+
+            if (rowsAffected == 0)
+                throw new RepositoryException($"Error trying to update used on event for ticket {ticket.Code}.");
         }
     }
 }

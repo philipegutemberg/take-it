@@ -7,17 +7,23 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.9" />
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.10" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\AsymmetricEncryption\AsymmetricEncryption.csproj" />
       <ProjectReference Include="..\AWS-S3\AWS-S3.csproj" />
       <ProjectReference Include="..\Database.SQLServer\Database.SQLServer.csproj" />
       <ProjectReference Include="..\Domain\Domain.csproj" />
       <ProjectReference Include="..\Ethereum.Nethereum\Ethereum.Nethereum.csproj" />
-      <ProjectReference Include="..\MockDatabase\MockDatabase.csproj" />
       <ProjectReference Include="..\QRCode.BarCode\QRCode.BarCode.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="keys.pem">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

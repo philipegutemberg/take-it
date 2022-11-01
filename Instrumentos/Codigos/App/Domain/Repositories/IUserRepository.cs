@@ -9,5 +9,7 @@ namespace Domain.Repositories
         Task<TUser> Insert(TUser user);
 
         Task<TUser> GetByUsername(string username);
+
+        Task<TUser> GetByCode(string code);
     }
 }

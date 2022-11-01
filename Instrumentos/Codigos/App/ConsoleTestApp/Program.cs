@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading;
 using Amazon;
 using Application.Injection;
+using AsymmetricEncryption.Injection;
 using AWS_S3.Injection;
 using Database.SQLServer.Injection;
 using Domain.Enums;
@@ -33,6 +36,7 @@ var provider = new ServiceCollection()
         "C@78726fFhd$Bj8")
     .InjectBarcodeServices()
     .InjectS3Services("AKIAW7G7XFRODL3YN5UO", "n0bSUIdqLQeMm+xIMiKXl0X8mwPM2q4U8DlL8nOD", RegionEndpoint.USEast1)
+    .InjectAsymmetricEncryptionServices("keys.pem")
     .BuildServiceProvider();
 
 var customerService = provider.GetRequiredService<ICustomerService>();

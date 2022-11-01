@@ -50,7 +50,33 @@ namespace Database.SQLServer
             });
 
             if (customerRow == null)
-                throw new RepositoryException($"Error trying to get customer.");
+                throw new RepositoryException($"Error trying to get customer by username {username}.");
+
+            return new Customer(
+                customerRow.Id,
+                customerRow.Code,
+                customerRow.Username,
+                customerRow.Password,
+                customerRow.FullName,
+                customerRow.Email,
+                customerRow.Phone,
+                customerRow.WalletAddress,
+                customerRow.InternalAddress);
+        }
+
+        public async Task<Customer> GetByCode(string code)
+        {
+            const string sql = @"SELECT *
+                                   FROM dbo.User_Customer
+                                  WHERE Code = @code";
+
+            var customerRow = await _dbConnection.QuerySingle(sql, new
+            {
+                code
+            });
+
+            if (customerRow == null)
+                throw new RepositoryException($"Error trying to get customer by code {code}.");
 
             return new Customer(
                 customerRow.Id,

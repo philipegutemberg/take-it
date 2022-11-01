@@ -13,9 +13,10 @@ namespace Domain.Models
             PurchaseDate = DateTime.UtcNow;
             OwnerCustomerCode = ownerCustomer.Code;
             TokenId = tokenId;
+            UsedOnEvent = false;
         }
 
-        public Ticket(string code, string eventCode, string eventTicketTypeCode, DateTime purchaseDate, string? ownerCustomerCode, long tokenId)
+        public Ticket(string code, string eventCode, string eventTicketTypeCode, DateTime purchaseDate, string? ownerCustomerCode, long tokenId, bool usedOnEvent)
         {
             Code = code;
             EventCode = eventCode;
@@ -23,6 +24,7 @@ namespace Domain.Models
             PurchaseDate = purchaseDate;
             OwnerCustomerCode = ownerCustomerCode;
             TokenId = tokenId;
+            UsedOnEvent = usedOnEvent;
         }
 
         public string Code { get; }
@@ -31,12 +33,31 @@ namespace Domain.Models
         public DateTime PurchaseDate { get; }
         public string? OwnerCustomerCode { get; private set; }
         public long TokenId { get; }
+        public bool UsedOnEvent { get; private set; }
 
         public bool HasCurrentCustomerOwner => OwnerCustomerCode == null;
 
         public void AssignOwner(string? ownerCustomerCode)
         {
             OwnerCustomerCode = ownerCustomerCode;
+        }
+
+        public bool TryMarkAsUsed()
+        {
+            if (UsedOnEvent)
+                return false;
+
+            UsedOnEvent = true;
+            return true;
+        }
+
+        public bool TryUnmarkAsUsed()
+        {
+            if (!UsedOnEvent)
+                return false;
+
+            UsedOnEvent = false;
+            return true;
         }
     }
 }

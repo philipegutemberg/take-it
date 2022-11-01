@@ -1,4 +1,8 @@
+using System;
 using System.Threading.Tasks;
+using Domain.Models;
+using Domain.Models.Users;
+using Domain.Repositories;
 using Domain.Services.Interfaces;
 
 namespace Domain.Services
@@ -6,20 +10,67 @@ namespace Domain.Services
     internal class TicketValidationService : ITicketValidationService
     {
         private readonly IQRCodeService _qrCodeService;
+        private readonly ICustomerRepository _customerRepository;
+        private readonly ITicketRepository _ticketRepository;
+        private readonly IEventRepository _eventRepository;
+        private readonly ITokenService _tokenService;
+        private readonly IEncryptionService _encryptionService;
 
-        public TicketValidationService(IQRCodeService qrCodeService)
+        public TicketValidationService(
+            IQRCodeService qrCodeService,
+            ICustomerRepository customerRepository,
+            ITicketRepository ticketRepository,
+            IEventRepository eventRepository,
+            ITokenService tokenService,
+            IEncryptionService encryptionService)
         {
             _qrCodeService = qrCodeService;
+            _customerRepository = customerRepository;
+            _ticketRepository = ticketRepository;
+            _eventRepository = eventRepository;
+            _tokenService = tokenService;
+            _encryptionService = encryptionService;
         }
 
-        public async Task<byte[]> GetTicketImage(string ticketId)
+        public async Task<byte[]> GetTicketImage(string username, string ticketCode)
         {
-            return await _qrCodeService.Generate("Esse TCC vai sair!!!!");
+            Ticket ticket = await _ticketRepository.GetByCode(ticketCode);
+            Event @event = await _eventRepository.GetByCode(ticket.EventCode);
+            Customer customer = await _customerRepository.GetByUsername(username);
+
+            bool isCustomerOwner = await _tokenService.CheckCustomerTokenOwnership(@event, customer, ticket);
+            if (!isCustomerOwner)
+                throw new Exception("Customer is not current owner of the ticket.");
+
+            string qrCodeText = _encryptionService.Encrypt($"{customer.Code}|{ticket.Code}");
+
+            return await _qrCodeService.Generate(qrCodeText);
         }
 
-        public Task<bool> IsValid(string ticketText)
+        public async Task<bool> IsValid(string qrCodeText)
         {
-            throw new System.NotImplementedException();
+            qrCodeText = _encryptionService.Decrypt(qrCodeText);
+            var splittedText = qrCodeText.Split('|');
+            string customerCode = splittedText[0];
+            string ticketCode = splittedText[1];
+
+            Ticket ticket = await _ticketRepository.GetByCode(ticketCode);
+            if (ticket.UsedOnEvent)
+                return false;
+            if (ticket.OwnerCustomerCode != customerCode)
+                return false;
+
+            Event @event = await _eventRepository.GetByCode(ticket.EventCode);
+            Customer customer = await _customerRepository.GetByCode(customerCode);
+
+            if (ticket.TryMarkAsUsed())
+                await _ticketRepository.UpdateUsedOnEvent(ticket);
+
+            bool isCustomerOwner = await _tokenService.CheckCustomerTokenOwnership(@event, customer, ticket);
+            if (!isCustomerOwner && ticket.TryUnmarkAsUsed())
+                await _ticketRepository.UpdateUsedOnEvent(ticket);
+
+            return isCustomerOwner;
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Application.Controllers
         {
             try
             {
-                byte[] fileByteArray = await _ticketValidationService.GetTicketImage(getTicketImageModel.TicketId!);
+                byte[] fileByteArray = await _ticketValidationService.GetTicketImage(GetLoggedUsername(), getTicketImageModel.TicketId!);
 
                 return File(fileByteArray, "image/png");
             }
