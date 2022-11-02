@@ -23,7 +23,7 @@ namespace Ethereum.Nethereum
             _web3Service = web3Service;
         }
 
-        public async Task EmitToken(EventTicketType ticketType, Ticket ticket, Event @event, Customer customer)
+        public async Task EmitToken(EventTicketType ticketType, Ticket ticket, Event @event, CustomerUser customer)
         {
             var mintFunctionMessage = new MintFunction()
             {
@@ -37,7 +37,7 @@ namespace Ethereum.Nethereum
             await mintHandler.SendRequestAndWaitForReceiptAsync(@event.TokenContractAddress, mintFunctionMessage);
         }
 
-        public async Task TransferToCustomer(Ticket ticket, Event @event, Customer customer)
+        public async Task TransferToCustomer(Ticket ticket, Event @event, CustomerUser customer)
         {
             if (string.IsNullOrWhiteSpace(customer.WalletAddress))
                 throw new InvalidAddressException(customer.WalletAddress);
@@ -58,7 +58,7 @@ namespace Ethereum.Nethereum
             await transferHandler.SendRequestAndWaitForReceiptAsync(@event.TokenContractAddress, transferFunction);
         }
 
-        public async Task<long> GetCustomerBalance(Event @event, Customer customer)
+        public async Task<long> GetCustomerBalance(Event @event, CustomerUser customer)
         {
             var balanceOfFunctionMessage = new BalanceOfFunction()
             {
@@ -70,12 +70,12 @@ namespace Ethereum.Nethereum
             return await balanceHandler.QueryAsync<long>(@event.TokenContractAddress, balanceOfFunctionMessage);
         }
 
-        public Task<string> GetCustomerInternalAddress(Customer customer)
+        public Task<string> GetCustomerInternalAddress(CustomerUser customer)
         {
             return Task.FromResult(_accountService.Get(customer.Id).Address);
         }
 
-        public async Task<bool> CheckCustomerTokenOwnership(Event @event, Customer customer, Ticket ticket)
+        public async Task<bool> CheckCustomerTokenOwnership(Event @event, CustomerUser customer, Ticket ticket)
         {
             var ownerOfFunction = new OwnerOfFunction
             {

@@ -10,6 +10,33 @@ Content-Length: 55
 
 ###
 
+# @name Create
+POST {{host}}/api/v1/events HTTP/1.1
+Authorization: Bearer {{LoginCustomer.response.body.token}}
+Content-Type: application/json
+
+{
+  "startDate": "2023-03-24T00:00:00",
+  "endDate": "2023-03-26T00:00:00",
+  "location": "Autódromo de Interlagos / SP",
+  "title": "Lolapalooza 2023",
+  "description": "Lolapalooza 2023",
+  "ticker": "LOLA23",
+  "imageUrl": "https://portalpopline.com.br/wp-content/uploads/2022/08/Lollapalooza-2023-800x800.jpg",
+  "ticketTypes": [
+    {
+      "ticketName": "Lola Pass (All days)",
+      "startDate": "2023-03-24T00:00:00",
+      "endDate": "2023-03-26T00:00:00",
+      "qualification": "Complimentary",
+      "priceBrl": 1250.00,
+      "totalTickets": 0
+    }
+  ]
+}
+
+###
+
 # @name List
 GET {{host}}/api/v1/events HTTP/1.1
 Authorization: Bearer {{LoginCustomer.response.body.token}}
@@ -23,17 +50,5 @@ Content-Type: application/json
 Content-Length: 55
 
 {
-  "EventTicketTypeCode": "b3340fc3-c828-44e0-bc5a-1f95ce0ca981"
-}
-
-###
-
-# @name Transfer
-POST {{host}}/api/v1/events/transfer HTTP/1.1
-Authorization: Bearer {{LoginCustomer.response.body.token}}
-Content-Type: application/json
-Content-Length: 126
-
-{
-  "TicketCode": "7d0b1fcf-ee01-4b2a-9bb0-a09365af21e2"
+  "EventTicketTypeCode": "6c004eb3-a5ca-4ef2-a56b-fdb0743919c5"
 }

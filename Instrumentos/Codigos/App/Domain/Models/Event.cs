@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Domain.Models.Users;
 
 namespace Domain.Models
@@ -62,7 +61,7 @@ namespace Domain.Models
         public string ImageUrl { get; }
         public long AlreadyIssuedTickets { get; private set; }
 
-        public bool TryIssueTicket(Customer customer, EventTicketType ticketType, out Ticket? ticket)
+        public bool TryIssueTicket(CustomerUser customer, EventTicketType ticketType, out Ticket? ticket)
         {
             return ticketType.TryIssueTicket(customer, ++AlreadyIssuedTickets, out ticket);
         }

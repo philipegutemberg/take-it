@@ -2,8 +2,10 @@
     "rest-client.environmentVariables": {
         "local": {
             "host": "https://localhost:7219",
-            "usernameCustomer": "philipe",
-            "passwordCustomer": "minhasenha",
+            // "usernameCustomer": "philipe",
+            // "passwordCustomer": "atrevida",
+            "usernameCustomer": "lais",
+            "passwordCustomer": "sialmor4es",
             "usernameOperational": "operacional",
             "passwordOperational": "minhasenha"
         },

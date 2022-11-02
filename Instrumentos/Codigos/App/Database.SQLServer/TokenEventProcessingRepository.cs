@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using Database.SQLServer.Connection;
 using Domain.Exceptions;
-using Domain.Models;
 using Domain.Repositories;
 
 namespace Database.SQLServer

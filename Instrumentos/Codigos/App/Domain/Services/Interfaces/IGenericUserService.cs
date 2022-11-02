@@ -3,11 +3,9 @@ using Domain.Models.Users;
 
 namespace Domain.Services.Interfaces
 {
-    public interface IUserService<TUser>
-        where TUser : User
+    public interface IGenericUserService<TUser>
+        where TUser : GenericUser
     {
-        Task<TUser> Create(TUser user);
-
         Task<TUser> Get(string username);
     }
 }

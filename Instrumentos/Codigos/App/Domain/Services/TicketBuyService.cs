@@ -31,7 +31,7 @@ namespace Domain.Services
 
         public async Task Buy(string username, string eventTicketTypeCode)
         {
-            Customer customer = await _customerRepository.GetByUsername(username);
+            CustomerUser customer = await _customerRepository.GetByUsername(username);
             EventTicketType eventTicketType = await _eventTicketTypeRepository.GetByCode(eventTicketTypeCode);
             Event @event = await _eventRepository.GetByCode(eventTicketType.EventCode);
 

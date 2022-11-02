@@ -6,6 +6,7 @@ namespace Application.Controllers.Models
 {
     public class TicketTypesModel
     {
+        public string? Code { get; set; }
         [Required]
         public string? TicketName { get; set; }
         [Required]

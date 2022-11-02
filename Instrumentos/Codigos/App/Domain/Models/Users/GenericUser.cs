@@ -3,18 +3,19 @@ using Domain.Enums;
 
 namespace Domain.Models.Users
 {
-    public abstract record User
+    public record GenericUser
     {
-        protected User(string username, string password)
+        protected GenericUser(string username, string password, EnumUserRole role)
         {
             Id = -1;
             Code = Guid.NewGuid().ToString();
             Username = username;
             Password = password;
+            Role = role;
         }
 
-        protected User(int id, string code, string username, string password)
-            : this(username, password)
+        public GenericUser(int id, string code, string username, string password, EnumUserRole role)
+            : this(username, password, role)
         {
             Id = id;
             Code = code;
@@ -24,6 +25,6 @@ namespace Domain.Models.Users
         public string Code { get; }
         public string Username { get; }
         public string Password { get; }
-        public abstract EnumUserRole Role { get; }
+        public EnumUserRole Role { get; }
     }
 }

@@ -3,10 +3,14 @@ using Domain.Models.Users;
 
 namespace Domain.Repositories
 {
-    public interface ICustomerRepository : IUserRepository<Customer>
+    public interface ICustomerRepository : IGenericUserRepository<CustomerUser>
     {
-        Task UpdateInternalAddress(Customer customer);
+        Task<CustomerUser> Insert(CustomerUser user);
 
-        Task<Customer?> GetByInternalAddress(string internalAddress);
+        Task UpdateInternalAddress(CustomerUser customer);
+
+        Task<CustomerUser?> GetByInternalAddress(string internalAddress);
+
+        Task<CustomerUser> GetByCode(string code);
     }
 }

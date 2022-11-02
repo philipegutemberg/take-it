@@ -13,3 +13,22 @@ Content-Length: 55
 # @name Tickets
 GET {{host}}/api/v1/tickets/owned HTTP/1.1
 Authorization: Bearer {{LoginCustomer.response.body.token}}
+
+###
+
+# @name Transfer
+POST {{host}}/api/v1/events/transfer HTTP/1.1
+Authorization: Bearer {{LoginCustomer.response.body.token}}
+Content-Type: application/json
+Content-Length: 126
+
+{
+  "TicketCode": "b02e9a15-eb78-4823-a496-97340c09d6e9"
+}
+
+###
+
+# @name GetCustomerAddress
+GET {{host}}/api/v1/users/customer/address HTTP/1.1
+Authorization: Bearer {{LoginCustomer.response.body.token}}
+Content-Type: application/json

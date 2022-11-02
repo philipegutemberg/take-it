@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Database.SQLServer.Connection;
 using Domain.Exceptions;
@@ -16,7 +15,7 @@ namespace Database.SQLServer
             _dbConnection = dbConnection;
         }
 
-        public async Task<Customer> Insert(Customer user)
+        public async Task<CustomerUser> Insert(CustomerUser user)
         {
             const string sql = @"INSERT INTO dbo.User_Customer (Code, Username, Password, FullName, Email, Phone, WalletAddress)
                                                         OUTPUT INSERTED.*
@@ -26,7 +25,7 @@ namespace Database.SQLServer
             if (insertedRow == null)
                 throw new RepositoryException($"Error trying to insert customer.");
 
-            return new Customer(
+            return new CustomerUser(
                 insertedRow.Id,
                 insertedRow.Code,
                 insertedRow.Username,
@@ -38,7 +37,7 @@ namespace Database.SQLServer
                 insertedRow.InternalAddress);
         }
 
-        public async Task<Customer> GetByUsername(string username)
+        public async Task<CustomerUser> GetByUsername(string username)
         {
             const string sql = @"SELECT *
                                    FROM dbo.User_Customer
@@ -52,7 +51,7 @@ namespace Database.SQLServer
             if (customerRow == null)
                 throw new RepositoryException($"Error trying to get customer by username {username}.");
 
-            return new Customer(
+            return new CustomerUser(
                 customerRow.Id,
                 customerRow.Code,
                 customerRow.Username,
@@ -64,7 +63,7 @@ namespace Database.SQLServer
                 customerRow.InternalAddress);
         }
 
-        public async Task<Customer> GetByCode(string code)
+        public async Task<CustomerUser> GetByCode(string code)
         {
             const string sql = @"SELECT *
                                    FROM dbo.User_Customer
@@ -78,7 +77,7 @@ namespace Database.SQLServer
             if (customerRow == null)
                 throw new RepositoryException($"Error trying to get customer by code {code}.");
 
-            return new Customer(
+            return new CustomerUser(
                 customerRow.Id,
                 customerRow.Code,
                 customerRow.Username,
@@ -90,7 +89,7 @@ namespace Database.SQLServer
                 customerRow.InternalAddress);
         }
 
-        public async Task UpdateInternalAddress(Customer customer)
+        public async Task UpdateInternalAddress(CustomerUser customer)
         {
             const string sql = @"UPDATE dbo.User_Customer
                                     SET InternalAddress = @internalAddress
@@ -106,7 +105,7 @@ namespace Database.SQLServer
                 throw new RepositoryException($"Error trying to update internal address for customer {customer.Code}");
         }
 
-        public async Task<Customer?> GetByInternalAddress(string internalAddress)
+        public async Task<CustomerUser?> GetByInternalAddress(string internalAddress)
         {
             const string sql = @"SELECT *
                                    FROM dbo.User_Customer
@@ -120,7 +119,7 @@ namespace Database.SQLServer
             if (customerRow == null)
                 return null;
 
-            return new Customer(
+            return new CustomerUser(
                 customerRow.Id,
                 customerRow.Code,
                 customerRow.Username,

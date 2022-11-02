@@ -20,7 +20,7 @@ namespace Domain.Services
 
         public async Task<IEnumerable<Ticket>> ListMyTickets(string username)
         {
-            Customer customer = await _customerRepository.GetByUsername(username);
+            CustomerUser customer = await _customerRepository.GetByUsername(username);
 
             return await _ticketRepository.GetAllOwnedByCustomer(customer.Code);
         }

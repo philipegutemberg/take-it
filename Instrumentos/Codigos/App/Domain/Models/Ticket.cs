@@ -5,7 +5,7 @@ namespace Domain.Models
 {
     public record Ticket
     {
-        public Ticket(string eventCode, string eventTicketTypeCode, Customer ownerCustomer, long tokenId)
+        public Ticket(string eventCode, string eventTicketTypeCode, CustomerUser ownerCustomer, long tokenId)
         {
             Code = Guid.NewGuid().ToString();
             EventCode = eventCode;

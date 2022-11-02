@@ -28,7 +28,7 @@ namespace Domain.Models
         public long CurrentlyAvailableTickets { get; private set; }
         public bool OutOfStock => CurrentlyAvailableTickets == 0;
 
-        public bool TryIssueTicket(Customer customer, long tokenId, out Ticket? ticket)
+        public bool TryIssueTicket(CustomerUser customer, long tokenId, out Ticket? ticket)
         {
             lock (_lockObj)
             {

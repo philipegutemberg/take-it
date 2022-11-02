@@ -19,7 +19,7 @@ namespace Application.Controllers
             _ticketValidationService = ticketValidationService;
         }
 
-        [HttpGet("ticket")]
+        [HttpGet("image")]
         [Authorize(Roles = "Customer")]
         public async Task<IActionResult> GetTicketImage([FromBody]GetTicketImageModel getTicketImageModel)
         {
@@ -28,6 +28,26 @@ namespace Application.Controllers
                 byte[] fileByteArray = await _ticketValidationService.GetTicketImage(GetLoggedUsername(), getTicketImageModel.TicketId!);
 
                 return File(fileByteArray, "image/png");
+            }
+            catch (Exception)
+            {
+                return Problem();
+            }
+        }
+
+        [HttpPost("ticket")]
+        // [Authorize(Roles = "Gatekeeper")]
+        [Authorize(Roles = "Customer")]
+        public async Task<IActionResult> ValidateTicket([FromBody]string validationText)
+        {
+            try
+            {
+                bool valid = await _ticketValidationService.IsValid(validationText);
+
+                if (valid)
+                    return Ok();
+                else
+                    return BadRequest();
             }
             catch (Exception)
             {

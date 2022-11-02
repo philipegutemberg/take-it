@@ -60,7 +60,7 @@ namespace Domain.Models
         public EventTicketTypeStock TicketStock { get; }
         public bool Available => EndDate >= DateTime.Today && !TicketStock.OutOfStock;
 
-        public bool TryIssueTicket(Customer customer, long tokenId, out Ticket? ticket)
+        public bool TryIssueTicket(CustomerUser customer, long tokenId, out Ticket? ticket)
         {
             return TicketStock.TryIssueTicket(customer, tokenId, out ticket);
         }

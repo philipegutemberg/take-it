@@ -1,5 +1,7 @@
 using System.Text;
+using System.Text.Json.Serialization;
 using Amazon;
+using Application.BackgroundWorker;
 using Application.Injection;
 using Application.Settings;
 using AsymmetricEncryption.Injection;
@@ -12,12 +14,18 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using QRCode.BarCode.Injection;
+using QRCodeGeneration.Injection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers();
+builder.Services
+    .AddControllers()
+    .AddJsonOptions(opts =>
+    {
+        var enumConverter = new JsonStringEnumConverter();
+        opts.JsonSerializerOptions.Converters.Add(enumConverter);
+    });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -52,6 +60,9 @@ builder.Services
     .InjectBarcodeServices()
     .InjectS3Services("AKIAW7G7XFRODL3YN5UO", "n0bSUIdqLQeMm+xIMiKXl0X8mwPM2q4U8DlL8nOD", RegionEndpoint.USEast1)
     .InjectAsymmetricEncryptionServices("keys.pem");
+
+builder.Services
+    .AddHostedService<BlockchainEventsProcessorWorker>();
 
 var app = builder.Build();
 

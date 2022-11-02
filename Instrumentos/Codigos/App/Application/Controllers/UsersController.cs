@@ -17,19 +17,16 @@ namespace Application.Controllers
     public class UsersController : BaseController
     {
         private readonly ICustomerService _customerUserService;
-        private readonly IUserService<BackOffice> _backOfficeUserService;
-        private readonly IUserService<Gatekeeper> _gatekeeperUserService;
+        private readonly ISpecialUserService _specialUserService;
         private readonly HashService _hashService;
 
         public UsersController(
             ICustomerService customerUserService,
-            IUserService<BackOffice> backOfficeUserService,
-            IUserService<Gatekeeper> gatekeeperUserService,
+            ISpecialUserService specialUserService,
             HashService hashService)
         {
             _customerUserService = customerUserService;
-            _backOfficeUserService = backOfficeUserService;
-            _gatekeeperUserService = gatekeeperUserService;
+            _specialUserService = specialUserService;
             _hashService = hashService;
         }
 
@@ -41,7 +38,7 @@ namespace Application.Controllers
             {
                 string password = _hashService.GetHash(newUser.Password!);
 
-                await _customerUserService.Create(new Customer(
+                await _customerUserService.Create(new CustomerUser(
                     newUser.Username!,
                     password,
                     newUser.FullName!,
@@ -58,7 +55,7 @@ namespace Application.Controllers
             }
         }
 
-        [HttpPost("/special/register")]
+        [HttpPost("special/register")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> RegisterSpecialUser(NewSpecialUserModel newUser)
         {
@@ -70,7 +67,7 @@ namespace Application.Controllers
                 {
                     case EnumUserRole.Backoffice:
                     {
-                        await _backOfficeUserService.Create(new BackOffice(
+                        await _specialUserService.CreateBackOfficeUser(new BackOfficeUser(
                             newUser.Username!,
                             password
                         ));
@@ -79,7 +76,7 @@ namespace Application.Controllers
 
                     case EnumUserRole.Gatekeeper:
                     {
-                        await _gatekeeperUserService.Create(new Gatekeeper(
+                        await _specialUserService.CreateGatekeeperUser(new GatekeeperUser(
                             newUser.Username!,
                             password
                         ));
@@ -93,6 +90,25 @@ namespace Application.Controllers
                 }
 
                 return StatusCode((int)HttpStatusCode.Created);
+            }
+            catch (Exception)
+            {
+                return Problem();
+            }
+        }
+
+        [HttpGet("customer/address")]
+        [Authorize(Roles = "Customer")]
+        public async Task<IActionResult> GetAddress()
+        {
+            try
+            {
+                var address = await _customerUserService.GetInternalAddress(GetLoggedUsername());
+
+                return Ok(new
+                {
+                    Address = address
+                });
             }
             catch (Exception)
             {

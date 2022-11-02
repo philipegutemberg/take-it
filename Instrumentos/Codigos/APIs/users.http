@@ -5,10 +5,10 @@ Content-Type: application/json
 {
   "username": "{{usernameCustomer}}",
   "password": "{{passwordCustomer}}",
-  "fullName": "Laís Felipe de Moraes",
-  "email": "sialmoraes@outlook.com",
+  "fullName": "Philipe Gutemberg Amaral Costa",
+  "email": "philipega@live.com",
   "phone": "3285574897",
-  "walletAddress": "Fullfill"
+  "walletAddress": "0xc3d5C17877EfBD914a34281a8F6AD0874f826Bbe"
 }
 
 ###
@@ -19,5 +19,6 @@ Content-Type: application/json
 
 {
   "username": "{{usernameCustomer}}",
-  "password": "{{passwordCustomer}}"
+  "password": "{{passwordCustomer}}",
+  "role": "Backoffice"
 }

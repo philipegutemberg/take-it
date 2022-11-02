@@ -1,7 +1,7 @@
 using Domain.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace QRCode.BarCode.Injection
+namespace QRCodeGeneration.Injection
 {
     public static class BarcodeInjector
     {

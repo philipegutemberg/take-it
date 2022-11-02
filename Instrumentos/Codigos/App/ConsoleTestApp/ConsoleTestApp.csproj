@@ -17,7 +17,7 @@
       <ProjectReference Include="..\AWS-S3\AWS-S3.csproj" />
       <ProjectReference Include="..\Database.SQLServer\Database.SQLServer.csproj" />
       <ProjectReference Include="..\Ethereum.Nethereum\Ethereum.Nethereum.csproj" />
-      <ProjectReference Include="..\QRCode.BarCode\QRCode.BarCode.csproj" />
+      <ProjectReference Include="..\QRCodeGeneration\QRCodeGeneration.csproj" />
     </ItemGroup>
 
     <ItemGroup>

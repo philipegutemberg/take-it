@@ -81,6 +81,7 @@ namespace Application.Controllers
                     StartDate = e.Key.StartDate,
                     TicketTypes = e.Value.Select(tt => new TicketTypesModel
                     {
+                        Code = tt.Code,
                         Qualification = tt.Qualification,
                         EndDate = tt.EndDate,
                         PriceBrl = tt.PriceBrl,

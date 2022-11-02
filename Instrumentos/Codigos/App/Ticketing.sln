@@ -8,11 +8,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ethereum.Nethereum", "Ether
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTestApp", "ConsoleTestApp\ConsoleTestApp.csproj", "{BA9A6374-D1EF-413F-9CD5-D4B7651BC8A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QRCode.BarCode", "QRCode.BarCode\QRCode.BarCode.csproj", "{D662970F-91FF-45C0-BF9F-7B82B722FDF4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QRCodeGeneration", "QRCodeGeneration\QRCodeGeneration.csproj", "{D662970F-91FF-45C0-BF9F-7B82B722FDF4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AWS-S3", "AWS-S3\AWS-S3.csproj", "{AD1635E7-539C-467E-97DD-713F2DAD90F8}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{ADCB17B1-5048-4C1A-BC0E-31DADC1D9215}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database.SQLServer", "Database.SQLServer\Database.SQLServer.csproj", "{465B4E31-0C05-4C32-A5D1-F47A09F71D0C}"
 EndProject

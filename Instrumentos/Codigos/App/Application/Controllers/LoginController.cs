@@ -29,7 +29,7 @@ namespace Application.Controllers
         {
             try
             {
-                User? loggedUser = await _loginService.TryLogin(model.Username!, model.Password!);
+                GenericUser? loggedUser = await _loginService.TryLogin(model.Username!, model.Password!);
                 if (loggedUser != null)
                 {
                     // Gera o Token

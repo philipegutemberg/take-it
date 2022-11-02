@@ -35,12 +35,17 @@ namespace Domain.Services
         public async Task<byte[]> GetTicketImage(string username, string ticketCode)
         {
             Ticket ticket = await _ticketRepository.GetByCode(ticketCode);
+            if (ticket.UsedOnEvent)
+                return Array.Empty<byte>();
+
             Event @event = await _eventRepository.GetByCode(ticket.EventCode);
-            Customer customer = await _customerRepository.GetByUsername(username);
+            CustomerUser customer = await _customerRepository.GetByUsername(username);
+            if (ticket.OwnerCustomerCode != customer.Code)
+                return Array.Empty<byte>();
 
             bool isCustomerOwner = await _tokenService.CheckCustomerTokenOwnership(@event, customer, ticket);
             if (!isCustomerOwner)
-                throw new Exception("Customer is not current owner of the ticket.");
+                return Array.Empty<byte>();
 
             string qrCodeText = _encryptionService.Encrypt($"{customer.Code}|{ticket.Code}");
 
@@ -61,7 +66,7 @@ namespace Domain.Services
                 return false;
 
             Event @event = await _eventRepository.GetByCode(ticket.EventCode);
-            Customer customer = await _customerRepository.GetByCode(customerCode);
+            CustomerUser customer = await _customerRepository.GetByCode(customerCode);
 
             if (ticket.TryMarkAsUsed())
                 await _ticketRepository.UpdateUsedOnEvent(ticket);
