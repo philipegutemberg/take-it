@@ -6,6 +6,6 @@ namespace Ethereum.Nethereum.SmartContracts.ERC721Mintable.BlockProcessor
 {
     public interface IERC721BlockProcessor
     {
-        Task StartProcessing(Event @event, CancellationToken cancellationToken);
+        Task StartProcessing(int minimumBlockConfirmations, Event @event, CancellationToken cancellationToken);
     }
 }

@@ -25,13 +25,14 @@ namespace Ethereum.Nethereum.SmartContracts.ERC721Mintable.BlockProcessor
             _blockProgressRepository = blockProgressRepository;
         }
 
-        public async Task StartProcessing(Event @event, CancellationToken cancellationToken)
+        public async Task StartProcessing(int minimumBlockConfirmations, Event @event, CancellationToken cancellationToken)
         {
             // https://docs.nethereum.com/en/latest/nethereum-log-processing-detail/
             var processor = _web3Service.GetWeb3().Processing.Logs.CreateProcessorForContract<TransferEventDTO>(
                 contractAddress: @event.TokenContractAddress,
                 action: eventLog => _tokenLogProcessingService.ProcessEventLog(eventLog.Event.From, eventLog.Event.To, (long)eventLog.Event.TokenId),
-                blockProgressRepository: _blockProgressRepository);
+                blockProgressRepository: _blockProgressRepository,
+                minimumBlockConfirmations: (uint)minimumBlockConfirmations);
 
             await processor.ExecuteAsync(
                 cancellationToken,

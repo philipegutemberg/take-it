@@ -64,4 +64,4 @@ balance = await tokenService.GetCustomerBalance(@event, customer);
 Console.WriteLine($"Balance minted: {balance} tokens");
 
 var processingService = provider.GetRequiredService<IERC721BlockProcessor>();
-await processingService.StartProcessing(@event, CancellationToken.None);
+await processingService.StartProcessing(1, @event, CancellationToken.None);

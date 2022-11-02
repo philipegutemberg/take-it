@@ -22,7 +22,7 @@ namespace Application.BackgroundWorker
         {
             var events = await _eventRepository.GetAllEnabled();
 
-            var tasks = events.Select(e => _blockProcessor.StartProcessing(e, stoppingToken));
+            var tasks = events.Select(e => _blockProcessor.StartProcessing(1, e, stoppingToken));
 
             await Task.WhenAll(tasks);
         }
