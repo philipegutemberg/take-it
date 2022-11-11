@@ -10,7 +10,8 @@ CREATE TABLE [Event] (
     Ticker                  VARCHAR(20)     NOT NULL,
     TokenContractAddress    VARCHAR(100)    NOT NULL,
     ImageUrl                VARCHAR(MAX)    NOT NULL,
-    AlreadyIssuedTickets    BIGINT          NOT NULL
+    AlreadyIssuedTickets    BIGINT          NOT NULL,
+    ResaleFeePercentage     DECIMAL(18,2)   NOT NULL
 );
 
 CREATE TABLE [EventTicketType] (

@@ -2,6 +2,6 @@ namespace Application.Controllers.Models
 {
     public class GetTicketImageModel
     {
-        public string? TicketId { get; set; }
+        public string? TicketCode { get; set; }
     }
 }

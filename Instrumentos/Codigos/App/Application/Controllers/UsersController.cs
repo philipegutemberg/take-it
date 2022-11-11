@@ -56,7 +56,7 @@ namespace Application.Controllers
         }
 
         [HttpPost("special/register")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Backoffice")]
         public async Task<IActionResult> RegisterSpecialUser(NewSpecialUserModel newUser)
         {
             try
@@ -83,7 +83,6 @@ namespace Application.Controllers
                         break;
                     }
 
-                    case EnumUserRole.Admin:
                     case EnumUserRole.Customer:
                     default:
                         throw new ArgumentOutOfRangeException(newUser.Role.ToString());

@@ -25,7 +25,7 @@ namespace Application.Controllers
         {
             try
             {
-                byte[] fileByteArray = await _ticketValidationService.GetTicketImage(GetLoggedUsername(), getTicketImageModel.TicketId!);
+                byte[] fileByteArray = await _ticketValidationService.GetTicketImage(GetLoggedUsername(), getTicketImageModel.TicketCode!);
 
                 return File(fileByteArray, "image/png");
             }
@@ -36,8 +36,7 @@ namespace Application.Controllers
         }
 
         [HttpPost("ticket")]
-        // [Authorize(Roles = "Gatekeeper")]
-        [Authorize(Roles = "Customer")]
+        [Authorize(Roles = "Gatekeeper")]
         public async Task<IActionResult> ValidateTicket([FromBody]string validationText)
         {
             try

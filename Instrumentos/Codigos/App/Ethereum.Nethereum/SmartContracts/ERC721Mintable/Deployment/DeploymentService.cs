@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 
 namespace Ethereum.Nethereum.SmartContracts.ERC721Mintable.Deployment
@@ -11,12 +12,13 @@ namespace Ethereum.Nethereum.SmartContracts.ERC721Mintable.Deployment
             _deploymentService = deploymentService;
         }
 
-        public async Task<string> Deploy(string tokenName, string tokenSymbol)
+        public async Task<string> Deploy(string tokenName, string tokenSymbol, decimal feePercentage)
         {
             var deploymentMessage = new DeploymentMessage
             {
                 TokenName = tokenName,
-                TokenSymbol = tokenSymbol
+                TokenSymbol = tokenSymbol,
+                // FeeNumerator = (int)Math.Truncate(feePercentage * 100)
             };
 
             return await _deploymentService.Deploy(deploymentMessage);

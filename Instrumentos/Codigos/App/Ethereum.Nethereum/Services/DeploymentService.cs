@@ -1,3 +1,4 @@
+using System.Net.Mime;
 using System.Threading.Tasks;
 using Nethereum.Contracts;
 using Nethereum.RPC.Eth.DTOs;
@@ -21,6 +22,11 @@ namespace Ethereum.Nethereum.Services
             var web3 = _web3Service.GetWeb3(_ownerAccountsService.GetContractOwner());
 
             var deploymentHandler = web3.Eth.GetContractDeploymentHandler<TContract>();
+
+            /* Aumentando o valor do gas para a transação acontecer mais rápido. */
+            var estimate = await deploymentHandler.EstimateGasAsync(deploymentMessage);
+            deploymentMessage.Gas = (int)((long)estimate.Value * 1.3m);
+
             TransactionReceipt? transactionReceipt = await deploymentHandler.SendRequestAndWaitForReceiptAsync(deploymentMessage);
             return transactionReceipt.ContractAddress;
         }

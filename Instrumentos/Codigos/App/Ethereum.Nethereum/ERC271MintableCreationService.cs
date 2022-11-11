@@ -16,7 +16,7 @@ namespace Ethereum.Nethereum
 
         public async Task<string> Create(Event @event)
         {
-            return await _eventTokenDeploymentService.Deploy(@event.Title, @event.Ticker);
+            return await _eventTokenDeploymentService.Deploy(@event.Title, @event.Ticker, @event.ResaleFeePercentage);
         }
     }
 }

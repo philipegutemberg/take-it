@@ -21,6 +21,8 @@ namespace Application.Controllers.Models
         [Required]
         public string? ImageUrl { get; set; }
         [Required]
+        public decimal ResaleFeePercentage { get; set; }
+        [Required]
         public List<TicketTypesModel>? TicketTypes { get; set; }
     }
 }

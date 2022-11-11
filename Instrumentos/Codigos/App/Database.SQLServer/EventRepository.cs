@@ -19,9 +19,9 @@ namespace Database.SQLServer
 
         public async Task<Event> Insert(Event newEvent)
         {
-            const string sql = @"INSERT INTO dbo.[Event] (Code, StartDate, EndDate, [Location], Title, [Description], Ticker, TokenContractAddress, ImageUrl, AlreadyIssuesTickets)
+            const string sql = @"INSERT INTO dbo.[Event] (Code, StartDate, EndDate, [Location], Title, [Description], Ticker, TokenContractAddress, ImageUrl, ResaleFeePercentage, AlreadyIssuedTickets)
                                                         OUTPUT INSERTED.*
-                                                        VALUES (@Code, @StartDate, @EndDate, @Location, @Title, @Description, @Ticker, @TokenContractAddress, @ImageUrl, @AlreadyIssuedTickets)";
+                                                        VALUES (@Code, @StartDate, @EndDate, @Location, @Title, @Description, @Ticker, @TokenContractAddress, @ImageUrl, @ResaleFeePercentage, @AlreadyIssuedTickets)";
 
             var insertedRow = await _dbConnection.QuerySingle(sql, newEvent);
             if (insertedRow == null)
@@ -37,6 +37,7 @@ namespace Database.SQLServer
                 insertedRow.Ticker,
                 insertedRow.TokenContractAddress,
                 insertedRow.ImageUrl,
+                insertedRow.ResaleFeePercentage,
                 insertedRow.AlreadyIssuedTickets);
         }
 
@@ -64,6 +65,7 @@ namespace Database.SQLServer
                 eventRow.Ticker,
                 eventRow.TokenContractAddress,
                 eventRow.ImageUrl,
+                eventRow.ResaleFeePercentage,
                 eventRow.AlreadyIssuedTickets);
         }
 
@@ -88,6 +90,7 @@ namespace Database.SQLServer
                 e.Ticker,
                 e.TokenContractAddress,
                 e.ImageUrl,
+                e.ResaleFeePercentage,
                 e.AlreadyIssuedTickets));
         }
 

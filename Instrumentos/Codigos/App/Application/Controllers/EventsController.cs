@@ -41,7 +41,8 @@ namespace Application.Controllers
                     newEvent.Title!,
                     newEvent.Description!,
                     newEvent.Ticker!,
-                    newEvent.ImageUrl!);
+                    newEvent.ImageUrl!,
+                    newEvent.ResaleFeePercentage!);
 
                 var eventTypes = newEvent.TicketTypes!.Select(et => new EventTicketType(
                     @event,
@@ -78,6 +79,7 @@ namespace Application.Controllers
                     Title = e.Key.Title,
                     EndDate = e.Key.EndDate,
                     ImageUrl = e.Key.ImageUrl,
+                    ResaleFeePercentage = e.Key.ResaleFeePercentage,
                     StartDate = e.Key.StartDate,
                     TicketTypes = e.Value.Select(tt => new TicketTypesModel
                     {

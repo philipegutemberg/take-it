@@ -18,15 +18,14 @@ namespace Ethereum.Nethereum.Metadata
 
             Attributes.Add(new MetadataFile.BasicAttribute("Location", @event.Location));
 
+            string dateText;
+
             if (eventType.SingleDay)
-            {
-                Attributes.Add(new MetadataFile.DateAttribute("Date", eventType.StartDate));
-            }
+                dateText = eventType.StartDate.ToShortDateString();
             else
-            {
-                Attributes.Add(new MetadataFile.DateAttribute("Start Date", eventType.StartDate));
-                Attributes.Add(new MetadataFile.DateAttribute("End Date", eventType.EndDate));
-            }
+                dateText = $"{eventType.StartDate.ToShortDateString()} a {eventType.EndDate.ToShortDateString()}";
+
+            Attributes.Add(new MetadataFile.BasicAttribute("Date", dateText));
 
             Attributes.Add(new MetadataFile.BasicAttribute("Qualification", eventType.Qualification.ToString()));
             Attributes.Add(new MetadataFile.BasicAttribute("Access", eventType.TicketName));

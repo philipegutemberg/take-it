@@ -35,8 +35,6 @@ namespace Domain.Models
         public long TokenId { get; }
         public bool UsedOnEvent { get; private set; }
 
-        public bool HasCurrentCustomerOwner => OwnerCustomerCode == null;
-
         public void AssignOwner(string? ownerCustomerCode)
         {
             OwnerCustomerCode = ownerCustomerCode;

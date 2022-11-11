@@ -34,6 +34,8 @@ namespace Domain.Services
 
             Event @event = await _eventRepository.GetByCode(ticket.EventCode);
             CustomerUser customer = await _customerRepository.GetByUsername(username);
+            if (ticket.OwnerCustomerCode != customer.Code)
+                throw new Exception("Logged user is not ticket owner.");
 
             ticket.AssignOwner(null);
             await _ticketRepository.UpdateOwner(ticket);
