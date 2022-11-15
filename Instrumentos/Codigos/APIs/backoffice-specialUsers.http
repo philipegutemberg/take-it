@@ -1,0 +1,35 @@
+# @name LoginOperational
+POST {{host}}/api/v1/login HTTP/1.1
+Content-Type: application/json
+Content-Length: 59
+
+{
+  "username": "{{backoffice_username}}",
+  "password": "{{backoffice_password}}"
+}
+
+###
+
+# @name RegisterBackoffice
+POST {{host}}/api/v1/users/special/register HTTP/1.1
+Authorization: Bearer {{LoginOperational.response.body.token}}
+Content-Type: application/json
+
+{
+  "username": "{{backoffice_username}}",
+  "password": "{{backoffice_password}}",
+  "role": "Backoffice"
+}
+
+###
+
+# @name RegisterGatekeeper
+POST {{host}}/api/v1/users/special/register HTTP/1.1
+Authorization: Bearer {{LoginOperational.response.body.token}}
+Content-Type: application/json
+
+{
+  "username": "{{gatekeeper_username}}",
+  "password": "{{gatekeeper_password}}",
+  "role": "Gatekeeper"
+}

@@ -1,0 +1,27 @@
+# @name LoginCustomer
+POST {{host}}/api/v1/login HTTP/1.1
+Content-Type: application/json
+Content-Length: 55
+
+{
+  "username": "{{customer_username}}",
+  "password": "{{customer_password}}"
+}
+
+###
+
+# @name List
+GET {{host}}/api/v1/events HTTP/1.1
+Authorization: Bearer {{LoginCustomer.response.body.token}}
+
+###
+
+# @name Buy
+POST {{host}}/api/v1/events/buy HTTP/1.1
+Authorization: Bearer {{LoginCustomer.response.body.token}}
+Content-Type: application/json
+Content-Length: 55
+
+{
+  "EventTicketTypeCode": "9803612d-41ab-45ea-99cf-c2d01c2deddf"
+}

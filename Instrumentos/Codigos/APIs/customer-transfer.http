@@ -1,0 +1,27 @@
+# @name LoginCustomer
+POST {{host}}/api/v1/login HTTP/1.1
+Content-Type: application/json
+Content-Length: 55
+
+{
+  "username": "{{customer_username}}",
+  "password": "{{customer_password}}"
+}
+
+###
+
+# @name Tickets
+GET {{host}}/api/v1/tickets/owned HTTP/1.1
+Authorization: Bearer {{LoginCustomer.response.body.token}}
+
+###
+
+# @name Transfer
+POST {{host}}/api/v1/events/transfer HTTP/1.1
+Authorization: Bearer {{LoginCustomer.response.body.token}}
+Content-Type: application/json
+Content-Length: 126
+
+{
+  "TicketCode": "5a00c26d-e4a8-4ca8-bfd5-8db3d649c749"
+}

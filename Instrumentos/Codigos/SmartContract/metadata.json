@@ -1,23 +1,17 @@
 {
-    "name": "The Town 2023",
-    "description": "The Town 2023",
+    "name": "Nome do evento 2023",
+    "description": "Descrição completa do evento",
     "external_url": "",
-    "image": "https://vejasp.abril.com.br/wp-content/uploads/2021/11/Vista-Noturna.png",
+    "image": "https://url-da-imagem-token.com",
     "attributes":
     [
         {
             "trait_type": "Location",
-            "value": "Autodromo Interlagos - SP"
+            "value": "Local do evento"
         },
         {
-            "display_type": "date", 
-            "trait_type": "event begin date", 
-            "value": 1693613514
-        },
-        {
-            "display_type": "date", 
-            "trait_type": "event end date", 
-            "value": 1694304714
+            "trait_type": "Date", 
+            "value": "Datas de início e fim do evento"
         },
         {
             "trait_type": "Qualification",
@@ -25,7 +19,7 @@
         },
         {
             "trait_type": "Access",
-            "value": "Pass (All days)"
+            "value": "Pass (All days) - Open bar"
         }
     ] 
   }

@@ -1,0 +1,16 @@
+# @name LoginCustomer
+POST {{host}}/api/v1/login HTTP/1.1
+Content-Type: application/json
+Content-Length: 55
+
+{
+  "username": "{{customer_username}}",
+  "password": "{{customer_password}}"
+}
+
+###
+
+# @name GetCustomerAddress
+GET {{host}}/api/v1/users/customer/address HTTP/1.1
+Authorization: Bearer {{LoginCustomer.response.body.token}}
+Content-Type: application/json

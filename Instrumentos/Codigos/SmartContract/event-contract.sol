@@ -1,11 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 
-import "@openzeppelin/contracts@4.7.3/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts@4.7.3/token/ERC721/extensions/ERC721Enumerable.sol";
-import "@openzeppelin/contracts@4.7.3/token/ERC721/extensions/ERC721URIStorage.sol";
-import "@openzeppelin/contracts@4.7.3/access/Ownable.sol";
-import "@openzeppelin/contracts@4.7.3/utils/Counters.sol";
+import "./node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "./node_modules/@openzeppelin/contracts/access/Ownable.sol";
+import "./node_modules/@openzeppelin/contracts/utils/Counters.sol";
+import "./node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+import "./node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+// import "./node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Royalty.sol";
+
+// import "./operator-filter-registry/src/example/OperatorFilterer721.sol";
 
 contract TicketToken is ERC721, ERC721Enumerable, Ownable, ERC721URIStorage {
     using Counters for Counters.Counter;
@@ -25,11 +28,11 @@ contract TicketToken is ERC721, ERC721Enumerable, Ownable, ERC721URIStorage {
 
     // The following functions are overrides required by Solidity.
 
-    function _beforeTokenTransfer(address from, address to, uint256 tokenId)
+    function _beforeTokenTransfer(address from, address to, uint256 firstTokenId, uint256 tokenId)
         internal
         override(ERC721, ERC721Enumerable)
     {
-        super._beforeTokenTransfer(from, to, tokenId);
+        super._beforeTokenTransfer(from, to, firstTokenId, tokenId);
     }
 
     function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {

@@ -1,0 +1,37 @@
+# @name LoginOperational
+POST {{host}}/api/v1/login HTTP/1.1
+Content-Type: application/json
+Content-Length: 59
+
+{
+  "username": "{{backoffice_username}}",
+  "password": "{{backoffice_password}}"
+}
+
+###
+
+# @name Create
+POST {{host}}/api/v1/events HTTP/1.1
+Authorization: Bearer {{LoginOperational.response.body.token}}
+Content-Type: application/json
+
+{
+  "startDate": "2023-09-24T00:00:00",
+  "endDate": "2023-09-27T00:00:00",
+  "location": "Autódromo de Interlagos, SP",
+  "title": "THE TOWN 2023",
+  "description": "THE TOWN 2023",
+  "ticker": "TOWN23",
+  "imageUrl": "https://radiomixfm.com.br/wp-content/uploads/2021/11/The-Town-Sao-Paulo-tera-festival-gigante-de-musica-dos-mesmos-criadores-do-Rock-in-Rio.png",
+  "resaleFeePercentage": 5,
+  "ticketTypes": [
+    {
+      "ticketName": "Town Key",
+      "startDate": "2023-09-24T00:00:00",
+      "endDate": "2023-09-27T00:00:00",
+      "qualification": "Staff",
+      "priceBrl": 1900.00,
+      "totalTickets": 100
+    }
+  ]
+}
