@@ -1,19 +1,17 @@
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
-import React, { useState, useReducer } from 'react'
-import { SecureStore } from 'expo'
+import React, { useContext, useState } from 'react'
 
 import * as Animatable from 'react-native-animatable'
-
-import Http from '../../services/http'
+import { AuthContext } from '../../context/AuthContext'
+import { useNavigation } from '@react-navigation/native'
 
 export default function SignIn() {
+  const navigation = useNavigation();
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const tryLogin = async() => {
-    console.log('trying')
-    await Http.Post("https://10.0.2.2:7219/api/v1/login/", { username: username, password: password });
-  };
+  const {login} = useContext(AuthContext);
   
   return (
     <View style={styles.container}>
@@ -47,7 +45,10 @@ export default function SignIn() {
 
         <TouchableOpacity 
           style={styles.button}
-          onPress={ () => tryLogin() }
+          onPress={ async () => {
+            await login(username, password);
+            navigation.navigate('Events');
+          } }
         >
           <Text style={styles.buttonText}>Acessar</Text>
         </TouchableOpacity>

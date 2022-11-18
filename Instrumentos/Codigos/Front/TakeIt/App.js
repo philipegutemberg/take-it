@@ -1,13 +1,15 @@
-import React from 'react';
-import { StatusBar } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import Routes from './src/routes'
+import AppNav from './src/pages/Nav/AppNav'
+
+import { AuthProvider } from './src/context/AuthContext';
+import { LoadingProvider } from './src/context/LoadingContext';
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <StatusBar backgroundColor="#38A69D" barStyle="light-content" />
-      <Routes/>
-    </NavigationContainer>
-  ); 
+    <LoadingProvider>
+      <AuthProvider>
+        <AppNav>
+        </AppNav>
+    </AuthProvider>
+    </LoadingProvider>
+  );
 }
