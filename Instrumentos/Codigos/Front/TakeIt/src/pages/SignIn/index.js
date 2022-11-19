@@ -5,6 +5,8 @@ import * as Animatable from 'react-native-animatable'
 import { AuthContext } from '../../context/AuthContext'
 import { useNavigation } from '@react-navigation/native'
 
+import Loading from '../../components/loading'
+
 export default function SignIn() {
   const navigation = useNavigation();
 
@@ -15,6 +17,8 @@ export default function SignIn() {
   
   return (
     <View style={styles.container}>
+      <Loading />
+
       <View style={styles.containerLogo}>
         <Animatable.Image
           animation="fadeIn"
@@ -44,10 +48,11 @@ export default function SignIn() {
         />
 
         <TouchableOpacity 
+          disabled={!username || !password}
           style={styles.button}
           onPress={ async () => {
-            await login(username, password);
-            navigation.navigate('Events');
+            // await login(username, password, () => navigation.navigate('Events'));
+            await login(username, password, (token) => token.role == 'Customer' ? navigation.navigate('Tickets') : navigation.navigate('Gatekeeper'));
           } }
         >
           <Text style={styles.buttonText}>Acessar</Text>

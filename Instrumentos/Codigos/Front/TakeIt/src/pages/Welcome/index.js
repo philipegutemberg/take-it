@@ -3,9 +3,13 @@ import React from 'react'
 
 import * as Animatable from 'react-native-animatable'
 import { useNavigation } from '@react-navigation/native'
+import axios from 'axios';
 
 export default function Welcome() {
   const navigation = useNavigation();
+
+  axios.defaults.baseURL = "http://EC2Co-EcsEl-Z57Y9UO0KY8Y-890817140.us-east-2.elb.amazonaws.com";
+  // axios.defaults.headers.common['content-type'] = "application/json";
 
   return (
     <View style={styles.container}>
@@ -18,15 +22,6 @@ export default function Welcome() {
           onAnimationEnd={ () => navigation.navigate('SignIn') }
         />
       </View>
-
-      {/* <Animatable.View animation='fadeInUp' delay={600}  style={styles.containerForm}>
-        <TouchableOpacity 
-          style={styles.button}
-          onPress={ () => navigation.navigate('SignIn') }
-        >
-          <Text style={styles.buttonText}>Acessar</Text>
-        </TouchableOpacity>
-      </Animatable.View> */}
     </View>
   )
 }
