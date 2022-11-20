@@ -19,13 +19,13 @@ namespace Application.Controllers
             _ticketValidationService = ticketValidationService;
         }
 
-        [HttpGet("image")]
+        [HttpGet("image/{ticketCode}")]
         [Authorize(Roles = "Customer")]
-        public async Task<IActionResult> GetTicketImage([FromBody]GetTicketImageModel getTicketImageModel)
+        public async Task<IActionResult> GetTicketImage(string ticketCode)
         {
             try
             {
-                byte[] fileByteArray = await _ticketValidationService.GetTicketImage(GetLoggedUsername(), getTicketImageModel.TicketCode!);
+                byte[] fileByteArray = await _ticketValidationService.GetTicketImage(GetLoggedUsername(), ticketCode);
 
                 return File(fileByteArray, "image/png");
             }

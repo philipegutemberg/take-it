@@ -1,0 +1,22 @@
+{
+    "rest-client.environmentVariables": {
+        "local": {
+            "host": "https://localhost:7219",
+            "customer_username": "lais",
+            "customer_password": "sialmor4es",
+            "backoffice_username": "philipe.bo",
+            "backoffice_password": "mypass",
+            "gatekeeper_username": "james",
+            "gatekeeper_password": "door"
+        },
+        "AWS": {
+            "host": "http://EC2Co-EcsEl-Z57Y9UO0KY8Y-890817140.us-east-2.elb.amazonaws.com",
+            "customer_username": "lais",
+            "customer_password": "sialmor4es",
+            "backoffice_username": "philipe.bo",
+            "backoffice_password": "mypass",
+            "gatekeeper_username": "james",
+            "gatekeeper_password": "door"
+        },
+    }
+}
