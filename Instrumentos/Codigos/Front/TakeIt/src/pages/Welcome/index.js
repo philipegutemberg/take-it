@@ -9,7 +9,7 @@ export default function Welcome() {
   const navigation = useNavigation();
 
   axios.defaults.baseURL = "http://EC2Co-EcsEl-Z57Y9UO0KY8Y-890817140.us-east-2.elb.amazonaws.com";
-  axios.defaults.headers.common['content-type'] = "application/json";
+  // axios.defaults.headers.common['content-type'] = "application/json";
 
   return (
     <View style={styles.container}>

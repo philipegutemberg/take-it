@@ -13,12 +13,12 @@ export default function ValidationResponse({route}) {
     const validateTicketQrCode = async () => {
         try {
             setIsLoading(true);
-            console.log('qrCode ' + qrCodeResponse);
-            await axios.post("/api/v1/ticketvalidation/ticket", qrCodeResponse);
-            console.log('sucesso');
+            alert('qrCode ' + JSON.stringify(qrCodeResponse));
+            await axios.post("/api/v1/ticketvalidation/ticket", JSON.stringify(qrCodeResponse));
+            // alert('sucesso');
             setStatus(true);
         } catch (err) {
-            console.log(err);
+            // alert(err);
             setStatus(false);
         } finally {
             setIsLoading(false);

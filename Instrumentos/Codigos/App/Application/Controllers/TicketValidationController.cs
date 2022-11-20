@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Application.Controllers.Base;
 using Application.Controllers.Models;
+using Domain.Exceptions;
 using Domain.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -25,9 +26,12 @@ namespace Application.Controllers
         {
             try
             {
-                byte[] fileByteArray = await _ticketValidationService.GetTicketImage(GetLoggedUsername(), ticketCode);
+                string ticketHash = await _ticketValidationService.GetTicketHash(GetLoggedUsername(), ticketCode);
 
-                return File(fileByteArray, "image/png");
+                return Ok(new
+                {
+                    TicketHash = ticketHash
+                });
             }
             catch (Exception)
             {
@@ -37,16 +41,16 @@ namespace Application.Controllers
 
         [HttpPost("ticket")]
         [Authorize(Roles = "Gatekeeper")]
-        public async Task<IActionResult> ValidateTicket([FromBody]string validationText)
+        public async Task<IActionResult> ValidateTicket([FromBody]ValidateTicketModel validationModel)
         {
             try
             {
-                bool valid = await _ticketValidationService.IsValid(validationText);
+                bool valid = await _ticketValidationService.IsValid(validationModel.ValidationHash!);
 
-                if (valid)
-                    return Ok();
-                else
-                    return BadRequest();
+                return Ok(new
+                {
+                    Valid = valid
+                });
             }
             catch (Exception)
             {

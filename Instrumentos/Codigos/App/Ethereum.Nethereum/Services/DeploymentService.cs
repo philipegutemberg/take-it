@@ -1,4 +1,3 @@
-using System.Net.Mime;
 using System.Threading.Tasks;
 using Nethereum.Contracts;
 using Nethereum.RPC.Eth.DTOs;

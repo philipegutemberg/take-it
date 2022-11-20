@@ -17,15 +17,6 @@ Authorization: Bearer {{LoginCustomer.response.body.token}}
 ###
 
 # @name GetImage
-GET {{host}}/api/v1/ticketvalidation/image HTTP/1.1
+GET {{host}}/api/v1/ticketvalidation/image/6abf41e9-7998-497d-ad9f-b1170e190354 HTTP/1.1
 Authorization: Bearer {{LoginCustomer.response.body.token}}
 Content-Type: application/json
-
-{
-  "TicketCode": "a1ea56a4-88cc-40ea-a92d-64a8f0ca9eb7"
-}
-
-###
-
-GET http://EC2Co-EcsEl-Z57Y9UO0KY8Y-890817140.us-east-2.elb.amazonaws.com/api/v1/ticketvalidation/image/33e184a4-a176-425b-817a-1fcd46dbc310
-Authorization: Bearer {{LoginCustomer.response.body.token}}

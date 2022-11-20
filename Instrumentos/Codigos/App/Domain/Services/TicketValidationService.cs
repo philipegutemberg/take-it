@@ -1,5 +1,5 @@
-using System;
 using System.Threading.Tasks;
+using Domain.Exceptions;
 using Domain.Models;
 using Domain.Models.Users;
 using Domain.Repositories;
@@ -9,7 +9,6 @@ namespace Domain.Services
 {
     internal class TicketValidationService : ITicketValidationService
     {
-        private readonly IQRCodeService _qrCodeService;
         private readonly ICustomerRepository _customerRepository;
         private readonly ITicketRepository _ticketRepository;
         private readonly IEventRepository _eventRepository;
@@ -17,14 +16,12 @@ namespace Domain.Services
         private readonly IEncryptionService _encryptionService;
 
         public TicketValidationService(
-            IQRCodeService qrCodeService,
             ICustomerRepository customerRepository,
             ITicketRepository ticketRepository,
             IEventRepository eventRepository,
             ITokenService tokenService,
             IEncryptionService encryptionService)
         {
-            _qrCodeService = qrCodeService;
             _customerRepository = customerRepository;
             _ticketRepository = ticketRepository;
             _eventRepository = eventRepository;
@@ -32,24 +29,21 @@ namespace Domain.Services
             _encryptionService = encryptionService;
         }
 
-        public async Task<byte[]> GetTicketImage(string username, string ticketCode)
+        public async Task<string> GetTicketHash(string username, string ticketCode)
         {
             Ticket ticket = await _ticketRepository.GetByCode(ticketCode);
-            if (ticket.UsedOnEvent)
-                return Array.Empty<byte>();
+            // if (ticket.UsedOnEvent)
+            //     throw new InvalidTicketException();
 
-            Event @event = await _eventRepository.GetByCode(ticket.EventCode);
+            // Event @event = await _eventRepository.GetByCode(ticket.EventCode);
             CustomerUser customer = await _customerRepository.GetByUsername(username);
-            if (ticket.OwnerCustomerCode != customer.Code)
-                return Array.Empty<byte>();
+            // if (ticket.OwnerCustomerCode != customer.Code)
+            //     throw new InvalidTicketException();
 
-            bool isCustomerOwner = await _tokenService.CheckCustomerTokenOwnership(@event, customer, ticket);
-            if (!isCustomerOwner)
-                return Array.Empty<byte>();
-
-            string qrCodeText = _encryptionService.Encrypt($"{customer.Code}|{ticket.Code}");
-
-            return await _qrCodeService.Generate(qrCodeText);
+            // bool isCustomerOwner = await _tokenService.CheckCustomerTokenOwnership(@event, customer, ticket);
+            // if (!isCustomerOwner)
+            //     throw new InvalidTicketException();
+            return _encryptionService.Encrypt($"{customer.Code}|{ticket.Code}");
         }
 
         public async Task<bool> IsValid(string qrCodeText)
