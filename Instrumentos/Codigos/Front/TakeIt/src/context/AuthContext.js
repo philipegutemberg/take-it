@@ -14,11 +14,13 @@ export const AuthProvider = ({children}) => {
             setIsLoading(true);
             let result = await axios.post("/api/v1/login", { username: username, password: password });
             let decodedJwt = jwtDecode(result.data.token);
-            setToken({
+            const token = {
                 jwt: result.data.token,
                 username: decodedJwt.name,
                 role: decodedJwt.role
-            });
+            };
+            
+            setToken(token);
             axios.defaults.headers.common["Authorization"] = "Bearer " + result.data.token;
             if (callBack)
                 callBack(token);

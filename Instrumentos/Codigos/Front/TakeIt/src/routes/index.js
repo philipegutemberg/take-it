@@ -7,7 +7,8 @@ import Event from '../pages/Event';
 import Tickets from '../pages/Tickets';
 import { StyleSheet } from 'react-native';
 import Ticket from '../pages/Ticket';
-// import Gatekeeper from '../pages/Gatekeeper';
+import Gatekeeper from '../pages/Gatekeeper';
+import ValidationResponse from '../pages/Gatekeeper/validationResponse';
 
 const Stack = createNativeStackNavigator();
 
@@ -73,7 +74,7 @@ export default function Routes() {
                 }}
             />
 
-            {/* <Stack.Screen
+            <Stack.Screen
                 name="Gatekeeper"
                 component={Gatekeeper}
                 options={{ 
@@ -81,7 +82,17 @@ export default function Routes() {
                     title: "Validar ingresso",
                     headerBackVisible: false
                 }}
-            /> */}
+            />
+
+            <Stack.Screen
+                name="ValidationResponse"
+                component={ValidationResponse}
+                options={{ 
+                    headerShown: true,
+                    title: "Resultado validação",
+                    headerBackVisible: false
+                }}
+            />
         </Stack.Navigator>
     );
 }

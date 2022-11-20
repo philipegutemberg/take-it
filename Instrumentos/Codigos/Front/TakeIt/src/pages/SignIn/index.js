@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 
 import * as Animatable from 'react-native-animatable'
 import { AuthContext } from '../../context/AuthContext'
@@ -52,7 +52,7 @@ export default function SignIn() {
           style={styles.button}
           onPress={ async () => {
             // await login(username, password, () => navigation.navigate('Events'));
-            await login(username, password, (token) => token.role == 'Customer' ? navigation.navigate('Tickets') : navigation.navigate('Tickets'));
+            await login(username, password, (token) => token.role == 'Customer' ? navigation.navigate('Tickets') : navigation.navigate('Gatekeeper'));
           } }
         >
           <Text style={styles.buttonText}>Acessar</Text>
