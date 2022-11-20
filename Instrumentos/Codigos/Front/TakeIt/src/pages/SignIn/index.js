@@ -52,7 +52,7 @@ export default function SignIn() {
           style={styles.button}
           onPress={ async () => {
             // await login(username, password, () => navigation.navigate('Events'));
-            await login(username, password, (token) => token.role == 'Customer' ? navigation.navigate('Tickets') : navigation.navigate('Gatekeeper'));
+            await login(username, password, (token) => token.role == 'Customer' ? navigation.navigate('Tickets') : navigation.navigate('Tickets'));
           } }
         >
           <Text style={styles.buttonText}>Acessar</Text>
