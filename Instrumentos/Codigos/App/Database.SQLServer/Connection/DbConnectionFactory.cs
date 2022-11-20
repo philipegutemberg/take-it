@@ -1,5 +1,6 @@
-using Microsoft.Data.SqlClient;
+using System.Data;
 using Microsoft.Extensions.Configuration;
+using Npgsql;
 
 namespace Database.SQLServer.Connection
 {
@@ -12,9 +13,9 @@ namespace Database.SQLServer.Connection
             _configuration = configuration;
         }
 
-        public SqlConnection Build()
+        public IDbConnection Build()
         {
-            return new SqlConnection(_configuration.GetConnectionString("TakeIt"));
+            return new NpgsqlConnection(_configuration.GetConnectionString("TakeIt"));
         }
     }
 }

@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using Domain.Exceptions;
 using Domain.Models;
 using Domain.Models.Users;
 using Domain.Repositories;

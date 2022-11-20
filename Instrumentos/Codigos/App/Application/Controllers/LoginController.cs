@@ -7,6 +7,7 @@ using Domain.Exceptions;
 using Domain.Models.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Application.Controllers
 {
@@ -14,11 +15,13 @@ namespace Application.Controllers
     [ApiController]
     public class LoginController : BaseController
     {
+        private readonly ILogger<LoginController> _logger;
         private readonly TokenService _tokenService;
         private readonly LoginService _loginService;
 
-        public LoginController(TokenService tokenService, LoginService loginService)
+        public LoginController(ILogger<LoginController> logger, TokenService tokenService, LoginService loginService)
         {
+            _logger = logger;
             _tokenService = tokenService;
             _loginService = loginService;
         }
@@ -49,9 +52,10 @@ namespace Application.Controllers
             {
                 return NotFound(new { message = "Invalid user" });
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return Problem();
+                _logger.LogError(e, "Error authenticating user");
+                return Problem("Error authenticating user");
             }
         }
     }

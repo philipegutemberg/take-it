@@ -17,19 +17,19 @@ namespace Database.SQLServer
 
         public async Task<BackOfficeUser> Insert(BackOfficeUser user)
         {
-            const string sql = @"INSERT INTO dbo.User_Backoffice (Code, Username, Password)
-                                                        OUTPUT INSERTED.*
-                                                        VALUES (@Code, @Username, @Password)";
+            const string sql = @"INSERT INTO User_Backoffice (Code, Username, Password)
+                                                        VALUES (@Code, @Username, @Password)
+                                                        RETURNING *";
 
             var insertedRow = await _dbConnection.QuerySingle(sql, user);
             if (insertedRow == null)
                 throw new RepositoryException($"Error trying to insert backoffice user.");
 
             return new BackOfficeUser(
-                insertedRow.Id,
-                insertedRow.Code,
-                insertedRow.Username,
-                insertedRow.Password);
+                insertedRow.id,
+                insertedRow.code,
+                insertedRow.username,
+                insertedRow.password);
         }
     }
 }

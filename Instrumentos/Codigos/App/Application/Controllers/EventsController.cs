@@ -10,6 +10,7 @@ using Domain.Models;
 using Domain.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Application.Controllers
 {
@@ -17,12 +18,14 @@ namespace Application.Controllers
     [ApiController]
     public class EventsController : BaseController
     {
+        private readonly ILogger<EventsController> _logger;
         private readonly IEventService _eventService;
         private readonly ITicketBuyService _ticketBuyService;
         private readonly ITokenTransferService _tokenTransferService;
 
-        public EventsController(IEventService eventService, ITicketBuyService ticketBuyService, ITokenTransferService tokenTransferService)
+        public EventsController(ILogger<EventsController> logger, IEventService eventService, ITicketBuyService ticketBuyService, ITokenTransferService tokenTransferService)
         {
+            _logger = logger;
             _eventService = eventService;
             _ticketBuyService = ticketBuyService;
             _tokenTransferService = tokenTransferService;
@@ -57,9 +60,10 @@ namespace Application.Controllers
 
                 return StatusCode((int)HttpStatusCode.Created);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return Problem();
+                _logger.LogError(e, "Error creating event");
+                return Problem("Error creating event");
             }
         }
 
@@ -93,9 +97,10 @@ namespace Application.Controllers
                     }).ToList()
                 }));
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return Problem();
+                _logger.LogError(e, "Error listing available events");
+                return Problem("Error listing available events");
             }
         }
 
@@ -113,9 +118,10 @@ namespace Application.Controllers
             {
                 return StatusCode((int)HttpStatusCode.Conflict);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return Problem();
+                _logger.LogError(e, "Error buying tickets for event");
+                return Problem("Error buying tickets for event");
             }
         }
 
@@ -129,9 +135,10 @@ namespace Application.Controllers
 
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return Problem();
+                _logger.LogError(e, "Error transferring token to ticket owner");
+                return Problem("Error transferring token to ticket owner");
             }
         }
     }

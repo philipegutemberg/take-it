@@ -2,10 +2,10 @@ using System;
 using System.Threading.Tasks;
 using Application.Controllers.Base;
 using Application.Controllers.Models;
-using Domain.Exceptions;
 using Domain.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Application.Controllers
 {
@@ -13,16 +13,18 @@ namespace Application.Controllers
     [ApiController]
     public class TicketValidationController : BaseController
     {
+        private readonly ILogger<TicketValidationController> _logger;
         private readonly ITicketValidationService _ticketValidationService;
 
-        public TicketValidationController(ITicketValidationService ticketValidationService)
+        public TicketValidationController(ILogger<TicketValidationController> logger, ITicketValidationService ticketValidationService)
         {
+            _logger = logger;
             _ticketValidationService = ticketValidationService;
         }
 
-        [HttpGet("image/{ticketCode}")]
+        [HttpGet("hash/tickets/{ticketCode}")]
         [Authorize(Roles = "Customer")]
-        public async Task<IActionResult> GetTicketImage(string ticketCode)
+        public async Task<IActionResult> GetTicketHash(string ticketCode)
         {
             try
             {
@@ -33,13 +35,14 @@ namespace Application.Controllers
                     TicketHash = ticketHash
                 });
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return Problem();
+                _logger.LogError(e, "Error getting ticket hash");
+                return Problem("Error getting ticket hash");
             }
         }
 
-        [HttpPost("ticket")]
+        [HttpPost("ticket/validate")]
         [Authorize(Roles = "Gatekeeper")]
         public async Task<IActionResult> ValidateTicket([FromBody]ValidateTicketModel validationModel)
         {
@@ -52,9 +55,10 @@ namespace Application.Controllers
                     Valid = valid
                 });
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return Problem();
+                _logger.LogError(e, "Error validating tickets hash");
+                return Problem("Error validating tickets hash");
             }
         }
     }

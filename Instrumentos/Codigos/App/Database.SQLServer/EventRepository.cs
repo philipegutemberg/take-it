@@ -19,32 +19,32 @@ namespace Database.SQLServer
 
         public async Task<Event> Insert(Event newEvent)
         {
-            const string sql = @"INSERT INTO dbo.[Event] (Code, StartDate, EndDate, [Location], Title, [Description], Ticker, TokenContractAddress, ImageUrl, ResaleFeePercentage, AlreadyIssuedTickets)
-                                                        OUTPUT INSERTED.*
-                                                        VALUES (@Code, @StartDate, @EndDate, @Location, @Title, @Description, @Ticker, @TokenContractAddress, @ImageUrl, @ResaleFeePercentage, @AlreadyIssuedTickets)";
+            const string sql = @"INSERT INTO Event (Code, StartDate, EndDate, Location, Title, Description, Ticker, TokenContractAddress, ImageUrl, ResaleFeePercentage, AlreadyIssuedTickets)
+                                                        VALUES (@Code, @StartDate, @EndDate, @Location, @Title, @Description, @Ticker, @TokenContractAddress, @ImageUrl, @ResaleFeePercentage, @AlreadyIssuedTickets)
+                                                        RETURNING *";
 
             var insertedRow = await _dbConnection.QuerySingle(sql, newEvent);
             if (insertedRow == null)
                 throw new RepositoryException($"Error trying to insert event.");
 
             return new Event(
-                insertedRow.Code,
-                insertedRow.StartDate,
-                insertedRow.EndDate,
-                insertedRow.Location,
-                insertedRow.Title,
-                insertedRow.Description,
-                insertedRow.Ticker,
-                insertedRow.TokenContractAddress,
-                insertedRow.ImageUrl,
-                insertedRow.ResaleFeePercentage,
-                insertedRow.AlreadyIssuedTickets);
+                insertedRow.code,
+                insertedRow.startdate,
+                insertedRow.enddate,
+                insertedRow.location,
+                insertedRow.title,
+                insertedRow.description,
+                insertedRow.ticker,
+                insertedRow.tokencontractaddress,
+                insertedRow.imageurl,
+                insertedRow.resalefeepercentage,
+                insertedRow.alreadyissuedtickets);
         }
 
         public async Task<Event> GetByCode(string code)
         {
             const string sql = @"SELECT *
-                                   FROM dbo.[Event]
+                                   FROM Event
                                   WHERE Code = @code";
 
             var eventRow = await _dbConnection.QuerySingle(sql, new
@@ -56,24 +56,24 @@ namespace Database.SQLServer
                 throw new RepositoryException($"Error trying to get event.");
 
             return new Event(
-                eventRow.Code,
-                eventRow.StartDate,
-                eventRow.EndDate,
-                eventRow.Location,
-                eventRow.Title,
-                eventRow.Description,
-                eventRow.Ticker,
-                eventRow.TokenContractAddress,
-                eventRow.ImageUrl,
-                eventRow.ResaleFeePercentage,
-                eventRow.AlreadyIssuedTickets);
+                eventRow.code,
+                eventRow.startdate,
+                eventRow.enddate,
+                eventRow.location,
+                eventRow.title,
+                eventRow.description,
+                eventRow.ticker,
+                eventRow.tokencontractaddress,
+                eventRow.imageurl,
+                eventRow.resalefeepercentage,
+                eventRow.alreadyissuedtickets);
         }
 
         public async Task<IEnumerable<Event>> GetAllEnabled()
         {
             const string sql = @"SELECT *
-                                   FROM dbo.[Event]
-                                  WHERE EndDate >= GETDATE()";
+                                   FROM Event
+                                  WHERE EndDate >= CURRENT_DATE";
 
             var eventsRows = await _dbConnection.QueryAsync(sql);
 
@@ -81,22 +81,22 @@ namespace Database.SQLServer
                 throw new RepositoryException($"Error trying to get all enabled events.");
 
             return eventsRows.Select(e => new Event(
-                e.Code,
-                e.StartDate,
-                e.EndDate,
-                e.Location,
-                e.Title,
-                e.Description,
-                e.Ticker,
-                e.TokenContractAddress,
-                e.ImageUrl,
-                e.ResaleFeePercentage,
-                e.AlreadyIssuedTickets));
+                e.code,
+                e.startdate,
+                e.enddate,
+                e.location,
+                e.title,
+                e.description,
+                e.ticker,
+                e.tokencontractaddress,
+                e.imageurl,
+                e.resalefeepercentage,
+                e.alreadyissuedtickets));
         }
 
         public async Task UpdateIssuedTickets(string eventCode, long alreadyIssuedTickets)
         {
-            const string sql = @"UPDATE dbo.[Event]
+            const string sql = @"UPDATE Event
                                     SET AlreadyIssuedTickets = @alreadyIssuedTickets
                                   WHERE Code = @code";
 

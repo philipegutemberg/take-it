@@ -26,4 +26,4 @@ CREATE TABLE User_Customer (
     InternalAddress     VARCHAR(100)    NULL
 );
 
-INSERTO INTO User_Backoffice (Code, Username, Password) VALUES ('d51d1355-0da2-4cc2-abf1-d52924a4d2d5', 'philipe.bo', 'ea71c25a7a602246b4c39824b855678894a96f43bb9b71319c39700a1e045222')
+INSERT INTO User_Backoffice (Code, Username, Password) VALUES ('d51d1355-0da2-4cc2-abf1-d52924a4d2d5', 'philipe.bo', 'ea71c25a7a602246b4c39824b855678894a96f43bb9b71319c39700a1e045222')

@@ -19,28 +19,28 @@ namespace Database.SQLServer
 
         public async Task<Ticket> Insert(Ticket ticket)
         {
-            const string sql = @"INSERT INTO dbo.Ticket (Code, EventCode, EventTicketTypeCode, PurchaseDate, OwnerCustomerCode, TokenId, UsedOnEvent)
-                                                        OUTPUT INSERTED.*
-                                                        VALUES (@Code, @EventCode, @EventTicketTypeCode, @PurchaseDate, @OwnerCustomerCode, @TokenId, @UsedOnEvent)";
+            const string sql = @"INSERT INTO Ticket (Code, EventCode, EventTicketTypeCode, PurchaseDate, OwnerCustomerCode, TokenId, UsedOnEvent)
+                                                        VALUES (@Code, @EventCode, @EventTicketTypeCode, @PurchaseDate, @OwnerCustomerCode, @TokenId, @UsedOnEvent)
+                                                        RETURNING *";
 
             var insertedRow = await _dbConnection.QuerySingle(sql, ticket);
             if (insertedRow == null)
                 throw new RepositoryException($"Error trying to insert ticket.");
 
             return new Ticket(
-                insertedRow.Code,
-                insertedRow.EventCode,
-                insertedRow.EventTicketTypeCode,
-                insertedRow.PurchaseDate,
-                insertedRow.OwnerCustomerCode,
-                insertedRow.TokenId,
-                insertedRow.UsedOnEvent);
+                insertedRow.code,
+                insertedRow.eventcode,
+                insertedRow.eventtickettypecode,
+                insertedRow.purchasedate,
+                insertedRow.ownercustomercode,
+                insertedRow.tokenid,
+                insertedRow.usedonevent);
         }
 
         public async Task<Ticket> GetByCode(string code)
         {
             const string sql = @"SELECT *
-                                   FROM dbo.Ticket
+                                   FROM Ticket
                                   WHERE Code = @code";
 
             var ticketRow = await _dbConnection.QuerySingle(sql, new
@@ -52,19 +52,19 @@ namespace Database.SQLServer
                 throw new RepositoryException($"Error trying to get ticket.");
 
             return new Ticket(
-                ticketRow.Code,
-                ticketRow.EventCode,
-                ticketRow.EventTicketTypeCode,
-                ticketRow.PurchaseDate,
-                ticketRow.OwnerCustomerCode,
-                ticketRow.TokenId,
-                ticketRow.UsedOnEvent);
+                ticketRow.code,
+                ticketRow.eventcode,
+                ticketRow.eventtickettypecode,
+                ticketRow.purchasedate,
+                ticketRow.ownercustomercode,
+                ticketRow.tokenid,
+                ticketRow.usedonevent);
         }
 
         public async Task<IEnumerable<Ticket>> GetAllOwnedByCustomer(string customerCode)
         {
             const string ticketSql = @"SELECT *
-                                   FROM dbo.Ticket
+                                   FROM Ticket
                                   WHERE OwnerCustomerCode = @customerCode";
 
             var ticketRows = await _dbConnection.QueryAsync(ticketSql, new
@@ -73,19 +73,19 @@ namespace Database.SQLServer
             });
 
             return ticketRows.Select(t => new Ticket(
-                t.Code,
-                t.EventCode,
-                t.EventTicketTypeCode,
-                t.PurchaseDate,
-                t.OwnerCustomerCode,
-                t.TokenId,
-                t.UsedOnEvent));
+                t.code,
+                t.eventcode,
+                t.eventtickettypecode,
+                t.purchasedate,
+                t.ownercustomercode,
+                t.tokenid,
+                t.usedonevent));
         }
 
         public async Task<Ticket> GetByTokenId(long tokenId)
         {
             const string sql = @"SELECT *
-                                   FROM dbo.Ticket
+                                   FROM Ticket
                                   WHERE TokenId = @tokenId";
 
             var ticketRow = await _dbConnection.QuerySingle(sql, new
@@ -97,18 +97,18 @@ namespace Database.SQLServer
                 throw new RepositoryException($"Error trying to get ticket by token id {tokenId}.");
 
             return new Ticket(
-                ticketRow.Code,
-                ticketRow.EventCode,
-                ticketRow.EventTicketTypeCode,
-                ticketRow.PurchaseDate,
-                ticketRow.OwnerCustomerCode,
-                ticketRow.TokenId,
-                ticketRow.UsedOnEvent);
+                ticketRow.code,
+                ticketRow.eventcode,
+                ticketRow.eventtickettypecode,
+                ticketRow.purchasedate,
+                ticketRow.ownercustomercode,
+                ticketRow.tokenid,
+                ticketRow.usedonevent);
         }
 
         public async Task UpdateOwner(Ticket ticket)
         {
-            const string sql = @"UPDATE dbo.Ticket
+            const string sql = @"UPDATE Ticket
                                     SET OwnerCustomerCode = @customerOwner
                                   WHERE Code = @code";
 
@@ -124,7 +124,7 @@ namespace Database.SQLServer
 
         public async Task UpdateUsedOnEvent(Ticket ticket)
         {
-            const string sql = @"UPDATE dbo.Ticket
+            const string sql = @"UPDATE Ticket
                                     SET UsedOnEvent = @usedOnEvent
                                   WHERE Code = @code
                                     AND OwnerCustomerCode = @ownerCustomerCode

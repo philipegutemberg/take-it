@@ -16,22 +16,30 @@ Authorization: Bearer {{LoginOperational.response.body.token}}
 Content-Type: application/json
 
 {
-  "startDate": "2023-09-24T00:00:00",
-  "endDate": "2023-09-27T00:00:00",
+  "startDate": "2022-11-25T00:00:00",
+  "endDate": "2022-11-25T00:00:00",
   "location": "Autódromo de Interlagos, SP",
-  "title": "THE TOWN 2023",
-  "description": "THE TOWN 2023",
-  "ticker": "TOWN23",
-  "imageUrl": "https://radiomixfm.com.br/wp-content/uploads/2021/11/The-Town-Sao-Paulo-tera-festival-gigante-de-musica-dos-mesmos-criadores-do-Rock-in-Rio.png",
+  "title": "F1 - GP BRASIL 2022",
+  "description": "A compra de ingressos para o Formula 1 Grande Pr\u00EAmio de S\u00E3o Paulo 2023 ser\u00E1 realizada por meio da Eventim, loja oficial de ingressos do evento.\r\n \r\n\r\nInformamos que este ano os ingressos poder\u00E3o ser digitais, com impress\u00E3o em casa ou apresentado pelo celular, ou f\u00EDsicos, com retirada em nossa Central de Atendimento.\r\n \r\n\r\nPara comprar seu ingresso, acesse a op\u00E7\u00E3o \u201CIngressos\u201D no site www.f1saopaulo.com.br, ou atrav\u00E9s do site www.eventim.com.br.\r\n \r\n\r\nCada comprador poder\u00E1 adquirir at\u00E9 04 (quatro) ingressos por CPF. Caso haja disponibilidade de ingressos, tamb\u00E9m ser\u00E1 poss\u00EDvel comprar seu ingresso presencialmente na Bilheteria do Aut\u00F3dromo de Interlagos:",
+  "ticker": "F12022",
+  "imageUrl": "https://esportividade.com.br/wp-content/uploads/2020/11/gpsp.jpg",
   "resaleFeePercentage": 5,
   "ticketTypes": [
     {
-      "ticketName": "Town Key",
-      "startDate": "2023-09-24T00:00:00",
-      "endDate": "2023-09-27T00:00:00",
-      "qualification": "Staff",
-      "priceBrl": 1900.00,
-      "totalTickets": 100
+      "ticketName": "Regular",
+      "startDate": "2022-11-25T00:00:00",
+      "endDate": "2022-11-25T00:00:00",
+      "qualification": "Regular",
+      "priceBrl": 175.00,
+      "totalTickets": 50
+    },
+    {
+      "ticketName": "Student",
+      "startDate": "2022-11-25T00:00:00",
+      "endDate": "2022-11-25T00:00:00",
+      "qualification": "Student",
+      "priceBrl": 87.50,
+      "totalTickets": 25
     }
   ]
 }

@@ -4,6 +4,7 @@ using Application.Controllers.Base;
 using Domain.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Application.Controllers
 {
@@ -11,10 +12,12 @@ namespace Application.Controllers
     [ApiController]
     public class TicketsController : BaseController
     {
+        private readonly ILogger<TicketsController> _logger;
         private readonly ITicketService _userService;
 
-        public TicketsController(ITicketService userService)
+        public TicketsController(ILogger<TicketsController> logger, ITicketService userService)
         {
+            _logger = logger;
             _userService = userService;
         }
 
@@ -28,9 +31,10 @@ namespace Application.Controllers
 
                 return Ok(tickets);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return Problem();
+                _logger.LogError(e, "Error listing users tickets");
+                return Problem("Error listing users tickets");
             }
         }
     }

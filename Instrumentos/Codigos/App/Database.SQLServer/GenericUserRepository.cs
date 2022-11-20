@@ -20,19 +20,19 @@ namespace Database.SQLServer
         public async Task<GenericUser> GetByUsername(string username)
         {
             const string sql = @"SELECT Id, Code, Username, Password, 'Customer' as Role
-                                   FROM dbo.User_Customer
+                                   FROM User_Customer
                                   WHERE Username = @username
                                   
                                   UNION
                                   
                                  SELECT Id, Code, Username, Password, 'Backoffice' as Role
-                                   FROM dbo.User_Backoffice
+                                   FROM User_Backoffice
                                   WHERE Username = @username
                                   
                                   UNION
 
                                  SELECT Id, Code, Username, Password, 'Gatekeeper' as Role
-                                   FROM dbo.User_Gatekeeper
+                                   FROM User_Gatekeeper
                                   WHERE Username = @username";
 
             var customerRow = await _dbConnection.QuerySingle(sql, new
@@ -44,11 +44,11 @@ namespace Database.SQLServer
                 throw new RepositoryException($"Error trying to get user by username {username}.");
 
             return new GenericUser(
-                customerRow.Id,
-                customerRow.Code,
-                customerRow.Username,
-                customerRow.Password,
-                Enum.Parse(typeof(EnumUserRole), customerRow.Role));
+                customerRow.id,
+                customerRow.code,
+                customerRow.username,
+                customerRow.password,
+                Enum.Parse(typeof(EnumUserRole), customerRow.role));
         }
     }
 }

@@ -16,15 +16,15 @@ namespace Database.SQLServer
 
         public async Task SetLastProcessed(long lastProcessed)
         {
-            const string sql = @"IF EXISTS (SELECT 1 FROM dbo.EthereumEventProcessing)
-                                BEGIN
-                                    UPDATE dbo.EthereumEventProcessing
-                                    SET LastBlockReadNumber = @lastProcessed
-                                END
+            string sql = @$"DO $$
+                            BEGIN
+                                IF EXISTS (SELECT 1 FROM EthereumEventProcessing) THEN
+                                    UPDATE EthereumEventProcessing
+                                    SET LastBlockReadNumber = {lastProcessed};
                                 ELSE
-                                BEGIN
-                                    INSERT INTO dbo.EthereumEventProcessing VALUES (@lastProcessed)
-                                END";
+                                    INSERT INTO EthereumEventProcessing VALUES ({lastProcessed});
+                                END IF;
+                            END $$;";
 
             int affectedRows = await _dbConnection.ExecuteAsyncWithTransaction(sql, new
             {
@@ -38,7 +38,7 @@ namespace Database.SQLServer
         public async Task<long?> GetLastProcessed()
         {
             const string sql = @"SELECT LastBlockReadNumber 
-                                 FROM dbo.EthereumEventProcessing";
+                                 FROM EthereumEventProcessing";
 
             return await _dbConnection.QuerySingle<long>(sql);
         }

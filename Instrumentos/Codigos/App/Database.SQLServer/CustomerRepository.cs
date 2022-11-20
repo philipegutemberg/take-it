@@ -17,30 +17,30 @@ namespace Database.SQLServer
 
         public async Task<CustomerUser> Insert(CustomerUser user)
         {
-            const string sql = @"INSERT INTO dbo.User_Customer (Code, Username, Password, FullName, Email, Phone, WalletAddress)
-                                                        OUTPUT INSERTED.*
-                                                        VALUES (@Code, @Username, @Password, @FullName, @Email, @Phone, @WalletAddress)";
+            const string sql = @"INSERT INTO User_Customer (Code, Username, Password, FullName, Email, Phone, WalletAddress)
+                                                        VALUES (@Code, @Username, @Password, @FullName, @Email, @Phone, @WalletAddress)
+                                                        RETURNING *";
 
             var insertedRow = await _dbConnection.QuerySingle(sql, user);
             if (insertedRow == null)
                 throw new RepositoryException($"Error trying to insert customer.");
 
             return new CustomerUser(
-                insertedRow.Id,
-                insertedRow.Code,
-                insertedRow.Username,
-                insertedRow.Password,
-                insertedRow.FullName,
-                insertedRow.Email,
-                insertedRow.Phone,
-                insertedRow.WalletAddress,
-                insertedRow.InternalAddress);
+                insertedRow.id,
+                insertedRow.code,
+                insertedRow.username,
+                insertedRow.password,
+                insertedRow.fullname,
+                insertedRow.email,
+                insertedRow.phone,
+                insertedRow.walletaddress,
+                insertedRow.internaladdress);
         }
 
         public async Task<CustomerUser> GetByUsername(string username)
         {
             const string sql = @"SELECT *
-                                   FROM dbo.User_Customer
+                                   FROM User_Customer
                                   WHERE Username = @username";
 
             var customerRow = await _dbConnection.QuerySingle(sql, new
@@ -52,21 +52,21 @@ namespace Database.SQLServer
                 throw new RepositoryException($"Error trying to get customer by username {username}.");
 
             return new CustomerUser(
-                customerRow.Id,
-                customerRow.Code,
-                customerRow.Username,
-                customerRow.Password,
-                customerRow.FullName,
-                customerRow.Email,
-                customerRow.Phone,
-                customerRow.WalletAddress,
-                customerRow.InternalAddress);
+                customerRow.id,
+                customerRow.code,
+                customerRow.username,
+                customerRow.password,
+                customerRow.fullname,
+                customerRow.email,
+                customerRow.phone,
+                customerRow.walletaddress,
+                customerRow.internaladdress);
         }
 
         public async Task<CustomerUser> GetByCode(string code)
         {
             const string sql = @"SELECT *
-                                   FROM dbo.User_Customer
+                                   FROM User_Customer
                                   WHERE Code = @code";
 
             var customerRow = await _dbConnection.QuerySingle(sql, new
@@ -78,20 +78,20 @@ namespace Database.SQLServer
                 throw new RepositoryException($"Error trying to get customer by code {code}.");
 
             return new CustomerUser(
-                customerRow.Id,
-                customerRow.Code,
-                customerRow.Username,
-                customerRow.Password,
-                customerRow.FullName,
-                customerRow.Email,
-                customerRow.Phone,
-                customerRow.WalletAddress,
-                customerRow.InternalAddress);
+                customerRow.id,
+                customerRow.code,
+                customerRow.username,
+                customerRow.password,
+                customerRow.fullname,
+                customerRow.email,
+                customerRow.phone,
+                customerRow.walletaddress,
+                customerRow.internaladdress);
         }
 
         public async Task UpdateInternalAddress(CustomerUser customer)
         {
-            const string sql = @"UPDATE dbo.User_Customer
+            const string sql = @"UPDATE User_Customer
                                     SET InternalAddress = @internalAddress
                                   WHERE Code = @code";
 
@@ -108,7 +108,7 @@ namespace Database.SQLServer
         public async Task<CustomerUser?> GetByInternalAddress(string internalAddress)
         {
             const string sql = @"SELECT *
-                                   FROM dbo.User_Customer
+                                   FROM User_Customer
                                   WHERE InternalAddress = @internalAddress";
 
             var customerRow = await _dbConnection.QuerySingle(sql, new
@@ -120,15 +120,15 @@ namespace Database.SQLServer
                 return null;
 
             return new CustomerUser(
-                customerRow.Id,
-                customerRow.Code,
-                customerRow.Username,
-                customerRow.Password,
-                customerRow.FullName,
-                customerRow.Email,
-                customerRow.Phone,
-                customerRow.WalletAddress,
-                customerRow.InternalAddress);
+                customerRow.id,
+                customerRow.code,
+                customerRow.username,
+                customerRow.password,
+                customerRow.fullname,
+                customerRow.email,
+                customerRow.phone,
+                customerRow.walletaddress,
+                customerRow.internaladdress);
         }
     }
 }

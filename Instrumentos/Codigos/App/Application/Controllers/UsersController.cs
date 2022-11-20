@@ -9,6 +9,7 @@ using Domain.Models.Users;
 using Domain.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Application.Controllers
 {
@@ -16,15 +17,18 @@ namespace Application.Controllers
     [ApiController]
     public class UsersController : BaseController
     {
+        private readonly ILogger<UsersController> _logger;
         private readonly ICustomerService _customerUserService;
         private readonly ISpecialUserService _specialUserService;
         private readonly HashService _hashService;
 
         public UsersController(
+            ILogger<UsersController> logger,
             ICustomerService customerUserService,
             ISpecialUserService specialUserService,
             HashService hashService)
         {
+            _logger = logger;
             _customerUserService = customerUserService;
             _specialUserService = specialUserService;
             _hashService = hashService;
@@ -49,9 +53,10 @@ namespace Application.Controllers
 
                 return StatusCode((int)HttpStatusCode.Created);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return Problem();
+                _logger.LogError(e, "Error registering consumer");
+                return Problem("Error registering consumer");
             }
         }
 
@@ -90,9 +95,10 @@ namespace Application.Controllers
 
                 return StatusCode((int)HttpStatusCode.Created);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return Problem();
+                _logger.LogError(e, "Error registering special user");
+                return Problem("Error registering special user");
             }
         }
 
@@ -109,9 +115,10 @@ namespace Application.Controllers
                     Address = address
                 });
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return Problem();
+                _logger.LogError(e, "Error getting customers wallet address");
+                return Problem("Error getting customers wallet address");
             }
         }
     }

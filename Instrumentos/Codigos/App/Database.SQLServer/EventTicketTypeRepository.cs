@@ -20,9 +20,9 @@ namespace Database.SQLServer
 
         public async Task<EventTicketType> Insert(EventTicketType eventTicketType)
         {
-            const string sql = @"INSERT INTO dbo.[EventTicketType] (Code, EventCode, TicketName, StartDate, EndDate, Qualification, PriceBrl, MetadataFileUrl, TotalAvailableTickets, CurrentlyAvailableTickets)
-                                                        OUTPUT INSERTED.*
-                                                        VALUES (@Code, @EventCode, @TicketName, @StartDate, @EndDate, @Qualification, @PriceBrl, @MetadataFileUrl, @TotalAvailableTickets, @CurrentlyAvailableTickets)";
+            const string sql = @"INSERT INTO EventTicketType (Code, EventCode, TicketName, StartDate, EndDate, Qualification, PriceBrl, MetadataFileUrl, TotalAvailableTickets, CurrentlyAvailableTickets)
+                                                        VALUES (@Code, @EventCode, @TicketName, @StartDate, @EndDate, @Qualification, @PriceBrl, @MetadataFileUrl, @TotalAvailableTickets, @CurrentlyAvailableTickets)
+                                                        RETURNING *";
 
             var insertedRow = await _dbConnection.QuerySingle(sql, new
             {
@@ -42,26 +42,26 @@ namespace Database.SQLServer
                 throw new RepositoryException($"Error trying to insert event ticket type.");
 
             return new EventTicketType(
-                insertedRow.Code,
-                insertedRow.EventCode,
-                insertedRow.TicketName,
-                insertedRow.StartDate,
-                insertedRow.EndDate,
-                (EnumTicketQualification)insertedRow.Qualification,
-                insertedRow.PriceBrl,
-                insertedRow.MetadataFileUrl,
+                insertedRow.code,
+                insertedRow.eventcode,
+                insertedRow.ticketname,
+                insertedRow.startdate,
+                insertedRow.enddate,
+                (EnumTicketQualification)insertedRow.qualification,
+                insertedRow.pricebrl,
+                insertedRow.metadatafileurl,
                 new EventTicketTypeStock(
-                    insertedRow.Code,
-                    insertedRow.EventCode,
-                    insertedRow.TotalAvailableTickets,
-                    insertedRow.CurrentlyAvailableTickets
+                    insertedRow.code,
+                    insertedRow.eventcode,
+                    insertedRow.totalavailabletickets,
+                    insertedRow.currentlyavailabletickets
                 ));
         }
 
         public async Task<EventTicketType> GetByCode(string code)
         {
             const string sql = @"SELECT *
-                                   FROM dbo.[EventTicketType]
+                                   FROM EventTicketType
                                   WHERE Code = @code";
 
             var eventTicketTypeRow = await _dbConnection.QuerySingle(sql, new
@@ -73,26 +73,26 @@ namespace Database.SQLServer
                 throw new RepositoryException($"Error trying to get event ticket type.");
 
             return new EventTicketType(
-                eventTicketTypeRow.Code,
-                eventTicketTypeRow.EventCode,
-                eventTicketTypeRow.TicketName,
-                eventTicketTypeRow.StartDate,
-                eventTicketTypeRow.EndDate,
-                (EnumTicketQualification)eventTicketTypeRow.Qualification,
-                eventTicketTypeRow.PriceBrl,
-                eventTicketTypeRow.MetadataFileUrl,
+                eventTicketTypeRow.code,
+                eventTicketTypeRow.eventcode,
+                eventTicketTypeRow.ticketname,
+                eventTicketTypeRow.startdate,
+                eventTicketTypeRow.enddate,
+                (EnumTicketQualification)eventTicketTypeRow.qualification,
+                eventTicketTypeRow.pricebrl,
+                eventTicketTypeRow.metadatafileurl,
                 new EventTicketTypeStock(
-                    eventTicketTypeRow.Code,
-                    eventTicketTypeRow.EventCode,
-                    eventTicketTypeRow.TotalAvailableTickets,
-                    eventTicketTypeRow.CurrentlyAvailableTickets
+                    eventTicketTypeRow.code,
+                    eventTicketTypeRow.eventcode,
+                    eventTicketTypeRow.totalavailabletickets,
+                    eventTicketTypeRow.currentlyavailabletickets
                 ));
         }
 
         public async Task<IEnumerable<EventTicketType>> GetAllByEvent(string eventCode)
         {
             const string sql = @"SELECT *
-                                   FROM dbo.[EventTicketType]
+                                   FROM EventTicketType
                                   WHERE EventCode = @eventCode";
 
             var eventTicketTypeRows = await _dbConnection.QueryAsync(sql, new
@@ -104,19 +104,19 @@ namespace Database.SQLServer
                 throw new RepositoryException($"Error trying to get available event ticket types for event {eventCode}.");
 
             return eventTicketTypeRows.Select(e => new EventTicketType(
-                e.Code,
-                e.EventCode,
-                e.TicketName,
-                e.StartDate,
-                e.EndDate,
-                (EnumTicketQualification)e.Qualification,
-                e.PriceBrl,
-                e.MetadataFileUrl,
+                e.code,
+                e.eventcode,
+                e.ticketname,
+                e.startdate,
+                e.enddate,
+                (EnumTicketQualification)e.qualification,
+                e.pricebrl,
+                e.metadatafileurl,
                 new EventTicketTypeStock(
-                    e.Code,
-                    e.EventCode,
-                    e.TotalAvailableTickets,
-                    e.CurrentlyAvailableTickets
+                    e.code,
+                    e.eventcode,
+                    e.totalavailabletickets,
+                    e.currentlyavailabletickets
                 )));
         }
     }
