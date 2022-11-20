@@ -13,7 +13,7 @@ Content-Length: 55
 # @name ValidateTicket
 POST {{host}}/api/v1/ticketvalidation/ticket HTTP/1.1
 Authorization: Bearer {{LoginGatekeeper.response.body.token}}
-# Content-Type: application/json
+Content-Type: application/json
 
 {
   "validationHash": "i3JMhLHRq52Y3wciQZloMvQ4Dxy5yLD5iAo+bmRX3Jup3zgBcaCzi/MbERBejLRTwbUH6w3eUSQpYMpsY7lhrjb26ZsRZcJetSHENS9fDGf9qDmUruy1rRzcZE9We2A2USyKtE6lfU7kvjIbyy4gyQxiuGYXgNwrGs3vCRODaxn3vHXv5GQB5D9AhJIPGzRJ1BWIyoSzDgHFCWyXPIK82X1jctaGrnoOkvzsajmDcBtcBr14Up0abaIntNJk27he9tKwcrgCB+0af6lJMq+YKT80rJlU8Miwq/358odEnBayq+daNT/VZbwSkdZ91qI9wLhtpX0x2isaI4iFKcGztw=="
