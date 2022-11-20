@@ -17,7 +17,6 @@
       <ProjectReference Include="..\Database.SQLServer\Database.SQLServer.csproj" />
       <ProjectReference Include="..\Domain\Domain.csproj" />
       <ProjectReference Include="..\Ethereum.Nethereum\Ethereum.Nethereum.csproj" />
-      <ProjectReference Include="..\QRCodeGeneration\QRCodeGeneration.csproj" />
     </ItemGroup>
 
     <ItemGroup>
