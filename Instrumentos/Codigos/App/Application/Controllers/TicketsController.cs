@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Application.Controllers.Base;
 using Domain.Services.Interfaces;
@@ -29,7 +30,24 @@ namespace Application.Controllers
             {
                 var tickets = await _userService.ListMyTickets(GetLoggedUsername());
 
-                return Ok(tickets);
+                return Ok(tickets.Select(ticket => new
+                {
+                    Code = ticket.Ticket.Code,
+                    Used = ticket.Ticket.UsedOnEvent,
+                    Ticket = new
+                    {
+                        StartDate = ticket.EventTicketType.StartDate,
+                        EndDate = ticket.EventTicketType.EndDate,
+                        Name = ticket.EventTicketType.TicketName,
+                        Qualification = ticket.EventTicketType.Qualification,
+                        PriceBrl = ticket.EventTicketType.PriceBrl
+                    },
+                    Event = new
+                    {
+                        Title = ticket.Event.Title,
+                        ImageUrl = ticket.Event.ImageUrl
+                    }
+                }));
             }
             catch (Exception e)
             {

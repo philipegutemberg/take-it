@@ -6,6 +6,6 @@ namespace Domain.Services.Interfaces
 {
     public interface ITicketService
     {
-        Task<IEnumerable<Ticket>> ListMyTickets(string username);
+        Task<IEnumerable<(Ticket Ticket, Event @Event, EventTicketType EventTicketType)>> ListMyTickets(string username);
     }
 }

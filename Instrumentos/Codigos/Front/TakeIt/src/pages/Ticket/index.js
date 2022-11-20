@@ -5,6 +5,7 @@ import * as Animatable from 'react-native-animatable'
 import axios from "axios";
 import { LoadingContext } from "../../context/LoadingContext";
 import Loading from "../../components/loading";
+import QRCode from 'react-native-qrcode-svg';
 
 export default function Ticket({route}) {
     const navigation = useNavigation();
@@ -15,9 +16,9 @@ export default function Ticket({route}) {
     const getQrCode = async () => {
         try {
             setIsLoading(true);
-            let responseImage = await axios.get("/api/v1/ticketvalidation/image/" + item.ticketCode, { responseType: 'arraybuffer' });
+            let responseImage = await axios.get("/api/v1/ticketvalidation/hash/tickets/" + item.ticketCode, { responseType: 'arraybuffer' });
 
-            setData(imgToBase64(responseImage.data));
+            setQrCodeHash(responseImage.data.ticketHash);
         } catch (err) {
             console.error(err);
         } finally {
@@ -45,14 +46,12 @@ export default function Ticket({route}) {
                 <Text style={styles.qualification}>{item.ticketName} ({item.qualification})</Text>
                 <Text style={styles.ticketType}>R${item.priceBrl}</Text>
             </View>
-            <View style={styles.eventContainer}>
-                <Animatable.Image
-                        style={styles.qrCodeImage} 
-                        // source={{uri: item.imageUrl}} 
-                        source={{uri: data}} 
-                        animation="fadeIn"
-                        delay={500}
-                        resizeMode="contain"
+            <View style={styles.qrCodeContainer}>
+                <QRCode 
+                    value={qrCodeHash}
+                    logo={require('../../assets/logo-pink.png')}
+                    logoSize={30}
+                    logoBackgroundColor='transparent'
                 />
             </View>
         </View>
