@@ -5,11 +5,10 @@ import * as Animatable from 'react-native-animatable'
 import axios from "axios";
 import { LoadingContext } from "../../context/LoadingContext";
 import Loading from "../../components/loading";
-import {decode as atob, encode as btoa} from 'base-64'
 
 export default function Ticket({route}) {
     const navigation = useNavigation();
-    const [data, setData] = useState('');
+    const [qrCodeHash, setQrCodeHash] = useState(null);
     const {setIsLoading} = useContext(LoadingContext);
     const item = route.params;
 

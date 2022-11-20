@@ -16,7 +16,7 @@ Authorization: Bearer {{LoginCustomer.response.body.token}}
 
 ###
 
-# @name GetImage
+# @name GetTicketHash
 GET {{host}}/api/v1/ticketvalidation/image/6abf41e9-7998-497d-ad9f-b1170e190354 HTTP/1.1
 Authorization: Bearer {{LoginCustomer.response.body.token}}
 Content-Type: application/json
