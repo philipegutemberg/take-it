@@ -4,7 +4,6 @@ import { Entypo, Feather } from '@expo/vector-icons';
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { LoadingContext } from "../../context/LoadingContext";
-import Loading from "../../components/loading";
 import QRCode from 'react-native-qrcode-svg';
 
 export default function Wallet() {
@@ -33,21 +32,20 @@ export default function Wallet() {
 
     return (
         <View style={styles.container}>
-            <Loading />
             <View style={styles.qrCodeContainer}>
                 <Text style={styles.textQrCode}>Endereço da sua wallet interna:</Text>
                 {address ? 
                 <QRCode
                     style={styles.qrCode}
                     size={250}
-                    color='black'
+                    color='#7ED957'
                     backgroundColor='white'
                     value={address}
                 />
                 : null}
                 <Text style={styles.addressText}>{address}</Text>
                 <TouchableOpacity style={styles.copyButton} onPress={copyToClipboard}>
-                    <Entypo name="copy" size={35} color='#d957d0' />
+                    <Entypo name="copy" size={30} color='#7ED957' />
                 </TouchableOpacity>
             </View>
         </View>
@@ -56,7 +54,8 @@ export default function Wallet() {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        backgroundColor: 'white'
     },
     qrCodeContainer: {
         flex: 5,
@@ -66,18 +65,19 @@ const styles = StyleSheet.create({
         // top: '2%'
     },
     textQrCode: {
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: 'bold',
-        bottom: '4%'
+        bottom: '8%'
     },
     qrCode: {
         top: '5%'
     },
     addressText: {
         top: '5%',
-        fontSize: 12,
+        fontSize: 14,
+        fontWeight: 'bold',
     },
     copyButton: {
-        top: '5%'
+        top: '7%'
     }
 });

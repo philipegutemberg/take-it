@@ -4,7 +4,6 @@ import { useContext, useEffect, useState } from "react";
 import * as Animatable from 'react-native-animatable'
 import axios from "axios";
 import { LoadingContext } from "../../context/LoadingContext";
-import Loading from "../../components/loading";
 import QRCode from 'react-native-qrcode-svg';
 
 export default function Ticket({route}) {
@@ -45,7 +44,6 @@ export default function Ticket({route}) {
 
     return (
         <View style={styles.container}>
-            <Loading />
             <View style={styles.eventContainer}>
                 <Animatable.Image
                     style={styles.image} 

@@ -3,7 +3,6 @@ import axios from "axios";
 import { useContext } from "react";
 import { View, StyleSheet, Text, TouchableOpacity, ScrollView } from "react-native";
 import * as Animatable from 'react-native-animatable'
-import Loading from '../../components/loading'
 import { LoadingContext } from "../../context/LoadingContext";
 
 export default function Event({route}) {
@@ -28,7 +27,6 @@ export default function Event({route}) {
 
     return (
         <View style={styles.container}>
-            <Loading />
             <View style={styles.eventContainer}>
                 <View style={styles.imageContainer}>
                     <Animatable.Image 

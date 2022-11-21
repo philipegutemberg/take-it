@@ -5,8 +5,6 @@ import * as Animatable from 'react-native-animatable'
 import { AuthContext } from '../../context/AuthContext'
 import { useNavigation } from '@react-navigation/native'
 
-import Loading from '../../components/loading'
-
 export default function SignIn() {
   const navigation = useNavigation();
 
@@ -17,8 +15,6 @@ export default function SignIn() {
   
   return (
     <View style={styles.container}>
-      <Loading />
-
       <View style={styles.containerLogo}>
         <Animatable.Image
           animation="fadeIn"

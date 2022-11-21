@@ -2,9 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useContext, useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import axios from 'axios';
-import Loading from "../../components/loading";
 import { LoadingContext } from "../../context/LoadingContext";
-import * as Animatable from 'react-native-animatable'
 
 
 export default function ValidationResponse({route}) {
@@ -37,8 +35,7 @@ export default function ValidationResponse({route}) {
 
     return (
         <View style={styles.container}>
-            <Loading />
-            {status ? <Success /> : <Error />}
+            {status == null ? null : status ? <Success /> : <Error />}
         </View>
     );
 };

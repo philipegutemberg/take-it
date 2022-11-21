@@ -177,12 +177,8 @@ function StackLogged() {
     return (
         <Tab.Navigator screenOptions={{
             headerShown: false,
-            style:{
-                backgroundColor: '#121212',
-                borderTopColor: 'transparent'
-            },
-            activeTintColor: '#FFF',
-            tabStyle: {
+            tabBarActiveTintColor: '#d957d0',
+            tabBarStyle: {
                 paddingBottom: 5,
                 paddingTop: 5
             }
@@ -207,7 +203,7 @@ function StackLogged() {
             />
 
             <Tab.Screen 
-                name="Wallet" 
+                name="Carteira" 
                 component={WalletStackScreen}
                 options={{
                     tabBarIcon: ({size, color}) => (
