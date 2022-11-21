@@ -15,7 +15,7 @@ export default function Tickets() {
         try {
             setIsLoading(true);
             let responseTickets = await axios.get("/api/v1/tickets/owned");
-            setData(responseTickets.data);
+            setData(responseTickets.data.sort((a, b) => a.used == b.used ? 0 : a.used ? 1 : -1));
         } catch (err) {
             console.error(err);
         } finally {

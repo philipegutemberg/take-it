@@ -43,3 +43,75 @@ Content-Type: application/json
     }
   ]
 }
+
+###
+
+# @name CreateTheTown
+POST {{host}}/api/v1/events HTTP/1.1
+Authorization: Bearer {{LoginOperational.response.body.token}}
+Content-Type: application/json
+
+{
+  "startDate": "2023-09-02T00:00:00",
+  "endDate": "2023-09-10T00:00:00",
+  "location": "Autódromo de Interlagos, SP",
+  "title": "The Town 2023",
+  "description": "Dos mesmos organizadores do Rock in Rio, The Town \u00E9 o novo festival de m\u00FAsica da cidade de S\u00E3o Paulo que ter\u00E1 a primeira edi\u00E7\u00E3o em 2023 nos dias 2, 3, 7, 9 e 10 de setembro no Aut\u00F3dromo de Interlagos. A edi\u00E7\u00E3o reunir\u00E1 artistas nacionais e internacionais em seis palcos distribu\u00EDdos pelo Aut\u00F3dromo de Interlagos.  Os shows de IZA e Criolo j\u00E1 est\u00E3o confirmados.\r\n\r\nA ideia \u00E9 manter o The Town nos anos \u00EDmpares. Por enquanto, duas edi\u00E7\u00F5es foram confirmadas e espera reunir 600 mil pessoas com mais de 230 horas de m\u00FAsica. Em comunicado \u00E0 imprensa, Roberto Medina, criador do evento, falou sobre a ideia de fazer um festival em S\u00E3o Paulo:",
+  "ticker": "TOWN23",
+  "imageUrl": "https://radiomixfm.com.br/wp-content/uploads/2021/11/The-Town-Sao-Paulo-tera-festival-gigante-de-musica-dos-mesmos-criadores-do-Rock-in-Rio.png",
+  "resaleFeePercentage": 5,
+  "ticketTypes": [
+    {
+      "ticketName": "Event Staff",
+      "startDate": "2023-09-02T00:00:00",
+      "endDate": "2023-09-10T00:00:00",
+      "qualification": "Staff",
+      "priceBrl": 0.00,
+      "totalTickets": 50
+    },
+    {
+      "ticketName": "Student",
+      "startDate": "2023-09-02T00:00:00",
+      "endDate": "2023-09-10T00:00:00",
+      "qualification": "Student",
+      "priceBrl": 850.00,
+      "totalTickets": 25
+    }
+  ]
+}
+
+###
+
+# @name CreateRockInRio
+POST {{host}}/api/v1/events HTTP/1.1
+Authorization: Bearer {{LoginOperational.response.body.token}}
+Content-Type: application/json
+
+{
+  "startDate": "2023-05-05T00:00:00",
+  "endDate": "2023-05-15T00:00:00",
+  "location": "Autódromo de Interlagos, SP",
+  "title": "The Town 2023",
+  "description": "O Rock in Rio \u00E9 um festival de m\u00FAsica idealizado pelo empres\u00E1rio brasileiro Roberto Medina pela primeira vez em 1985. \u00C9 reconhecido como um dos maiores festivais musicais do planeta. Foi originalmente organizado no Rio de Janeiro, de onde vem o nome. Tornou-se um evento de repercuss\u00E3o em n\u00EDvel mundial e teve em 2004 sua primeira edi\u00E7\u00E3o fora do Brasil, em Lisboa, Portugal.\r\n\r\nAo longo da sua hist\u00F3ria, o Rock in Rio teve 22 edi\u00E7\u00F5es, nove no Brasil, nove em Portugal, tr\u00EAs na Espanha e uma nos Estados Unidos. Em 2008, foi realizado pela primeira vez em dois locais diferentes, Lisboa e Madrid. Al\u00E9m destas, duas edi\u00E7\u00F5es foram canceladas: Madrid e Buenos Aires, ambas programadas para 2014.[1][2]\r\n\r\nO hino do festival \u00E9 de autoria do compositor Nelson Wellington e do maestro Eduardo Souto Neto e foi gravado originalmente pelo grupo Roupa Nova.[3] O festival \u00E9 considerado o oitavo melhor do mundo pelo site especializado Festival Fling.[4]. Desde sua 4\u00AA edi\u00E7\u00E3o no Brasil, o festival costuma ocorrer bianualmente no in\u00EDcio da primavera em seu pa\u00EDs de origem (Brasil). A \u00FAltima edi\u00E7\u00E3o do festival ocorreu em 2022 no Parque Ol\u00EDmpico do Rio de Janeiro.",
+  "ticker": "TOWN23",
+  "imageUrl": "https://s2.glbimg.com/oiItbufXKRRnm4uGWEL059m4T1E=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2022/t/q/QiKDixTEujuAdiCcwZQA/rock-in-rio-2022.jpeg",
+  "resaleFeePercentage": 5,
+  "ticketTypes": [
+    {
+      "ticketName": "Pass",
+      "startDate": "2023-05-05T00:00:00",
+      "endDate": "2023-05-15T00:00:00",
+      "qualification": "Student",
+      "priceBrl": 1050.00,
+      "totalTickets": 50
+    },
+    {
+      "ticketName": "Day",
+      "startDate": "2023-05-14T00:00:00",
+      "endDate": "2023-05-14T00:00:00",
+      "qualification": "Student",
+      "priceBrl": 350.00,
+      "totalTickets": 25
+    }
+  ]
+}
