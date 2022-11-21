@@ -64,9 +64,9 @@ builder.Services
     .InjectApplicationServices()
     .InjectSqlServerServices()
     .InjectNethereumServices(
-        $"https://summer-lingering-silence.ethereum-goerli.discover.quiknode.pro/ee2b11130f5ef374d83453df4e8adf8b2f70b840/",
-        "ripple scissors kick mammal hire column oak again sun offer wealth tomorrow wagon turn fatal",
-        "C@78726fFhd$Bj8")
+        $"https://damp-polished-fog.ethereum-goerli.discover.quiknode.pro/e0aa26155599d50c5aa21a2e0588a17c827ffcd8/",
+        "nerve man agree reform cash tiger brother egg ostrich kidney wolf industry august dynamic garbage",
+        "TReyp8#PcQxas#V")
     .InjectS3Services("AKIAW7G7XFRODL3YN5UO", "n0bSUIdqLQeMm+xIMiKXl0X8mwPM2q4U8DlL8nOD", RegionEndpoint.USEast1)
     .InjectAsymmetricEncryptionServices("keys.pem");
 
