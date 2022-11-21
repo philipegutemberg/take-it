@@ -34,6 +34,7 @@ export default function SignIn() {
           placeholder='Usuário'
           style={styles.input}
           autoComplete='username'
+          autoCapitalize='none'
           value={username}
           onChangeText={text => { setUsername(text) }}
         />
@@ -43,6 +44,7 @@ export default function SignIn() {
           style={styles.input}
           autoComplete='password'
           secureTextEntry={true}
+          autoCapitalize='none'
           value={password}
           onChangeText={text => { setPassword(text) }}
         />
@@ -51,8 +53,7 @@ export default function SignIn() {
           disabled={!username || !password}
           style={styles.button}
           onPress={ async () => {
-            // await login(username, password, () => navigation.navigate('Events'));
-            await login(username, password, (token) => token.role == 'Customer' ? navigation.navigate('Tickets') : navigation.navigate('Gatekeeper'));
+            await login(username, password);
           } }
         >
           <Text style={styles.buttonText}>Acessar</Text>

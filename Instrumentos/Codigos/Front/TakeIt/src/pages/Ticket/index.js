@@ -16,9 +16,8 @@ export default function Ticket({route}) {
     const getQrCode = async () => {
         try {
             setIsLoading(true);
-            let responseImage = await axios.get("/api/v1/ticketvalidation/hash/tickets/" + item.ticketCode, { responseType: 'arraybuffer' });
-
-            setQrCodeHash(responseImage.data.ticketHash);
+            let response = await axios.get("/api/v1/ticketvalidation/hash/tickets/" + item.code);
+            setQrCodeHash(response.data.ticketHash);
         } catch (err) {
             console.error(err);
         } finally {
@@ -30,29 +29,53 @@ export default function Ticket({route}) {
         getQrCode();
     }, []);
 
+    const transfer = async () => {
+        try {
+            setIsLoading(true);
+            await axios.post('/api/v1/events/transfer', {
+                TicketCode: item.code
+            });
+            navigation.navigate('Tickets');
+        } catch (error) {
+            console.error(err);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     return (
         <View style={styles.container}>
+            <Loading />
             <View style={styles.eventContainer}>
-                <Loading />
                 <Animatable.Image
                     style={styles.image} 
-                    source={{uri: item.imageUrl}} 
+                    source={{uri: item.event.imageUrl}} 
                     animation="fadeIn"
                     delay={200}
                     resizeMode="contain"
                 />
-                <Text style={styles.date}>{new Date(item.startDate).toLocaleDateString('pt-BR')} {'>'} {new Date(item.endDate).toLocaleDateString('pt-BR')}</Text>
-                <Text style={styles.title}>{item.title}</Text>
-                <Text style={styles.qualification}>{item.ticketName} ({item.qualification})</Text>
-                <Text style={styles.ticketType}>R${item.priceBrl}</Text>
+                <Text style={styles.date}>{new Date(item.ticket.startDate).toLocaleDateString('pt-BR')} {'>'} {new Date(item.ticket.endDate).toLocaleDateString('pt-BR')}</Text>
+                <Text style={styles.title}>{item.event.title}</Text>
+                <Text style={styles.qualification}>{item.ticket.name} ({item.ticket.qualification})</Text>
+                <Text style={styles.ticketType}>R${item.ticket.priceBrl}</Text>
             </View>
             <View style={styles.qrCodeContainer}>
+                {qrCodeHash ? 
                 <QRCode 
+                    size={200}
+                    color='black'
+                    backgroundColor='white'
                     value={qrCodeHash}
-                    logo={require('../../assets/logo-pink.png')}
-                    logoSize={30}
-                    logoBackgroundColor='transparent'
                 />
+                : null}
+            </View>
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity 
+                    style={styles.button}
+                    onPress={transfer}
+                >
+                    <Text style={styles.buttonText}>Transferir</Text>
+                </TouchableOpacity>
             </View>
         </View>
     );
@@ -64,13 +87,17 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffff'
     },
     eventContainer: {
-        flex: 1,
+        flex: 5,
         top: '2%',
         marginBottom: 30
     },
     qrCodeContainer: {
-        flex: 1,
+        flex: 4,
+        alignItems: 'center',
         // top: '2%'
+    },
+    buttonContainer: {
+        flex: 1,
     },
     image: {
         height: 200,

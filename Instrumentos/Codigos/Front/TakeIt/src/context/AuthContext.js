@@ -7,9 +7,9 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({children}) => {
     const {setIsLoading} = useContext(LoadingContext);
-    const [token, setToken] = useState('');
+    const [token, setToken] = useState(null);
 
-    const login = async (username, password, callBack) => {
+    const login = async (username, password) => {
         try {
             setIsLoading(true);
             let result = await axios.post("/api/v1/login", { username: username, password: password });
@@ -20,10 +20,8 @@ export const AuthProvider = ({children}) => {
                 role: decodedJwt.role
             };
             
-            setToken(token);
             axios.defaults.headers.common["Authorization"] = "Bearer " + result.data.token;
-            if (callBack)
-                callBack(token);
+            setToken(token);
         } catch (err) {
             console.error(err);
         } finally {

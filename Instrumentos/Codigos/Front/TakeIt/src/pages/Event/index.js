@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import { useContext } from "react";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, ScrollView } from "react-native";
 import * as Animatable from 'react-native-animatable'
 import Loading from '../../components/loading'
 import { LoadingContext } from "../../context/LoadingContext";
@@ -51,7 +51,7 @@ export default function Event({route}) {
                 <TouchableOpacity 
                     style={styles.button}
                     onPress={async () => {
-                        await buy(() => navigation.navigate('Tickets'));
+                        await buy(navigation.navigate('Tickets'));
                     }}
                 >
                     <Text style={styles.buttonText}>Comprar ingresso</Text>

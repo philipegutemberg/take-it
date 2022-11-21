@@ -1,15 +1,14 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, ScrollView, RefreshControl } from "react-native";
 import * as Animatable from 'react-native-animatable'
 import { useNavigation } from "@react-navigation/native";
-import Loading from '../../components/loading'
 import { LoadingContext } from "../../context/LoadingContext";
 
 export default function Events() {
     const navigation = useNavigation();
 
-    const {setIsLoading} = useContext(LoadingContext);
+    const {isLoading, setIsLoading} = useContext(LoadingContext);
     const [data, setData] = useState([]);
 
     const getEvents = async () => {
@@ -29,15 +28,18 @@ export default function Events() {
     }, []);
     
     return (
-        <View style={{flex: 1}}>
-            <Loading />
+        <ScrollView style={{flex: 1}} refreshControl={
+            <RefreshControl
+                refreshing={isLoading}
+                onRefresh={getEvents}
+            />
+        }>
             <View style={styles.container}>
                 {data.map((e, idx) =>
-                    <View style={styles.eventContainer}>
+                    <View key={idx} style={styles.eventContainer}>
                         <TouchableOpacity onPress={ () => navigation.navigate('Event', e) }>
                             <Animatable.Image
                                 style={styles.image} 
-                                key={idx} 
                                 source={{uri: e.imageUrl}} 
                                 animation="fadeIn"
                                 delay={300}
@@ -50,8 +52,7 @@ export default function Events() {
                     </View>
                 )}
             </View>
-        </View>
-        
+        </ScrollView>
     );
 };
 

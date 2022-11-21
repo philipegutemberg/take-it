@@ -9,34 +9,24 @@ import { StyleSheet } from 'react-native';
 import Ticket from '../pages/Ticket';
 import Gatekeeper from '../pages/Gatekeeper';
 import ValidationResponse from '../pages/Gatekeeper/validationResponse';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
+import { Entypo, Feather } from '@expo/vector-icons';
+import Wallet from '../pages/Wallet';
 
-const Stack = createNativeStackNavigator();
+const EventsStack = createNativeStackNavigator();
 
-export default function Routes() {
+function EventsStackScreen() {
     return (
-        <Stack.Navigator screenOptions={{
+        <EventsStack.Navigator
+        screenOptions={{
             headerBackTitleVisible: false,
             headerStyle: styles.header,
             headerTitleStyle: styles.headerTitle,
             headerTintColor: '#fff',
             headerTitleAlign: 'center'
         }}>
-            <Stack.Screen
-                name="Welcome"
-                component={Welcome}
-                options={{ 
-                    headerShown: false 
-                }}
-            />
-
-            <Stack.Screen
-                name="SignIn"
-                component={SignIn}
-                options={{ 
-                    headerShown: false 
-                }}
-            />
-
             <Stack.Screen
                 name="Events"
                 component={Events}
@@ -55,7 +45,21 @@ export default function Routes() {
                     title: ""
                 }}
             />
+        </EventsStack.Navigator>
+    );
+}
 
+const TicketsStack = createNativeStackNavigator();
+
+function TicketsStackScreen() {
+    return (
+        <TicketsStack.Navigator screenOptions={{
+            headerBackTitleVisible: false,
+            headerStyle: styles.header,
+            headerTitleStyle: styles.headerTitle,
+            headerTintColor: '#fff',
+            headerTitleAlign: 'center'
+        }}>
             <Stack.Screen
                 name="Tickets"
                 component={Tickets}
@@ -73,7 +77,77 @@ export default function Routes() {
                     title: "Ingresso"
                 }}
             />
+        </TicketsStack.Navigator>
+    );
+}
 
+const WalletStack = createNativeStackNavigator();
+
+function WalletStackScreen() {
+    return (
+        <WalletStack.Navigator screenOptions={{
+            headerBackTitleVisible: false,
+            headerStyle: styles.header,
+            headerTitleStyle: styles.headerTitle,
+            headerTintColor: '#fff',
+            headerTitleAlign: 'center'
+        }}>
+            <Stack.Screen
+                name="WalletScreen"
+                component={Wallet}
+                options={{
+                    headerShown: true,
+                    title: "Minha carteira"
+                }}
+            />
+        </WalletStack.Navigator>
+    );
+}
+
+export default function Routes() {
+    const {token} = useContext(AuthContext);
+
+    if (!token)
+        return (<StackNotLogged />);
+    else if (token.role == 'Customer')
+        return (<StackLogged />);
+    else if (token.role == 'Gatekeeper')
+        return (<StackGatekeeper />);
+}
+
+const Stack = createNativeStackNavigator();
+
+function StackNotLogged() {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen
+                name="Welcome"
+                component={Welcome}
+                options={{ 
+                    headerShown: false 
+                }}
+            />
+
+            <Stack.Screen
+                name="SignIn"
+                component={SignIn}
+                options={{ 
+                    headerShown: false 
+                }}
+            />
+        </Stack.Navigator>
+    );
+}
+
+function StackGatekeeper() {
+    return (
+        <Stack.Navigator screenOptions={{
+            headerBackTitleVisible: false,
+            headerStyle: styles.header,
+            headerTitleStyle: styles.headerTitle,
+            headerTintColor: '#fff',
+            headerTitleAlign: 'center'
+        }}>
             <Stack.Screen
                 name="Gatekeeper"
                 component={Gatekeeper}
@@ -94,6 +168,54 @@ export default function Routes() {
                 }}
             />
         </Stack.Navigator>
+    );
+}
+
+const Tab = createBottomTabNavigator();
+
+function StackLogged() {
+    return (
+        <Tab.Navigator screenOptions={{
+            headerShown: false,
+            style:{
+                backgroundColor: '#121212',
+                borderTopColor: 'transparent'
+            },
+            activeTintColor: '#FFF',
+            tabStyle: {
+                paddingBottom: 5,
+                paddingTop: 5
+            }
+        }}>
+            <Tab.Screen 
+                name="Home" 
+                component={EventsStackScreen}
+                options={{
+                    tabBarIcon: ({size, color}) => (
+                        <Entypo name="home" size={size} color={color} />
+                    )
+                }}
+            />
+            <Tab.Screen 
+                name="Ingressos" 
+                component={TicketsStackScreen}
+                options={{
+                    tabBarIcon: ({size, color}) => (
+                        <Entypo name="ticket" size={size} color={color} />
+                    )
+                }}
+            />
+
+            <Tab.Screen 
+                name="Wallet" 
+                component={WalletStackScreen}
+                options={{
+                    tabBarIcon: ({size, color}) => (
+                        <Entypo name="wallet" size={size} color={color} />
+                    )
+                }}
+            />
+        </Tab.Navigator>
     );
 }
 

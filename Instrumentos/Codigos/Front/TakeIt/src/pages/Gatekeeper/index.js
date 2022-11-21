@@ -5,8 +5,8 @@ import { useNavigation } from '@react-navigation/native'
 
 export default function Gatekeeper() {
   const navigation = useNavigation();
+  const [nothing, setIsNothing] = useState(null);
   const [hasPermission, setHasPermission] = useState(null);
-  const [scanned, setScanned] = useState(false);
 
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -18,8 +18,8 @@ export default function Gatekeeper() {
   }, []);
 
   const handleBarCodeScanned = ({ type, data }) => {
-    setScanned(true);
     navigation.navigate('ValidationResponse', data);
+    setIsNothing("anything");
   };
 
   if (hasPermission === null) {
@@ -32,10 +32,9 @@ export default function Gatekeeper() {
   return (
     <View style={styles.container}>
       <BarCodeScanner
-        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+        onBarCodeScanned={handleBarCodeScanned}
         style={StyleSheet.absoluteFillObject}
       />
-      {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
     </View>
   );
 };

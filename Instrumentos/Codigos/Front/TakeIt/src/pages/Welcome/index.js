@@ -17,7 +17,7 @@ export default function Welcome() {
         <Animatable.Image
           animation="flipInY"
           source={require('../../assets/logo-white.png')}
-          style={{ width: '70%' }}
+          style={{ width: '65%' }}
           resizeMode="contain"
           onAnimationEnd={ () => navigation.navigate('SignIn') }
         />

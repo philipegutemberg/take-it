@@ -12,7 +12,7 @@ namespace Domain.Repositories
 
         Task<IEnumerable<Ticket>> GetAllOwnedByCustomer(string customerCode);
 
-        Task<Ticket> GetByTokenId(long tokenId);
+        Task<Ticket> GetByTokenId(string eventCode, long tokenId);
 
         Task UpdateOwner(Ticket ticket);
 

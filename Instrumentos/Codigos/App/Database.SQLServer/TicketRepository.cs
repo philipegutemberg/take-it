@@ -82,15 +82,17 @@ namespace Database.SQLServer
                 t.usedonevent));
         }
 
-        public async Task<Ticket> GetByTokenId(long tokenId)
+        public async Task<Ticket> GetByTokenId(string eventCode, long tokenId)
         {
             const string sql = @"SELECT *
                                    FROM Ticket
-                                  WHERE TokenId = @tokenId";
+                                  WHERE TokenId = @tokenId
+                                  AND EventCode = @eventCode";
 
             var ticketRow = await _dbConnection.QuerySingle(sql, new
             {
-                tokenId
+                tokenId,
+                eventCode
             });
 
             if (ticketRow == null)
