@@ -1,0 +1,116 @@
+\documentclass[a4paper,12pt,Times]{article}
+\usepackage{abakos}  %pacote com padrão da Abakos baseado no padrão da PUC
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Capa da revista
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newcommand{\monog}{Smart ticketing: descentralizando o mercado de ingressos através da blockchain}
+
+\newcommand{\tipo}{Artigo }
+\newcommand{\origem}{Brasil }
+
+\newcommand{\lcc}{\scriptsize{Licença Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported}}
+
+%%%%%%%%%%%%%%%%%INFORMAÇÕES SOBRE AUTOR PRINCIPAL %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\AutorA}{Philipe Gutemberg Amaral Costa}
+\newcommand{\funcaoA}{}
+\newcommand{\emailA}{gutembergphilipe@gmail.com}
+\newcommand{\cursA}{Aluno do Curso de Graduação em Sistemas de Informação}
+
+\newcommand{\AutorB}{Leonardo Vilela Cardoso}
+\newcommand{\funcaoB}{}
+\newcommand{\emailB}{leonardocardoso@pucminas.br}
+\newcommand{\cursB}{Professor do Curso de Graduação em Sistemas de Informação}
+% 
+% Definir macros para o nome da Instituição, da Faculdade, etc.
+\newcommand{\univ}{Pontifícia Universidade Católica de Minas Gerais}
+
+\newcommand{\keyword}[1]{\textsf{#1}}
+
+\usepackage[title,titletoc]{appendix}
+\usepackage{longtable}
+
+\begin{document}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %% Pagina de titulo
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{center}
+\includegraphics[scale=0.2]{figuras/brasao.jpg} \\
+PONTIFÍCIA UNIVERSIDADE CATÓLICA DE MINAS GERAIS \\
+Instituto de Ciências Exatas e de Informática
+
+% \vspace{1.0cm}
+
+\end{center}
+
+ \vspace{0cm} {
+ \singlespacing \Large{\monog \symbolfootnote[1]{Artigo apresentado ao Instituto de Ciências Exatas e Informática da Pontifícia Universidade Católica de Minas Gerais como pré-requisito para obtenção do título de Bacharel em Sistemas de Informação.} \\ }
+  \normalsize{\monogES}
+ }
+
+\vspace{1.0cm}
+
+\begin{flushright}
+\singlespacing 
+\normalsize{\AutorA \footnote{\funcaoA \cursA; \emailA . }} \\
+\normalsize{\AutorB \footnote{\funcaoB \cursB; \emailB . }} \\
+
+\end{flushright}
+\thispagestyle{empty}
+
+\vspace{1.0cm}
+
+\begin{abstract}
+\noindent
+O desenvolvimento tecnológico de plataformas de venda e compra de ingressos não foi o suficiente para reprimir práticas ilegais do mercado secundário. O sistema presente em plataformas de bilheteria online (além de ineficiente em questões de segurança e privacidade do cliente) fomenta a presença de cambistas e acumuladores, distorcendo o preço dessa experiência para os fãs, que se veem obrigados a pagar valores absurdos por ingressos que podem, inclusive, não ser legítimos. Inserindo as possibilidades do universo cripto para solução dessa dor de mercado, esse artigo busca propor uma alternativa de armazenamento e transferência de ingressos através da tecnologia Blockchain, responsável por elementos essenciais como segurança, descentralização e, principalmente, autonomia -- que torna a confiança entre as partes de um contrato praticamente desprezível. A amenização desse risco, cuja existência foi atestada por meio de pesquisa própria, colaboraria para a diminuição dos mercados paralelos, permitindo que os organizadores de eventos consigam consumidores mais engajados; além disso, essa proposta pode ser adaptada para os mais variados tipos de serviços e dores de mercado que são intensamente afetados pelo fator confiabilidade. Apesar de ser uma ideia já prevista e comentada em outros trabalhos, a inserção de NFTs nessa dinâmica através de uma aplicação híbrida, que permite que o consumidor compre o ingresso e o transfira para sua carteira ou apenas utilize pelo app, é inédita e expõe na prática os pontos positivos e negativos de uma novidade que promete autenticidade e confiança para ser utilizada como intermediária otimizada dessas trocas.
+\\\textbf{\keyword{Palavras-chave: }} Ingressos. NFT. Blockchain.
+\end{abstract}
+
+
+\selectlanguage{english}
+\begin{abstract}
+\noindent
+The technological development of online ticket platforms was not enough to repress illegal practices in the secondary market. The system present on online ticketing (in addition to being inefficient in terms of security and customer privacy) encourages the presence of hoarders, distorting the price of this experience for fans, who are forced to pay absurd amounts for tickets that can not being legitimate. Inserting the possibilities of the crypto universe to solve this market pain, this article seeks to propose an alternative for storing and transferring tickets through Blockchain technology, responsible for essential elements such as security, decentralization and, mainly, autonomy -- which makes trust between parties to a virtually contract negligible. Mitigating this risk, which existence has been attested through our own research, would contribute to the reduction of parallel markets, allowing event organizers to obtain more engaged consumers. Furthermore, this proposal can be adapted to the most varied types of services and market pains that are intensely affected by the reliability factor. Despite being an idea already foreseen and commented on in other works, the insertion of NFTs in this dynamic through a hybrid application, which allows the consumer to buy the ticket and transfer it to his wallet or just use it through the app, is unprecedented and expose in the practice the positive and negative points of a novelty that promises authenticity and trust to be used as an optimized intermediary of these exchanges.
+\\\textbf{\keyword{Keywords: }} Tickets. NFT. Blockchain.
+\end{abstract}
+
+\selectlanguage{brazilian}
+ \onehalfspace  % espaçamento 1.5 entre linhas
+ \setlength{\parindent}{1.25cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% INICIO DO TEXTO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{textos}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% FIM DO TEXTO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \selectlanguage{brazil}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Inicio bibliografia
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ \newpage
+\singlespace{
+\renewcommand\refname{REFERÊNCIAS}
+\bibliographystyle{abntex2-alf}
+\bibliography{bibliografia}
+
+}
+
+% \clearpage
+% \pagenumbering{gobble}
+% \appendix
+\begin{appendices}
+\include{appendix}
+\end{appendices}
+
+\end{document}
+
+
