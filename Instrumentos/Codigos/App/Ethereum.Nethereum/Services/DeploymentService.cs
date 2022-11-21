@@ -24,7 +24,7 @@ namespace Ethereum.Nethereum.Services
 
             /* Aumentando o valor do gas para a transação acontecer mais rápido. */
             var estimate = await deploymentHandler.EstimateGasAsync(deploymentMessage);
-            deploymentMessage.Gas = (int)((long)estimate.Value * 1.3m);
+            deploymentMessage.Gas = (int)((long)estimate.Value * 1.7m);
 
             TransactionReceipt? transactionReceipt = await deploymentHandler.SendRequestAndWaitForReceiptAsync(deploymentMessage);
             return transactionReceipt.ContractAddress;
