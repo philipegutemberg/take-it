@@ -21,7 +21,7 @@ export default function Tickets() {
         } finally {
             setIsLoading(false);
         }
-    };
+    }; 
 
     useEffect(() => {
         getTickets();

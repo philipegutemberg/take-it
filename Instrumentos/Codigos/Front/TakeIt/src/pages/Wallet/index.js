@@ -35,21 +35,20 @@ export default function Wallet() {
         <View style={styles.container}>
             <Loading />
             <View style={styles.qrCodeContainer}>
-                <Text>Endereço da sua wallet interna:</Text>
+                <Text style={styles.textQrCode}>Endereço da sua wallet interna:</Text>
                 {address ? 
-                <QRCode 
-                    size={300}
+                <QRCode
+                    style={styles.qrCode}
+                    size={250}
                     color='black'
                     backgroundColor='white'
                     value={address}
                 />
                 : null}
-            </View>
-            <View>
-            <Text>{address}</Text>
-            <TouchableOpacity onPress={copyToClipboard}>
-                <Entypo name="copy" />
-            </TouchableOpacity>
+                <Text style={styles.addressText}>{address}</Text>
+                <TouchableOpacity style={styles.copyButton} onPress={copyToClipboard}>
+                    <Entypo name="copy" size={35} color='#d957d0' />
+                </TouchableOpacity>
             </View>
         </View>
     );
@@ -60,8 +59,25 @@ const styles = StyleSheet.create({
         flex: 1
     },
     qrCodeContainer: {
-        flex: 4,
+        flex: 5,
+        justifyContent: 'center',
         alignItems: 'center',
+        alignSelf: 'center',
         // top: '2%'
     },
+    textQrCode: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        bottom: '4%'
+    },
+    qrCode: {
+        top: '5%'
+    },
+    addressText: {
+        top: '5%',
+        fontSize: 12,
+    },
+    copyButton: {
+        top: '5%'
+    }
 });
