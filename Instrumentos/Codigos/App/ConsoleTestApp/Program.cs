@@ -1,18 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Threading;
-using Amazon;
-using Application.Injection;
-using AsymmetricEncryption.Injection;
-using AWS_S3.Injection;
-using Database.SQLServer.Injection;
-using Domain.Injection;
-using Domain.Models.Users;
-using Domain.Services.Interfaces;
-using Ethereum.Nethereum.Injection;
-using Ethereum.Nethereum.SmartContracts.ERC721Mintable.BlockProcessor;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿
 
 // IConfiguration configuration = new ConfigurationBuilder()
 //     .AddJsonFile("appsettings.json")
