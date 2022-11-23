@@ -51,6 +51,7 @@ namespace Application.BackgroundWorker
             catch (Exception e)
             {
                 _logger.LogError(e, "Unknown error on log processing");
+                await StartWorkWithTimer(stoppingToken, timeout);
             }
         }
 
