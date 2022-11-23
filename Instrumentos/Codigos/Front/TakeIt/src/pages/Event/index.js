@@ -49,7 +49,7 @@ export default function Event({route}) {
                 <TouchableOpacity 
                     style={styles.button}
                     onPress={async () => {
-                        await buy(navigation.navigate('Tickets'));
+                        await buy(navigation.navigate('Ingressos'));
                     }}
                 >
                     <Text style={styles.buttonText}>Comprar ingresso</Text>

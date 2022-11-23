@@ -60,11 +60,11 @@ export default function Tickets() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // top: '5%',
         backgroundColor: '#ffff'
     },
     eventContainer: {
-        marginBottom: 30
+        top: '5%',
+        marginBottom: '15%',
     },
     eventContainerOpacity: {
         marginBottom: 30,
